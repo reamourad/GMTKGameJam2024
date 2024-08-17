@@ -37,11 +37,11 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _GlowText:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: e53e9de23f87c4a4b806bb32b38cf711, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: f643ff3bd4f394847b65ad5beafd3e66, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
@@ -61,5 +61,5 @@ Material:
     - _QueueControl: 0
     - _QueueOffset: 0
     m_Colors:
-    - _GlowColor: {r: 0.00073146436, g: 0.00073146436, b: 0.00073146436, a: 1}
+    - _GlowColor: {r: 3.6501966, g: 1.7036493, b: 0, a: 1}
   m_BuildTextureStacks: []

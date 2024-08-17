@@ -6,18 +6,18 @@ using UnityEngine;
 public enum BlockColor
 {
     Red,
-    Green, 
-    Blue
+    Blue, 
+    Yellow,
+    White
 }
 public abstract class BaseBlock : MonoBehaviour
 {
     public List<Vector2Int> offsetList = new List<Vector2Int>();
     public string description = "This block is not special";
-    public Sprite blockImage;
-    public string color;
     public BlockColor blockColor;
     public bool isGlowing = false;
-    private Renderer currentRenderer; 
+    private Renderer currentRenderer;
+    [SerializeField] public GameObject background; 
 
     public void setIsGlowing(bool newIsGlowing)
     {
@@ -28,14 +28,14 @@ public abstract class BaseBlock : MonoBehaviour
         isGlowing = newIsGlowing;
         if (isGlowing)
         {
-            float factor = 0.005f;
-            Color blockColorHex = GameManager.Instance.blockColorToColor[blockColor];
+            float factor = 0.03f;
+            Color blockColorHex = GameManager.Instance.blockColorToColor[BlockColor.White];
             Color color = blockColorHex * factor; 
             currentRenderer.material.SetColor("_GlowColor", color);
         }
         else
         {
-            float factor = 0.001f;
+            float factor = 0.1f;
             Color blockColorHex = GameManager.Instance.blockColorToColor[blockColor];
             Color color = blockColorHex * factor;
             currentRenderer.material.SetColor("_GlowColor", color);
@@ -47,8 +47,7 @@ public abstract class BaseBlock : MonoBehaviour
         {
             currentRenderer = GetComponent<Renderer>();
         }
-
-        
+        setIsGlowing(false); 
     }
 
     public void Update()

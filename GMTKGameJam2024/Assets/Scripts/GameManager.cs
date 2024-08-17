@@ -18,6 +18,9 @@ public class GameManager : MonoBehaviour
 
     //dictionnary used to translate the block color to its related color 
     public Dictionary<BlockColor, Color> blockColorToColor = new Dictionary<BlockColor, Color>();
+    public Dictionary<BlockColor, Sprite> blockColorToSprite = new Dictionary<BlockColor, Sprite>();
+
+    public List<Sprite> blockSpriteList = new List<Sprite>();
 
 
     public static GameManager Instance
@@ -34,16 +37,24 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
-        instance = this; 
+        instance = this;
+        allBlocksList.Add(tier1Blocks);
+        allBlocksList.Add(tier2Blocks);
+
+        //set up the colors 
+        blockColorToColor.Add(BlockColor.Red, new Color(199, 5, 5, 255));
+        blockColorToColor.Add(BlockColor.White, new Color(255, 255, 255, 255));
+        blockColorToColor.Add(BlockColor.Blue, new Color(0, 10, 190, 255));
+        blockColorToColor.Add(BlockColor.Yellow, new Color(190, 90, 0, 255));
+
+        blockColorToSprite.Add(BlockColor.Red, blockSpriteList[0]);
+        blockColorToSprite.Add(BlockColor.Blue, blockSpriteList[1]);
+        blockColorToSprite.Add(BlockColor.Yellow, blockSpriteList[2]);
     }
     // Start is called before the first frame update
     void Start()
     {
-        allBlocksList.Add(tier1Blocks); 
-        allBlocksList.Add(tier2Blocks);
-
-        //set up the colors 
-        blockColorToColor.Add(BlockColor.Red, new Color(191, 14, 0, 255)); 
+        
     }
 
     // Update is called once per frame
@@ -92,19 +103,22 @@ public class GameManager : MonoBehaviour
                                        Quaternion.identity
                                      );
             instance.transform.SetParent(folderForPiece.transform, false);
+            instance.GetComponent<BaseBlock>().background.GetComponent<SpriteRenderer>().sprite = blockColorToSprite[instance.GetComponent<BaseBlock>().blockColor];
 
             //check the lenght of offsets = number of blocks to draw 
             for (int z = 0; z < randomBlock.offsetList.Count; z++)
             {
                 instance = Instantiate(
                                        randomBlock,
-                                       new Vector3(randomBlock.offsetList[z].x * 50, randomBlock.offsetList[z].y * 50, 0),
+                                       new Vector3(randomBlock.offsetList[z].x * 2, randomBlock.offsetList[z].y * 2, 0),
                                        Quaternion.identity
                                      );  
                 instance.transform.SetParent(folderForPiece.transform, false);
+                instance.GetComponent<BaseBlock>().background.GetComponent<SpriteRenderer>().sprite = blockColorToSprite[instance.GetComponent<BaseBlock>().blockColor];
+
             }
             folderForPiece.transform.position = positionToDisplayBlocks[i]; 
-            folderForPiece.transform.localScale = new Vector3(0.02f, 0.02f, 0.02f); 
+            folderForPiece.transform.localScale = new Vector3(0.5f, 0.5f, 1f); 
         }
     }
 }
