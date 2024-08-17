@@ -33,15 +33,16 @@ public class TetrisGridDisplay : MonoBehaviour
         Vector2 mousePositionRelative = (((Vector2) Input.mousePosition - new Vector2(referenceCamera.pixelWidth, referenceCamera.pixelHeight) / 2) / referenceCamera.pixelHeight) * referenceCamera.transform.localScale * referenceCamera.orthographicSize * 2;
         Vector2 mousePosition = mousePositionRelative + (Vector2) referenceCamera.transform.position;
 
-        Vector2Int currentHoveredCell = Vector2Int.FloorToInt((mousePosition - (Vector2) this.transform.position) / cellSize);
+        Vector2Int currentHoveredCell = Vector2Int.RoundToInt((mousePosition - (Vector2) this.transform.position) / cellSize);
         if (currentHoveredCell != hoveredCell) {
             // print("hovered cell "+currentHoveredCell.ToString()+", unhovered cell "+hoveredCell.ToString());
+            unhoverCell(hoveredCell);
             if (currentHoveredCell.x < displayedSize.x && currentHoveredCell.x >= 0 && currentHoveredCell.y < displayedSize.y && currentHoveredCell.y >= 0) {
-                unhoverCell(hoveredCell);
                 hoverCell(currentHoveredCell);
                 hoveredCell = currentHoveredCell;
             } else if (!(hoveredCell.x < displayedSize.x && hoveredCell.x >= 0 && hoveredCell.y < displayedSize.y && hoveredCell.y >= 0)) {
                 unhoverCell(hoveredCell);
+                hoveredCell = Vector2Int.one * -1;
             }
         }
 
