@@ -30,10 +30,10 @@ public class EnemyLineUp : MonoBehaviour
 
     for (int i = 0; i < numberOfEnemies; i++)
     {
-        // Generate a random position near the origin (0,0) within a range
+        // SPAWNING IN RANDOM AREAS NEAR ORIGIN TO TEST
         Vector2 randomPosition = new Vector2(
-            Random.Range(-5f, 5f), // Random x position between -5 and 5 units
-            Random.Range(-5f, 5f)  // Random y position between -5 and 5 units
+            Random.Range(1f, 4f), 
+            Random.Range(-4f, 4f)  
         );
 
         // Instantiate the enemy at the random position
