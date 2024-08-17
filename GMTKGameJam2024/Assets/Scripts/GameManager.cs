@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    private static GameManager instance;
     //IF YOU ADD A TIER LIST, ADD IT TO THE ALL BLOCKS LIST 
     [SerializeField] List<BaseBlock> tier1Blocks = new List<BaseBlock>();
     [SerializeField] List<BaseBlock> tier2Blocks = new List<BaseBlock>();
@@ -13,14 +14,36 @@ public class GameManager : MonoBehaviour
     public int currentTierLevel = 1;
     public List<Vector2> positionToDisplayBlocks = new List<Vector2>();
 
-    [SerializeField] GameObject gameCanvas;
+    private List<GameObject> currentRollout = new List<GameObject>();
 
-    private List<GameObject> currentRollout = new List<GameObject>(); 
+    //dictionnary used to translate the block color to its related color 
+    public Dictionary<BlockColor, Color> blockColorToColor = new Dictionary<BlockColor, Color>();
+
+
+    public static GameManager Instance
+    {
+        get
+        {
+            if (instance == null)
+            {
+                Debug.Log("GameManager is missing");
+            }
+            return instance;
+        }
+    }
+
+    private void Awake()
+    {
+        instance = this; 
+    }
     // Start is called before the first frame update
     void Start()
     {
         allBlocksList.Add(tier1Blocks); 
-        allBlocksList.Add(tier2Blocks); 
+        allBlocksList.Add(tier2Blocks);
+
+        //set up the colors 
+        blockColorToColor.Add(BlockColor.Red, new Color(191, 14, 0, 255)); 
     }
 
     // Update is called once per frame
@@ -49,7 +72,6 @@ public class GameManager : MonoBehaviour
         for (int i = 0; i < 3; i++)
         {
             GameObject folderForPiece = new GameObject();
-            folderForPiece.transform.SetParent(gameCanvas.transform, false);
             folderForPiece.name = "Piece" + i.ToString();
             currentRollout.Add(folderForPiece.gameObject);
 
@@ -66,10 +88,9 @@ public class GameManager : MonoBehaviour
             //draw the original block 
             BaseBlock instance = Instantiate(
                                        randomBlock,
-                                       positionToDisplayBlocks[i],
+                                       new Vector3(0, 0, 0),
                                        Quaternion.identity
                                      );
-            instance.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
             instance.transform.SetParent(folderForPiece.transform, false);
 
             //check the lenght of offsets = number of blocks to draw 
@@ -77,12 +98,13 @@ public class GameManager : MonoBehaviour
             {
                 instance = Instantiate(
                                        randomBlock,
-                                        positionToDisplayBlocks[i] + (randomBlock.offsetList[z] * 50),
+                                       new Vector3(randomBlock.offsetList[z].x * 50, randomBlock.offsetList[z].y * 50, 0),
                                        Quaternion.identity
-                                     );
-                instance.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
+                                     );  
                 instance.transform.SetParent(folderForPiece.transform, false);
             }
+            folderForPiece.transform.position = positionToDisplayBlocks[i]; 
+            folderForPiece.transform.localScale = new Vector3(0.02f, 0.02f, 0.02f); 
         }
     }
 }
