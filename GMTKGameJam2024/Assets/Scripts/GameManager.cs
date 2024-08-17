@@ -53,11 +53,6 @@ public class GameManager : MonoBehaviour
         blockColorToSprite.Add(BlockColor.Blue, blockSpriteList[1]);
         blockColorToSprite.Add(BlockColor.Yellow, blockSpriteList[2]);
     }
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
     // Update is called once per frame
     void Update()
