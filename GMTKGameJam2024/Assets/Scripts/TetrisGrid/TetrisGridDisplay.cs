@@ -7,7 +7,8 @@ public class TetrisGridDisplay : MonoBehaviour
     [SerializeField] private TetrisGrid tetrisGrid;
     // one dimensional size because cells are square.
     // size is in pixels.
-    [SerializeField] private const float cellSize = 0.2f;
+    [SerializeField] private float cellSize = 0.4f;
+    [SerializeField] private int cellPixels = 36;
     [SerializeField] private TetrisGridCell cell;
     [SerializeField] private Camera referenceCamera;
     private Vector2Int displayedSize = Vector2Int.zero;
@@ -30,8 +31,8 @@ public class TetrisGridDisplay : MonoBehaviour
         // a size of 1 represents a total height of 2.
         // finding the position of the mouse relative to the camera position.
         // TODO: fix referenceCamera.transform.localScale issues with this
-        Vector2 mousePositionRelative = (((Vector2) Input.mousePosition - new Vector2(referenceCamera.pixelWidth, referenceCamera.pixelHeight) / 2) / referenceCamera.pixelHeight) * referenceCamera.transform.localScale * referenceCamera.orthographicSize * 2;
-        Vector2 mousePosition = mousePositionRelative + (Vector2) referenceCamera.transform.position;
+        // Vector2 mousePositionRelative = (((Vector2) Input.mousePosition - new Vector2(referenceCamera.pixelWidth, referenceCamera.pixelHeight) / 2) / referenceCamera.pixelHeight) * referenceCamera.transform.localScale * referenceCamera.orthographicSize * 2;
+        Vector2 mousePosition = referenceCamera.ScreenToWorldPoint(Input.mousePosition);
 
         Vector2Int currentHoveredCell = Vector2Int.RoundToInt((mousePosition - (Vector2) this.transform.position) / cellSize);
         if (currentHoveredCell != hoveredCell) {
@@ -62,7 +63,7 @@ public class TetrisGridDisplay : MonoBehaviour
                     if (!gridCells.ContainsKey(new Vector2Int(x,y))) {
                         TetrisGridCell newCell = Object.Instantiate(cell, this.transform);
                         newCell.transform.localPosition = (new Vector2(x,y)) * cellSize;
-                        newCell.transform.localScale = new Vector3(cellSize, cellSize, 1);
+                        newCell.transform.localScale = new Vector3(cellSize / cellPixels * 100, cellSize / cellPixels * 100, 1);
                         gridCells[new Vector2Int(x,y)] = newCell;
                     }
                 }
@@ -76,7 +77,7 @@ public class TetrisGridDisplay : MonoBehaviour
                     if (!gridCells.ContainsKey(new Vector2Int(x,y))) {
                         TetrisGridCell newCell = Object.Instantiate(cell, this.transform);
                         newCell.transform.localPosition = (new Vector2(x,y)) * cellSize;
-                        newCell.transform.localScale = new Vector3(cellSize, cellSize, 1);
+                        newCell.transform.localScale = new Vector3(cellSize / cellPixels * 100, cellSize / cellPixels * 100, 1);
                         gridCells[new Vector2Int(x,y)] = newCell;
                     }
                 }
@@ -99,7 +100,6 @@ public class TetrisGridDisplay : MonoBehaviour
     }
 
     private void hoverCell(Vector2Int cell) {
-        print("hovered cell"+cell.ToString());
         if (gridCells.ContainsKey(hoveredCell)) {
             gridCells[cell].hoverSprite.enabled = true;
             gridCells[cell].unhoverSprite.enabled = false;
@@ -107,7 +107,6 @@ public class TetrisGridDisplay : MonoBehaviour
     }
 
     private void unhoverCell(Vector2Int cell) {
-        print("unhovered cell"+cell.ToString());
         if (gridCells.ContainsKey(cell)) {
             gridCells[cell].unhoverSprite.enabled = true;
             gridCells[cell].hoverSprite.enabled = false;
