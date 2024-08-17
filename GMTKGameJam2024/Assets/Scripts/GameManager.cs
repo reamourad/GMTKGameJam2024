@@ -13,9 +13,9 @@ public class GameManager : MonoBehaviour
     public int currentTierLevel = 1;
     public List<Vector2> positionToDisplayBlocks = new List<Vector2>();
 
-    [SerializeField] GameObject gameCanvas; 
+    [SerializeField] GameObject gameCanvas;
 
-
+    private List<GameObject> currentRollout = new List<GameObject>(); 
     // Start is called before the first frame update
     void Start()
     {
@@ -35,12 +35,27 @@ public class GameManager : MonoBehaviour
 
     public void Roll()
     {
-        //I want to display three random block based on the current tier 
-        for(int i = 0; i < 3; i++)
+        // Delete previously instantiated blocks
+        foreach (GameObject block in currentRollout)
         {
+            if(block != null)
+            {
+                Destroy(block);
+            }
+        }
+        currentRollout.Clear();
+
+        //I want to display three random block based on the current tier 
+        for (int i = 0; i < 3; i++)
+        {
+            GameObject folderForPiece = new GameObject();
+            folderForPiece.transform.SetParent(gameCanvas.transform, false);
+            folderForPiece.name = "Piece" + i.ToString();
+            currentRollout.Add(folderForPiece.gameObject);
+
             //temp array for all blocks of the right tier 
             List<BaseBlock> tempBlockList = new List<BaseBlock>();
-             
+
             for (int j = 0; j < currentTierLevel; j++)
             {
                 tempBlockList.AddRange(allBlocksList[j]);
@@ -48,14 +63,28 @@ public class GameManager : MonoBehaviour
             //get a random block
             BaseBlock randomBlock = tempBlockList[Random.Range(0, tempBlockList.Count)];
 
-            //spawn the block at the right position 
+            //draw the original block 
             BaseBlock instance = Instantiate(
-                                   randomBlock,
-                                   positionToDisplayBlocks[i],
-                                   Quaternion.identity
-                                 );
-            instance.transform.SetParent(gameCanvas.transform, false); 
-        }
+                                       randomBlock,
+                                       positionToDisplayBlocks[i],
+                                       Quaternion.identity
+                                     );
+            instance.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
+            instance.transform.SetParent(folderForPiece.transform, false);
+            Vector2 previousBlockPosition = instance.transform.localPosition;
 
+            //check the lenght of offsets = number of blocks to draw 
+            for (int z = 0; z < randomBlock.offsetList.Count; z++)
+            {
+                instance = Instantiate(
+                                       randomBlock,
+                                        previousBlockPosition + (randomBlock.offsetList[z] * 50),
+                                       Quaternion.identity
+                                     );
+                instance.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
+                instance.transform.SetParent(folderForPiece.transform, false);
+                previousBlockPosition = instance.transform.localPosition;
+            }
+        }
     }
 }
