@@ -4,7 +4,7 @@ using UnityEngine;
 
 public abstract class BaseBlock : MonoBehaviour
 {
-    [SerializeField] List<Vector2> offsetList = new List<Vector2>();
+    [SerializeField] public List<Vector2Int> offsetList = new List<Vector2Int>();
     [SerializeField] string description = "This block is not special";
     [SerializeField] Sprite blockImage;
     [SerializeField] int tierLevel;
