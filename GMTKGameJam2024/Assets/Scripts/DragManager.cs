@@ -1,13 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class DragManager : MonoBehaviour
 {
     [SerializeField] private Camera referenceCamera;
-    [SerializeField] GameObject dragBlock = null;
+    [SerializeField] private EventSystem eventSystem;
+    [SerializeField] public Transform dragBlock = null;
     bool isMouseDown = false;
 
+    public Vector2 blockMouseOffset;
 
     // https://gamedev.stackexchange.com/questions/121994/how-to-get-which-gameobject-the-mouse-is-over-in-unity
     Ray ray;
@@ -30,6 +33,7 @@ public class DragManager : MonoBehaviour
     {
         // Vector2 mousePosition = referenceCamera.ScreenToWorldPoint(Input.mousePosition);
 
+        // pickBlock(Input.mousePosition);
 
 
         switch (dragMode) {
@@ -56,10 +60,8 @@ public class DragManager : MonoBehaviour
         Vector2 mousePosition = m_Event.mousePosition;
         mousePosition.y = referenceCamera.pixelHeight - mousePosition.y;
 
-        print("trying event");
         switch (m_Event.type) {
             case EventType.MouseDown:
-                pickBlock(mousePosition);
                 dragMode = DragMode.Click;
                 isMouseDown = true;
                 break;
@@ -67,10 +69,15 @@ public class DragManager : MonoBehaviour
                 isMouseDown = false;
                 if (dragBlock != null) {
                     dropBlock(mousePosition);
+                } else if (dragMode == DragMode.Click) {
+                    pickBlock(mousePosition);
                 }
                 break;
             case EventType.MouseDrag:
                 dragMode = DragMode.Drag;
+                if (dragBlock == null) {
+                    pickBlock(mousePosition);
+                }
                 break;
             default:
                 break;
@@ -78,19 +85,33 @@ public class DragManager : MonoBehaviour
     }
 
     private void pickBlock(Vector2 mousePos) {
-        ray = Camera.main.ScreenPointToRay(mousePos);
-        print("trying raycast "+mousePos.ToString());
-        if (Physics.Raycast(ray, out hit)) {
-            print(hit.collider.name);
-            // TODO: update checking style. tags maybe?
+        // https://stackoverflow.com/questions/72872575/raycast-with-pointereventdata-raycastui
+        // https://docs.unity3d.com/540/Documentation/ScriptReference/EventSystems.EventSystem.RaycastAll.html
+        List<RaycastResult> raycastResults = new List<RaycastResult>();
+        PointerEventData pointerEventData  = new PointerEventData(EventSystem.current);
+        pointerEventData.position = mousePos;
+        eventSystem.RaycastAll(pointerEventData, raycastResults);
+        foreach (RaycastResult raycastResult in raycastResults) {
+            // TODO: update checking style. tags maybe? right now it's based on name...?
+            Transform parent = raycastResult.gameObject.GetComponentInParent<Transform>().parent;
+            blockMouseOffset = parent.position - referenceCamera.ScreenToWorldPoint(mousePos);
+            Debug.Log("transform name "+parent.name);
+            if (parent.name.StartsWith("Piece")) {
+                Debug.Log("picked block");
+                dragBlock = parent;
+            }
         }
     }
 
     private void dropBlock(Vector2 mousePos) {
         Debug.Log("dropped block at"+mousePos.ToString());
+        dragBlock = null;
     }
 
     private void blockFollowMouse(Vector2 mousePos) {
-
+        if (dragBlock != null) {
+            Debug.Log(mousePos);
+            dragBlock.position = (Vector2) referenceCamera.ScreenToWorldPoint(mousePos) + blockMouseOffset;
+        }
     }
 }
