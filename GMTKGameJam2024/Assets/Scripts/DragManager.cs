@@ -7,7 +7,7 @@ public class DragManager : MonoBehaviour
 {
     [SerializeField] private Camera referenceCamera;
     [SerializeField] private EventSystem eventSystem;
-    [SerializeField] public Transform dragBlock = null;
+    public Transform dragBlock = null;
     bool isMouseDown = false;
     private Vector2 pickupLocation = Vector2.zero;
 
@@ -97,8 +97,8 @@ public class DragManager : MonoBehaviour
         foreach (RaycastResult raycastResult in raycastResults) {
             // TODO: update checking style. tags maybe? right now it's based on name...?
             Transform parent = raycastResult.gameObject.GetComponentInParent<Transform>().parent;
-            blockMouseOffset = (Vector2) (parent.position - referenceCamera.ScreenToWorldPoint(mousePos));
             if (parent.name.StartsWith("Piece")) {
+                blockMouseOffset = (Vector2) (parent.position - referenceCamera.ScreenToWorldPoint(mousePos));
                 dragBlock = parent;
                 if (tetrisGridDisplayLocked) {
                     tetrisGridDisplay.tetrisGrid.RemoveFromGrid(dragBlock);
@@ -142,7 +142,7 @@ public class DragManager : MonoBehaviour
                 Vector2 cellPos = Vector2Int.RoundToInt(((Vector2) referenceCamera.ScreenToWorldPoint(mousePos) - gridPosition) / tetrisGridDisplay.cellSize);
                 dragBlock.position = gridPosition + cellPos * tetrisGridDisplay.cellSize;
             } else {
-                dragBlock.position = ((Vector2) referenceCamera.ScreenToWorldPoint(mousePos)) + blockMouseOffset;
+                dragBlock.position = ((Vector2) referenceCamera.ScreenToWorldPoint(mousePos))+ blockMouseOffset;
             }
         }
     }
