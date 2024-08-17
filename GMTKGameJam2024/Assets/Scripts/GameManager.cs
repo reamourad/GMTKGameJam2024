@@ -71,19 +71,17 @@ public class GameManager : MonoBehaviour
                                      );
             instance.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
             instance.transform.SetParent(folderForPiece.transform, false);
-            Vector2 previousBlockPosition = instance.transform.localPosition;
 
             //check the lenght of offsets = number of blocks to draw 
             for (int z = 0; z < randomBlock.offsetList.Count; z++)
             {
                 instance = Instantiate(
                                        randomBlock,
-                                        previousBlockPosition + (randomBlock.offsetList[z] * 50),
+                                        positionToDisplayBlocks[i] + (randomBlock.offsetList[z] * 50),
                                        Quaternion.identity
                                      );
                 instance.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
                 instance.transform.SetParent(folderForPiece.transform, false);
-                previousBlockPosition = instance.transform.localPosition;
             }
         }
     }

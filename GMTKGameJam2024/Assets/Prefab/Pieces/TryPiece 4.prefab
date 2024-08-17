@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8873607906561075721}
   - component: {fileID: 1029296230148046611}
   m_Layer: 5
-  m_Name: TryPiece
+  m_Name: TryPiece 4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -59,7 +59,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0, g: 0.27750063, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -89,8 +89,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   offsetList:
-  - {x: 1, y: 0}
-  - {x: 2, y: 0}
+  - {x: 0, y: 1}
+  - {x: 0, y: 1}
+  - {x: 0, y: 1}
   description: This block is not special
   blockImage: {fileID: 0}
   tierLevel: 0
