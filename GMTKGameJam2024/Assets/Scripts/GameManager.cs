@@ -22,6 +22,8 @@ public class GameManager : MonoBehaviour
 
     public List<Sprite> blockSpriteList = new List<Sprite>();
 
+     
+
 
     public static GameManager Instance
     {
@@ -96,19 +98,10 @@ public class GameManager : MonoBehaviour
             //get a random block
             BaseBlock randomBlock = tempBlockList[Random.Range(0, tempBlockList.Count)];
 
-            //draw the original block 
-            BaseBlock instance = Instantiate(
-                                       randomBlock,
-                                       new Vector3(0, 0, 0),
-                                       Quaternion.identity
-                                     );
-            instance.transform.SetParent(folderForPiece.transform, false);
-            instance.GetComponent<BaseBlock>().background.GetComponent<SpriteRenderer>().sprite = blockColorToSprite[instance.GetComponent<BaseBlock>().blockColor];
-
             //check the lenght of offsets = number of blocks to draw 
             for (int z = 0; z < randomBlock.offsetList.Count; z++)
             {
-                instance = Instantiate(
+                BaseBlock instance = Instantiate(
                                        randomBlock,
                                        new Vector3(randomBlock.offsetList[z].x * 2, randomBlock.offsetList[z].y * 2, 0),
                                        Quaternion.identity

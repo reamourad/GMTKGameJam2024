@@ -52,10 +52,7 @@ MonoBehaviour:
   - {x: 2, y: 0}
   - {x: 3, y: 0}
   description: This block is not special
-  blockImage: {fileID: 0}
-  color: 
   blockColor: 0
-  isGlowing: 0
   background: {fileID: 7894481252088301330}
 --- !u!212 &7038440171669779206
 SpriteRenderer:
@@ -128,8 +125,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 0.2}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 7.4595075, y: 7.473843, z: 0.2}
+  m_Center: {x: 0.022476116, y: -0.08560697, z: 0}
 --- !u!1 &7894481252088301330
 GameObject:
   m_ObjectHideFlags: 0

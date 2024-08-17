@@ -57,12 +57,28 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5441173028511223340, guid: bdd66013bb724e9429fbb39187da2517, type: 3}
-      propertyPath: offsetList.Array.data[1].x
+      propertyPath: isSelected
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5441173028511223340, guid: bdd66013bb724e9429fbb39187da2517, type: 3}
-      propertyPath: offsetList.Array.data[1].y
+      propertyPath: offsetList.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 5441173028511223340, guid: bdd66013bb724e9429fbb39187da2517, type: 3}
+      propertyPath: offsetList.Array.data[0].x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5441173028511223340, guid: bdd66013bb724e9429fbb39187da2517, type: 3}
+      propertyPath: offsetList.Array.data[0].y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5441173028511223340, guid: bdd66013bb724e9429fbb39187da2517, type: 3}
+      propertyPath: offsetList.Array.data[1].x
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5441173028511223340, guid: bdd66013bb724e9429fbb39187da2517, type: 3}
+      propertyPath: offsetList.Array.data[1].y
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5441173028511223340, guid: bdd66013bb724e9429fbb39187da2517, type: 3}
       propertyPath: offsetList.Array.data[2].x
@@ -70,6 +86,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5441173028511223340, guid: bdd66013bb724e9429fbb39187da2517, type: 3}
       propertyPath: offsetList.Array.data[2].y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5441173028511223340, guid: bdd66013bb724e9429fbb39187da2517, type: 3}
+      propertyPath: offsetList.Array.data[3].y
       value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []

@@ -50,11 +50,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4958074049130618074, guid: bdd66013bb724e9429fbb39187da2517, type: 3}
       propertyPath: m_Name
-      value: BasePiece 1 Variant
+      value: YellowPiece Variant
       objectReference: {fileID: 0}
     - target: {fileID: 5441173028511223340, guid: bdd66013bb724e9429fbb39187da2517, type: 3}
       propertyPath: blockColor
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5441173028511223340, guid: bdd66013bb724e9429fbb39187da2517, type: 3}
+      propertyPath: isSelected
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5441173028511223340, guid: bdd66013bb724e9429fbb39187da2517, type: 3}
+      propertyPath: offsetList.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 5441173028511223340, guid: bdd66013bb724e9429fbb39187da2517, type: 3}
+      propertyPath: offsetList.Array.data[0].x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5441173028511223340, guid: bdd66013bb724e9429fbb39187da2517, type: 3}
+      propertyPath: offsetList.Array.data[0].y
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5441173028511223340, guid: bdd66013bb724e9429fbb39187da2517, type: 3}
       propertyPath: offsetList.Array.data[1].x
@@ -62,14 +78,22 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5441173028511223340, guid: bdd66013bb724e9429fbb39187da2517, type: 3}
       propertyPath: offsetList.Array.data[1].y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5441173028511223340, guid: bdd66013bb724e9429fbb39187da2517, type: 3}
       propertyPath: offsetList.Array.data[2].x
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5441173028511223340, guid: bdd66013bb724e9429fbb39187da2517, type: 3}
       propertyPath: offsetList.Array.data[2].y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5441173028511223340, guid: bdd66013bb724e9429fbb39187da2517, type: 3}
+      propertyPath: offsetList.Array.data[3].x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5441173028511223340, guid: bdd66013bb724e9429fbb39187da2517, type: 3}
+      propertyPath: offsetList.Array.data[3].y
       value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []

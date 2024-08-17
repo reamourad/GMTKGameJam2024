@@ -15,10 +15,27 @@ public abstract class BaseBlock : MonoBehaviour
     public List<Vector2Int> offsetList = new List<Vector2Int>();
     public string description = "This block is not special";
     public BlockColor blockColor;
-    public bool isGlowing = false;
+    private bool isGlowing = false;
+    private bool isHoverable = true;
+    public bool isSelectable = true;
+    public bool isSelected = false;
     private Renderer currentRenderer;
-    [SerializeField] public GameObject background; 
+    [SerializeField] public GameObject background;
 
+
+    public void setIsSelected(bool newIsSelected)
+    {
+        isSelected = newIsSelected; 
+        if(isSelected)
+        {
+            setIsGlowing(true);
+        }
+        else
+        {
+            setIsGlowing(false);
+        }
+
+    }
     public void setIsGlowing(bool newIsGlowing)
     {
         if (!currentRenderer)
@@ -55,6 +72,44 @@ public abstract class BaseBlock : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.V))
         {
             setIsGlowing(!isGlowing); 
+        }
+    }
+
+    public void OnMouseOver()
+    {
+        if (isHoverable)
+        {
+            //get all children of the parent 
+            var children = transform.parent.gameObject.GetComponentsInChildren<BaseBlock>();
+            foreach (BaseBlock baseBlock in children)
+            {
+                baseBlock.setIsGlowing(true);
+            }
+        }
+    }
+
+    public void OnMouseExit()
+    {
+        if (isHoverable && !isSelected)
+        {
+            var children = transform.parent.gameObject.GetComponentsInChildren<BaseBlock>();
+            foreach (BaseBlock baseBlock in children)
+            {
+                baseBlock.setIsGlowing(false);
+            }
+        }
+    }
+
+    public void OnMouseDown()
+    {
+        if (isSelectable)
+        {
+            //add it to the selected list 
+            var children = transform.parent.gameObject.GetComponentsInChildren<BaseBlock>();
+            foreach (BaseBlock baseBlock in children)
+            {
+                baseBlock.setIsSelected(!isSelected);
+            }
         }
     }
     public abstract void Activate(); 
