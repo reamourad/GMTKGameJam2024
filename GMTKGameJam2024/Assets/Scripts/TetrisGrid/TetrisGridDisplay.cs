@@ -4,13 +4,14 @@ using UnityEngine;
 
 public class TetrisGridDisplay : MonoBehaviour
 {
-    [SerializeField] private TetrisGrid tetrisGrid;
+    [SerializeField] public TetrisGrid tetrisGrid;
     // one dimensional size because cells are square.
     // size is in pixels.
-    [SerializeField] private float cellSize = 0.4f;
+    [SerializeField] public float cellSize = 0.4f;
     [SerializeField] private int cellPixels = 36;
     [SerializeField] private TetrisGridCell cell;
     [SerializeField] private Camera referenceCamera;
+    [SerializeField] private DragManager dragManager;
     private Vector2Int displayedSize = Vector2Int.zero;
     private Dictionary<Vector2Int, TetrisGridCell> gridCells = new Dictionary<Vector2Int, TetrisGridCell>();
     private Vector2Int hoveredCell = Vector2Int.one * -1;
@@ -24,10 +25,6 @@ public class TetrisGridDisplay : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-        // find world position based on pixel position of mouse.
-
-
         // a size of 1 represents a total height of 2.
         // finding the position of the mouse relative to the camera position.
         // TODO: fix referenceCamera.transform.localScale issues with this
@@ -49,6 +46,16 @@ public class TetrisGridDisplay : MonoBehaviour
 
 
         if (displayedSize != tetrisGrid.size) UpdateSize();
+
+        // update DragManager's clipping.
+        // assume 1 block's buffer. i guess.
+        if (currentHoveredCell.x <= displayedSize.x && currentHoveredCell.x >= -1 && currentHoveredCell.y <= displayedSize.y && currentHoveredCell.y >= -1) {
+            dragManager.tetrisGridDisplayLocked = true;
+            dragManager.tetrisGridDisplay = this;
+        } else if (dragManager.tetrisGridDisplay == this) {
+            dragManager.tetrisGridDisplayLocked = false;
+            dragManager.tetrisGridDisplay = null;
+        }
     }
 
     void UpdateSize() {
@@ -87,11 +94,13 @@ public class TetrisGridDisplay : MonoBehaviour
 
         // remove extraneous cells
         if (resizeSize.y < 0 || resizeSize.x < 0) {
-            // there's better logic that shouldn't require iterating through cells that are known to be within tetrisGrid.size but whatever
-            foreach ((Vector2Int key, TetrisGridCell gridCell) in gridCells) {
+            // there's better logic that shouldn't require iterating through cells that are known to be within tetrisGrid.size but i'm not paid enough for this
+            var keys = new List<Vector2Int>(gridCells.Keys);
+            foreach (Vector2Int key in keys) {
+                // TODO: this may not work. "Collection was modified; enumeration operation may not execute".
                 if (key.x >= tetrisGrid.size.x || key.y >= tetrisGrid.size.y) {
+                    Destroy(gridCells[key]);
                     gridCells.Remove(key);
-                    Destroy(gridCell);
                 }
             }
         }
