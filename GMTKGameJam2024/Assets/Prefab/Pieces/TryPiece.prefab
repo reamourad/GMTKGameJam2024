@@ -88,7 +88,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b44587ff9a327ee45a798bcc3f581095, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  offsetList: []
+  offsetList:
+  - {x: 1, y: 0}
+  - {x: 1, y: 0}
   description: This block is not special
   blockImage: {fileID: 0}
   tierLevel: 0
