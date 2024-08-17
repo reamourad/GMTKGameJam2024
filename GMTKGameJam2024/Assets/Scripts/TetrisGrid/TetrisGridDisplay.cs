@@ -31,8 +31,8 @@ public class TetrisGridDisplay : MonoBehaviour
         // a size of 1 represents a total height of 2.
         // finding the position of the mouse relative to the camera position.
         // TODO: fix referenceCamera.transform.localScale issues with this
-        Vector2 mousePositionRelative = (((Vector2) Input.mousePosition - new Vector2(referenceCamera.pixelWidth, referenceCamera.pixelHeight) / 2) / referenceCamera.pixelHeight) * referenceCamera.transform.localScale * referenceCamera.orthographicSize * 2;
-        Vector2 mousePosition = mousePositionRelative + (Vector2) referenceCamera.transform.position;
+        // Vector2 mousePositionRelative = (((Vector2) Input.mousePosition - new Vector2(referenceCamera.pixelWidth, referenceCamera.pixelHeight) / 2) / referenceCamera.pixelHeight) * referenceCamera.transform.localScale * referenceCamera.orthographicSize * 2;
+        Vector2 mousePosition = referenceCamera.ScreenToWorldPoint(Input.mousePosition);
 
         Vector2Int currentHoveredCell = Vector2Int.RoundToInt((mousePosition - (Vector2) this.transform.position) / cellSize);
         if (currentHoveredCell != hoveredCell) {
