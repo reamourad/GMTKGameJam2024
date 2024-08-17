@@ -90,7 +90,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   offsetList:
   - {x: 1, y: 1}
-  - {x: 0, y: 1}
+  - {x: 0, y: 2}
   description: This block is not special
   blockImage: {fileID: 0}
   tierLevel: 0
