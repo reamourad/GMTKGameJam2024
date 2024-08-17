@@ -77,7 +77,7 @@ public abstract class BaseBlock : MonoBehaviour
 
     public void OnMouseOver()
     {
-        if (isHoverable)
+        if (isHoverable && !isSelected)
         {
             //get all children of the parent 
             var children = transform.parent.gameObject.GetComponentsInChildren<BaseBlock>();
@@ -85,6 +85,7 @@ public abstract class BaseBlock : MonoBehaviour
             {
                 baseBlock.setIsGlowing(true);
             }
+            Debug.Log("mouse over");
         }
     }
 
@@ -97,6 +98,7 @@ public abstract class BaseBlock : MonoBehaviour
             {
                 baseBlock.setIsGlowing(false);
             }
+            Debug.Log("mouse exit");
         }
     }
 
@@ -104,12 +106,26 @@ public abstract class BaseBlock : MonoBehaviour
     {
         if (isSelectable)
         {
-            //add it to the selected list 
-            var children = transform.parent.gameObject.GetComponentsInChildren<BaseBlock>();
-            foreach (BaseBlock baseBlock in children)
+            if (isSelected)
             {
-                baseBlock.setIsSelected(!isSelected);
+                //add it to the selected list 
+                var children = transform.parent.gameObject.GetComponentsInChildren<BaseBlock>();
+                foreach (BaseBlock baseBlock in children)
+                {
+                    baseBlock.setIsSelected(false);
+                }
             }
+            else
+            {
+                //add it to the selected list 
+                var children = transform.parent.gameObject.GetComponentsInChildren<BaseBlock>();
+                foreach (BaseBlock baseBlock in children)
+                {
+                    baseBlock.setIsSelected(true);
+                }
+            }
+           
+            Debug.Log("mouse down");
         }
     }
     public abstract void Activate(); 
