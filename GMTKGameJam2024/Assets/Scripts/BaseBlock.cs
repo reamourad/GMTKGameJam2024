@@ -17,8 +17,8 @@ public abstract class BaseBlock : MonoBehaviour
     public BlockColor blockColor;
     private bool isGlowing = false;
     private bool isHoverable = true;
-    public bool isSelectable = true;
-    public bool isSelected = false;
+    private bool isSelectable = false;
+    private bool isSelected = false;
     private Renderer currentRenderer;
     [SerializeField] public GameObject background;
 
