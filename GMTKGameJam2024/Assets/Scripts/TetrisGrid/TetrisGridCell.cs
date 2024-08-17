@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class TetrisGridCell : MonoBehaviour
 {
+    [SerializeField] public SpriteRenderer hoverSprite;
+    [SerializeField] public SpriteRenderer unhoverSprite;
     // Start is called before the first frame update
     void Start()
     {

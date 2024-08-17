@@ -134,6 +134,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: TetrisGrid
       objectReference: {fileID: 0}
+    - target: {fileID: 3458992783110730198, guid: 319e44bd4c6d04e89be3933a5a348e9b, type: 3}
+      propertyPath: size.x
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 3458992783110730198, guid: 319e44bd4c6d04e89be3933a5a348e9b, type: 3}
+      propertyPath: size.y
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 6405322539814239480, guid: 319e44bd4c6d04e89be3933a5a348e9b, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -179,6 +187,82 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 319e44bd4c6d04e89be3933a5a348e9b, type: 3}
+--- !u!114 &606469452 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3458992783110730198, guid: 319e44bd4c6d04e89be3933a5a348e9b, type: 3}
+  m_PrefabInstance: {fileID: 437657371}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5cb4ec3b224e42038e881b6938efd09, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1001 &622962267
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2187340837290474198, guid: 8e6e1627698cd4eaa8c983addad0956f, type: 3}
+      propertyPath: m_Name
+      value: TetrisGridDisplay
+      objectReference: {fileID: 0}
+    - target: {fileID: 3773075257938960069, guid: 8e6e1627698cd4eaa8c983addad0956f, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3773075257938960069, guid: 8e6e1627698cd4eaa8c983addad0956f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3773075257938960069, guid: 8e6e1627698cd4eaa8c983addad0956f, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3773075257938960069, guid: 8e6e1627698cd4eaa8c983addad0956f, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3773075257938960069, guid: 8e6e1627698cd4eaa8c983addad0956f, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3773075257938960069, guid: 8e6e1627698cd4eaa8c983addad0956f, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3773075257938960069, guid: 8e6e1627698cd4eaa8c983addad0956f, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3773075257938960069, guid: 8e6e1627698cd4eaa8c983addad0956f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3773075257938960069, guid: 8e6e1627698cd4eaa8c983addad0956f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3773075257938960069, guid: 8e6e1627698cd4eaa8c983addad0956f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9141521743797726000, guid: 8e6e1627698cd4eaa8c983addad0956f, type: 3}
+      propertyPath: tetrisGrid
+      value: 
+      objectReference: {fileID: 606469452}
+    - target: {fileID: 9141521743797726000, guid: 8e6e1627698cd4eaa8c983addad0956f, type: 3}
+      propertyPath: referenceCamera
+      value: 
+      objectReference: {fileID: 1654165890}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 8e6e1627698cd4eaa8c983addad0956f, type: 3}
 --- !u!1 &1654165888
 GameObject:
   m_ObjectHideFlags: 0
@@ -322,3 +406,4 @@ SceneRoots:
   m_Roots:
   - {fileID: 1654165891}
   - {fileID: 437657371}
+  - {fileID: 622962267}

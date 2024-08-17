@@ -9,22 +9,48 @@ public class TetrisGridDisplay : MonoBehaviour
     // size is in pixels.
     [SerializeField] private const float cellSize = 0.2f;
     [SerializeField] private TetrisGridCell cell;
+    [SerializeField] private Camera referenceCamera;
     private Vector2Int displayedSize = Vector2Int.zero;
     private Dictionary<Vector2Int, TetrisGridCell> gridCells = new Dictionary<Vector2Int, TetrisGridCell>();
+    private Vector2Int hoveredCell = Vector2Int.one * -1;
     // Start is called before the first frame update
     void Start()
     {
+        UpdateSize();
+
     }
 
     // Update is called once per frame
     void Update()
     {
 
+        // find world position based on pixel position of mouse.
+
+
+        // a size of 1 represents a total height of 2.
+        // finding the position of the mouse relative to the camera position.
+        // TODO: fix referenceCamera.transform.localScale issues with this
+        Vector2 mousePositionRelative = (((Vector2) Input.mousePosition - new Vector2(referenceCamera.pixelWidth, referenceCamera.pixelHeight) / 2) / referenceCamera.pixelHeight) * referenceCamera.transform.localScale * referenceCamera.orthographicSize * 2;
+        Vector2 mousePosition = mousePositionRelative + (Vector2) referenceCamera.transform.position;
+
+        Vector2Int currentHoveredCell = Vector2Int.FloorToInt((mousePosition - (Vector2) this.transform.position) / cellSize);
+        if (currentHoveredCell != hoveredCell) {
+            // print("hovered cell "+currentHoveredCell.ToString()+", unhovered cell "+hoveredCell.ToString());
+            if (currentHoveredCell.x < displayedSize.x && currentHoveredCell.x >= 0 && currentHoveredCell.y < displayedSize.y && currentHoveredCell.y >= 0) {
+                unhoverCell(hoveredCell);
+                hoverCell(currentHoveredCell);
+                hoveredCell = currentHoveredCell;
+            } else if (!(hoveredCell.x < displayedSize.x && hoveredCell.x >= 0 && hoveredCell.y < displayedSize.y && hoveredCell.y >= 0)) {
+                unhoverCell(hoveredCell);
+            }
+        }
+
+
         if (displayedSize != tetrisGrid.size) UpdateSize();
-        // TODO: implement resizing
     }
 
     void UpdateSize() {
+        // shouldn't be possible to break now.
         Vector2Int resizeSize = tetrisGrid.size - displayedSize;
         
         // x axis
@@ -69,5 +95,21 @@ public class TetrisGridDisplay : MonoBehaviour
         }
 
         displayedSize = tetrisGrid.size;
+    }
+
+    private void hoverCell(Vector2Int cell) {
+        print("hovered cell"+cell.ToString());
+        if (gridCells.ContainsKey(hoveredCell)) {
+            gridCells[cell].hoverSprite.enabled = true;
+            gridCells[cell].unhoverSprite.enabled = false;
+        }
+    }
+
+    private void unhoverCell(Vector2Int cell) {
+        print("unhovered cell"+cell.ToString());
+        if (gridCells.ContainsKey(cell)) {
+            gridCells[cell].unhoverSprite.enabled = true;
+            gridCells[cell].hoverSprite.enabled = false;
+        }
     }
 }
