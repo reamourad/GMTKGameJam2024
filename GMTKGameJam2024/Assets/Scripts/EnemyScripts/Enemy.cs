@@ -23,17 +23,7 @@ public class Enemy : MonoBehaviour
             }
         }
 
-        // Initialize health
-        maxHealth = health;
-        healthBar = GetComponentInChildren<HealthBar>();
-        if (healthBar != null)
-        {
-            healthBar.SetMaxHealth(maxHealth);
-        }
-        else
-        {
-            Debug.LogError("Enemy.cs: HealthBar component not found on child objects.");
-        }       
+        InitializeHealthBar();     
     }
 
     // Update is called once per frame
@@ -41,6 +31,22 @@ public class Enemy : MonoBehaviour
     {
         
     }
+
+    //Initializing the health bar
+    public void InitializeHealthBar()
+    {
+        healthBar = GetComponentInChildren<HealthBar>();
+        if (healthBar != null)
+        {
+            healthBar.SetMaxHealth(maxHealth);
+            healthBar.SetHealth(health);
+        }
+        else
+        {
+            Debug.LogError("Enemy.cs: HealthBar component not found on child objects.");
+        }
+    }
+
 
     public virtual void Attack()
     {

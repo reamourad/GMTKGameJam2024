@@ -36,8 +36,7 @@ public class EnemyLineUp : MonoBehaviour
     //SPAWNING ENEMIES
 
 
-    public void CreateLineUp(int numberOfEnemies)
-    {
+    public void CreateLineUp(int numberOfEnemies) {
         enemyLineUp = new Enemy[numberOfEnemies];
 
         Debug.Log("EnemyLineUp.cs: Creating enemy lineup...");
@@ -57,12 +56,15 @@ public class EnemyLineUp : MonoBehaviour
             Enemy enemy = enemyObject.GetComponent<Enemy>();
 
             // Assign the enemy to the array and set stats
+            int health = Random.Range(50, 100);
             enemyLineUp[i] = enemy;
-            enemy.health = Random.Range(50, 100); // Example values
+            enemy.health = health;
+            enemy.maxHealth = health; // Set maxHealth for health bar initialization
         }
 
         Debug.Log("EnemyLineUp.cs: Enemy lineup creation complete. Total enemies: " + enemyLineUp.Length);
     }
+
 
 
     //ATTACK LOGIC
@@ -87,12 +89,18 @@ public class EnemyLineUp : MonoBehaviour
         Debug.Log("EnemyLineUp.cs: All attacks completed.");
     }
 
-    public void ApplyDamageToAll(int damage)
-    {
-        // Apply damage to each enemy in the lineup
+    public void ApplyDamageToAll(int damage) {
+        // Apply damage to each enemy in the lineup if the enemy exists
         for (int i = 0; i < numberOfEnemies; i++)
         {
-            enemyLineUp[i].TakeDamage(damage);
+            if (enemyLineUp[i] != null)
+            {
+                enemyLineUp[i].TakeDamage(damage);
+            }
+            else
+            {
+                Debug.LogWarning($"EnemyLineUp.cs: Enemy at index {i} is null and will be skipped.");
+            }
         }
     }
 }
