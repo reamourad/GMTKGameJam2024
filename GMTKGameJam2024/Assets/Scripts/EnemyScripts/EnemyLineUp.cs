@@ -3,31 +3,31 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyLineUp : MonoBehaviour
-{   
-    //Variables
+{
+    // Variables
     public Enemy[] enemyLineUp;
     public GameObject enemyPrefab;
     public int numberOfEnemies = 3;
+    public float attackDelay = 3f; // Time in seconds between each attack
 
     // Start is called before the first frame update
     void Start()
-    {   
-        //For testing purposes
+    {
+        // For testing purposes
         Debug.Log("EnemyLineUp: Line up created");
         this.CreateLineUp(numberOfEnemies);
         Debug.Log("EnemyLineUp: Attack called");
-        this.BeginAttack();
-        //Debug.Log("EnemyLineUp: apply damage called");
-        //this.ApplyDamageToAll(100);
+        StartCoroutine(BeginAttack()); // Start the attack coroutine
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
-    public void CreateLineUp(int numberOfEnemies){
+    public void CreateLineUp(int numberOfEnemies)
+    {
         enemyLineUp = new Enemy[numberOfEnemies];
 
         Debug.Log("EnemyLineUp.cs: Creating enemy lineup...");
@@ -36,8 +36,8 @@ public class EnemyLineUp : MonoBehaviour
         {
             // SPAWNING IN RANDOM AREAS NEAR ORIGIN TO TEST
             Vector2 randomPosition = new Vector2(
-                Random.Range(1f, 4f), 
-                Random.Range(-4f, 4f)  
+                Random.Range(1f, 4f),
+                Random.Range(-4f, 4f)
             );
 
             // Instantiate the enemy at the random position
@@ -46,26 +46,34 @@ public class EnemyLineUp : MonoBehaviour
             // Get the Enemy component from the instantiated object
             Enemy enemy = enemyObject.GetComponent<Enemy>();
 
-            // Assign the enemy to the array and the stats n stuff
+            // Assign the enemy to the array and set stats
             enemyLineUp[i] = enemy;
             enemy.health = Random.Range(50, 100); // Example values
         }
 
         Debug.Log("EnemyLineUp.cs: Enemy lineup creation complete. Total enemies: " + enemyLineUp.Length);
-}
-
-
-    public void BeginAttack() {
-        //TODO: Iterate through enemy array and have each enemy attack 
-        for (int i = 0; i < numberOfEnemies; i++) {
-            enemyLineUp[i].Attack();
-        }
-        Debug.Log("EnemyLineUp.cs: Attack completed");
     }
 
-    public void ApplyDamageToAll(int damage) {
+    private IEnumerator BeginAttack()
+    {
+        // Iterate through the enemy array and have each enemy attack with a delay
+        for (int i = 0; i < numberOfEnemies; i++)
+        {
+            enemyLineUp[i].Attack();
+            Debug.Log($"EnemyLineUp.cs: Enemy {i} attacked.");
+            
+            // Wait for the specified delay before the next enemy attacks
+            yield return new WaitForSeconds(attackDelay);
+        }
+        
+        Debug.Log("EnemyLineUp.cs: All attacks completed.");
+    }
+
+    public void ApplyDamageToAll(int damage)
+    {
         // Apply damage to each enemy in the lineup
-        for (int i = 0; i < numberOfEnemies; i++) {
+        for (int i = 0; i < numberOfEnemies; i++)
+        {
             enemyLineUp[i].TakeDamage(damage);
         }
     }
