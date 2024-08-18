@@ -9,7 +9,7 @@ public class EnemyClickManager : MonoBehaviour
     [SerializeField] private EventSystem eventSystem;
     [SerializeField] private GameManager gameManager;
     [SerializeField] private Camera referenceCamera;
-    private GameObject selectedEnemy;
+    public GameObject selectedEnemy;
 
     // Start is called before the first frame update
     void Start()
@@ -50,5 +50,9 @@ public class EnemyClickManager : MonoBehaviour
 
     private void selectEnemy(GameObject gameObject) {
         selectedEnemy = gameObject;
+    }
+
+    public void unselectEnemy() {
+        selectedEnemy = null;
     }
 }

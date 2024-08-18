@@ -51,6 +51,8 @@ public class GameManager : MonoBehaviour
 
     public List<PieceFolder> actionList = new List<PieceFolder>();
 
+    [SerializeField] public EnemyClickManager enemyClickManager;
+
 
     public static GameManager Instance
     {
@@ -146,7 +148,11 @@ public class GameManager : MonoBehaviour
                 
                 if (actionList.Count > 0) {
                     undo.interactable = true;
-                    attack.interactable = true;
+                    if (enemyClickManager.selectedEnemy != null) {
+                        attack.interactable = true;
+                    } else {
+                        attack.interactable = false;
+                    }
                 } else {
                     undo.interactable = false;
                     attack.interactable = false;
@@ -287,8 +293,9 @@ public class GameManager : MonoBehaviour
         {
             PieceFolder pieceFolder = actionList[i];
             pieceFolder.gameObject.SetActive(false);
-            actionList.RemoveAt(i); 
+            actionList.RemoveAt(i);
         }
+        enemyClickManager.selectedEnemy.GetComponent<Enemy>().TakeDamage(currentAttackScore);
         yield return null;
     }
 
