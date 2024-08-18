@@ -8,4 +8,9 @@ public class ChildrenBlock : BaseBlock
     {
         Debug.Log("Works Ayeee!"); 
     }
+
+    public override void Deactivate()
+    {
+        Debug.Log("Deactivated!");
+    }
 }

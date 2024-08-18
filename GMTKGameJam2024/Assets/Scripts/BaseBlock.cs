@@ -18,7 +18,6 @@ public abstract class BaseBlock : MonoBehaviour
     private bool isGlowing = false;
     private bool isHoverable = true;
     public bool isSelectable = false;
-    private bool isSelected = false;
     public bool isBought = false; 
     private Renderer currentRenderer;
     [SerializeField] public GameObject background;
@@ -27,21 +26,6 @@ public abstract class BaseBlock : MonoBehaviour
     private GameManager gameManager;
 
 
-    public void setIsSelected(bool newIsSelected)
-    {
-        isSelected = newIsSelected; 
-        if(isSelected)
-        {
-            gameManager.actionList.Add(transform.parent.gameObject);
-            setIsGlowing(true);
-        }
-        else
-        {
-            gameManager.actionList.Remove(transform.parent.gameObject);
-            setIsGlowing(false);
-        }
-
-    }
     public void setIsGlowing(bool newIsGlowing)
     {
         if (!currentRenderer)
@@ -85,7 +69,8 @@ public abstract class BaseBlock : MonoBehaviour
 
     public void OnMouseOver()
     {
-        if (isHoverable && !isSelected)
+        PieceFolder pieceFolder = GetComponentInParent<PieceFolder>();
+        if (isHoverable && !pieceFolder.isSelected)
         {
             //get all children of the parent 
             var children = transform.parent.gameObject.GetComponentsInChildren<BaseBlock>();
@@ -96,27 +81,11 @@ public abstract class BaseBlock : MonoBehaviour
         }
         if (isSelectable && Input.GetMouseButtonDown(0))
         {
-            if (isSelected)
-            {
-                //add it to the selected list 
-                var children = transform.parent.gameObject.GetComponentsInChildren<BaseBlock>();
-                foreach (BaseBlock baseBlock in children)
-                {
-                    baseBlock.setIsSelected(false);
-                }
-            }
-            else
-            {
-                //add it to the selected list 
-                var children = transform.parent.gameObject.GetComponentsInChildren<BaseBlock>();
-                foreach (BaseBlock baseBlock in children)
-                {
-                    baseBlock.setIsSelected(true);
-                }
-            }
+            //get the parent and call setisselected(false)
+            pieceFolder.setIsPieceSelected(true); 
         }
 
-        if (Input.GetMouseButtonDown(1) && !GetComponentInParent<PieceFolder>().isInsideGrid)
+        if (Input.GetMouseButtonDown(1) && !pieceFolder.isInsideGrid)
         {
             Debug.Log("Rotate");
             transform.parent.Rotate(0, 0, 90); 
@@ -125,7 +94,8 @@ public abstract class BaseBlock : MonoBehaviour
 
     public void OnMouseExit()
     {
-        if (isHoverable && !isSelected)
+        PieceFolder pieceFolder = GetComponentInParent<PieceFolder>();
+        if (isHoverable && !pieceFolder.isSelected)
         {
             var children = transform.parent.gameObject.GetComponentsInChildren<BaseBlock>();
             foreach (BaseBlock baseBlock in children)
@@ -139,5 +109,6 @@ public abstract class BaseBlock : MonoBehaviour
     {
         
     }
-    public abstract void Activate(); 
+    public abstract void Activate();  
+    public abstract void Deactivate(); 
 }

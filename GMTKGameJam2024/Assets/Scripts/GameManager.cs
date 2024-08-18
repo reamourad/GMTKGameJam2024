@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine; 
 using UnityEngine.UI;
@@ -41,7 +42,7 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private TetrisGridDisplay tetrisGridDisplay;
 
-    public List<GameObject> actionList = new List<GameObject>();
+    public List<PieceFolder> actionList = new List<PieceFolder>();
 
 
     public static GameManager Instance
@@ -187,7 +188,6 @@ public class GameManager : MonoBehaviour
 
     public void UI_StartBattle() {
         ChangePhase(Phase.Battle);
-        // delete all non-grid blocks.
         // Delete previously instantiated blocks
         for (int i = currentRollout.Count - 1; i >= 0; i--)
         {
@@ -214,13 +214,24 @@ public class GameManager : MonoBehaviour
 
     public void UI_UndoButton() {
         if (actionList.Count > 0) {
-            actionList.RemoveAt(actionList.Count - 1);
+            actionList.Last().transform.GetChild(0).GetComponent<BaseBlock>().Deactivate();
+            actionList.Last().setIsPieceSelected(false);
+            Debug.Log("called"); 
         }
     }
 
     public void UI_Attack() {
+        //TODO: CHECK IF ENEMY IS TARGETED
         if (actionList.Count > 0) {
             // attack here.
+            for (int i = actionList.Count - 1; i >= 0; i--)
+            {
+                PieceFolder pieceFolder = actionList[i];
+                pieceFolder.transform.GetChild(0).GetComponent<BaseBlock>().Activate();
+                pieceFolder.gameObject.SetActive(false);
+                actionList.RemoveAt(i);
+            }
+
         }
     }
 }
