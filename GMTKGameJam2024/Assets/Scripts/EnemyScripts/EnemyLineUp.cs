@@ -14,15 +14,21 @@ public class EnemyLineUp : MonoBehaviour
     void Start()
     {
         // For testing purposes
-        Debug.Log("EnemyLineUp: Line up created");
+        //Debug.Log("EnemyLineUp: Line up created");
         this.CreateLineUp(numberOfEnemies);
-        Debug.Log("EnemyLineUp: Attack called");
-        StartAttackSequence(); // Helper method for attack since i dont wanna call coroutine in here
+        //Debug.Log("EnemyLineUp: Attack called");
+        //StartAttackSequence(); // Helper method for attack since i dont wanna call coroutine in here
     }
 
     // Update is called once per frame
     void Update()
     {
+        // Test: Apply damage to all enemies when Enter is pressed
+        if (Input.GetKeyDown(KeyCode.Return))
+        {
+            Debug.Log("EnemyLineUp: Enter key pressed, applying damage to all enemies.");
+            ApplyDamageToAll(4);
+        }
 
     }
 

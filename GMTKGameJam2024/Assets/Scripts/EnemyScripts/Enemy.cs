@@ -6,6 +6,8 @@ public class Enemy : MonoBehaviour
 {
     // Variables
     public int health;
+    public int maxHealth;
+    private HealthBar healthBar;
     [SerializeField] private TetrisGrid tetrisGrid;  // Reference to TetrisGrid
 
     // Start is called before the first frame update
@@ -20,6 +22,18 @@ public class Enemy : MonoBehaviour
                 Debug.LogError("TetrisGrid not found in the scene.");
             }
         }
+
+        // Initialize health
+        maxHealth = health;
+        healthBar = GetComponentInChildren<HealthBar>();
+        if (healthBar != null)
+        {
+            healthBar.SetMaxHealth(maxHealth);
+        }
+        else
+        {
+            Debug.LogError("Enemy.cs: HealthBar component not found on child objects.");
+        }       
     }
 
     // Update is called once per frame
@@ -62,7 +76,20 @@ public class Enemy : MonoBehaviour
     // Method for taking damage
     public virtual void TakeDamage(int damage)
     {
+        // Print health before taking damage
+        Debug.Log($"Enemy.cs: Health before damage: {health}");
+
         health -= damage;
+
+        // Print health after taking damage
+        Debug.Log($"Enemy.cs: Health after damage: {health}");
+
+        // Update the health bar
+        if (healthBar != null)
+        {
+            healthBar.SetHealth(health);
+        }
+
         if (health <= 0)
         {
             Die();
