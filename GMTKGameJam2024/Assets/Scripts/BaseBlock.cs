@@ -79,6 +79,10 @@ public abstract class BaseBlock : MonoBehaviour
                 baseBlock.setIsGlowing(true);
             }
         }
+        if (isHoverable)
+        {
+            GameManager.Instance.setDescriptionDisplay(GetComponentInParent<PieceFolder>().currentPowerLevel, description); 
+        }
         if (isSelectable && Input.GetMouseButtonDown(0))
         {
             //get the parent and call setisselected(false)
@@ -102,6 +106,11 @@ public abstract class BaseBlock : MonoBehaviour
             {
                 baseBlock.setIsGlowing(false);
             }
+        }
+
+        if (isHoverable)
+        {
+            GameManager.Instance.clearDescriptionDisplay();
         }
     }
 

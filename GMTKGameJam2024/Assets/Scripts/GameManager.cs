@@ -26,7 +26,8 @@ public class GameManager : MonoBehaviour
     public List<Sprite> blockSpriteList = new List<Sprite>();
 
     public int currentMoney = 10;
-    [SerializeField] TMP_Text moneyDisplay; 
+    [SerializeField] TMP_Text moneyDisplay;
+    [SerializeField] TMP_Text descriptionDisplay; 
      
     public int damage = -1;
 
@@ -55,6 +56,16 @@ public class GameManager : MonoBehaviour
             }
             return instance;
         }
+    }
+
+    public void setDescriptionDisplay(int powerLevel, string description)
+    {
+        descriptionDisplay.text = "Power Level: " + powerLevel + "\nDescription: " + description; 
+    }
+
+    public void clearDescriptionDisplay()
+    {
+        descriptionDisplay.text = "";
     }
 
     public void changeMoneyBy(int money)
@@ -171,7 +182,9 @@ public class GameManager : MonoBehaviour
 
             }
             folderForPiece.transform.position = positionToDisplayBlocks[i];
-            folderForPiece.transform.localScale = new Vector3(0.3f, 0.3f, 1f); 
+            folderForPiece.transform.localScale = new Vector3(0.3f, 0.3f, 1f);
+            folderForPiece.GetComponent<PieceFolder>().initialPowerLevel = folderForPiece.transform.childCount ^ 2;
+            folderForPiece.GetComponent<PieceFolder>().currentPowerLevel = folderForPiece.transform.childCount ^ 2;
         }
     }
 

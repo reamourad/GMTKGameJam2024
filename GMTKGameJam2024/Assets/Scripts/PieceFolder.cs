@@ -8,6 +8,9 @@ public class PieceFolder : MonoBehaviour
     public bool isInsideGrid = false;
     public bool isSelected = false; 
 
+    public int initialPowerLevel = 0; 
+    public int currentPowerLevel = 0;
+
     public void setIsPieceSelected(bool newIsSelected)
     {
         isSelected = newIsSelected;

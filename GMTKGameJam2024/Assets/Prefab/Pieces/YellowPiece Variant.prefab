@@ -61,6 +61,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5441173028511223340, guid: bdd66013bb724e9429fbb39187da2517, type: 3}
+      propertyPath: description
+      value: This is a yellow piece
+      objectReference: {fileID: 0}
+    - target: {fileID: 5441173028511223340, guid: bdd66013bb724e9429fbb39187da2517, type: 3}
       propertyPath: offsetList.Array.size
       value: 4
       objectReference: {fileID: 0}
