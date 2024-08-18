@@ -8,7 +8,7 @@ public class Enemy : MonoBehaviour
     // Variables
     public int health;
     public int maxHealth;
-    [SerializeField] private Text healthText; // Reference to the UI Text for health display
+    private HealthText healthTextComponent; // Reference to the HealthText component
     [SerializeField] private TetrisGrid tetrisGrid;  // Reference to TetrisGrid
 
     // Start is called before the first frame update
@@ -24,8 +24,17 @@ public class Enemy : MonoBehaviour
             }
         }
 
-        // Initialize health  
-        healthText.text = health.ToString();   
+        // Initialize health and healthTextComponent
+        healthTextComponent = GetComponentInChildren<HealthText>();
+        if (healthTextComponent != null)
+        {
+            healthTextComponent.SetMaxHealth(maxHealth);
+            healthTextComponent.SetHealth(health);
+        }
+        else
+        {
+            Debug.LogError("Enemy.cs: HealthText component not found on child objects.");
+        }
     }
 
     // Update is called once per frame
@@ -70,9 +79,9 @@ public class Enemy : MonoBehaviour
         health -= damage;
 
         // Update the health text
-        if (healthText != null)
+        if (healthTextComponent != null)
         {
-            healthText.text = health.ToString();
+            healthTextComponent.SetHealth(health);
         }
 
         if (health <= 0)
