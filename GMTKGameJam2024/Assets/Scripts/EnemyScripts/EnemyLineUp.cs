@@ -8,7 +8,7 @@ public class EnemyLineUp : MonoBehaviour
     public Enemy[] enemyLineUp;
     public GameObject enemyPrefab;
     public int numberOfEnemies = 3;
-    public float attackDelay = 3f; // Time in seconds between each attack
+    public float attackDelay = 1f; // Time in seconds between each attack
 
     // Start is called before the first frame update
     void Start()
@@ -17,7 +17,7 @@ public class EnemyLineUp : MonoBehaviour
         Debug.Log("EnemyLineUp: Line up created");
         this.CreateLineUp(numberOfEnemies);
         Debug.Log("EnemyLineUp: Attack called");
-        StartCoroutine(BeginAttack()); // Start the attack coroutine
+        StartAttackSequence(); // Helper method for attack since i dont wanna call coroutine in here
     }
 
     // Update is called once per frame
@@ -25,6 +25,10 @@ public class EnemyLineUp : MonoBehaviour
     {
 
     }
+
+
+    //SPAWNING ENEMIES
+
 
     public void CreateLineUp(int numberOfEnemies)
     {
@@ -54,7 +58,15 @@ public class EnemyLineUp : MonoBehaviour
         Debug.Log("EnemyLineUp.cs: Enemy lineup creation complete. Total enemies: " + enemyLineUp.Length);
     }
 
-    private IEnumerator BeginAttack()
+
+    //ATTACK LOGIC
+
+    private void StartAttackSequence()
+    {
+        StartCoroutine(AttackSequenceCoroutine());
+    }
+
+    private IEnumerator AttackSequenceCoroutine()
     {
         // Iterate through the enemy array and have each enemy attack with a delay
         for (int i = 0; i < numberOfEnemies; i++)
