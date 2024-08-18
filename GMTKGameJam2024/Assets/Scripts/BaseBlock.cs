@@ -17,11 +17,14 @@ public abstract class BaseBlock : MonoBehaviour
     public BlockColor blockColor;
     private bool isGlowing = false;
     private bool isHoverable = true;
-    private bool isSelectable = false;
+    public bool isSelectable = false;
     private bool isSelected = false;
     public bool isBought = false; 
     private Renderer currentRenderer;
     [SerializeField] public GameObject background;
+
+    // assigned on Start()
+    private GameManager gameManager;
 
 
     public void setIsSelected(bool newIsSelected)
@@ -29,10 +32,12 @@ public abstract class BaseBlock : MonoBehaviour
         isSelected = newIsSelected; 
         if(isSelected)
         {
+            gameManager.actionList.Add(transform.parent.gameObject);
             setIsGlowing(true);
         }
         else
         {
+            gameManager.actionList.Remove(transform.parent.gameObject);
             setIsGlowing(false);
         }
 
@@ -66,6 +71,8 @@ public abstract class BaseBlock : MonoBehaviour
             currentRenderer = GetComponent<Renderer>();
         }
         setIsGlowing(false); 
+
+        gameManager = FindObjectOfType(typeof(GameManager)) as GameManager;
     }
 
     public void Update()

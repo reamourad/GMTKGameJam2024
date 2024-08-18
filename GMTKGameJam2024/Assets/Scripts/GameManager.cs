@@ -17,7 +17,7 @@ public class GameManager : MonoBehaviour
 
     public List<GameObject> currentRollout = new List<GameObject>();
 
-    //dictionnary used to translate the block color to its related color 
+    //dictionary used to translate the block color to its related color 
     public Dictionary<BlockColor, Color> blockColorToColor = new Dictionary<BlockColor, Color>();
     public Dictionary<BlockColor, Sprite> blockColorToSprite = new Dictionary<BlockColor, Sprite>();
 
@@ -26,6 +26,21 @@ public class GameManager : MonoBehaviour
     public int currentMoney = 10;
     [SerializeField] TMP_Text moneyDisplay; 
      
+    public int damage = -1;
+
+    public enum Phase {
+        Menu,
+        Shop,
+        Battle,
+    }
+
+    [SerializeField] Dictionary<Phase, GameObject> phaseScenes;
+
+    [SerializeField] public Phase phase = Phase.Menu;
+
+    [SerializeField] private TetrisGridDisplay tetrisGridDisplay;
+
+    public List<GameObject> actionList = new List<GameObject>();
 
 
     public static GameManager Instance
@@ -56,6 +71,17 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
+        phaseScenes = new Dictionary<Phase, GameObject>() {
+        {Phase.Menu, GameObject.Find("/Canvas/UIMenuPhase")},
+        {Phase.Shop, GameObject.Find("/Canvas/UIShopPhase")},
+        {Phase.Battle, GameObject.Find("/Canvas/UIBattlePhase")},
+        };
+        
+        foreach ((Phase key, GameObject value) in phaseScenes) {
+            value.SetActive(false);
+        }
+        phaseScenes[phase].SetActive(true);
+
         instance = this;
         setMoneyTo(currentMoney); 
         allBlocksList.Add(tier1Blocks);
@@ -125,8 +151,49 @@ public class GameManager : MonoBehaviour
                 instance.GetComponent<BaseBlock>().background.GetComponent<SpriteRenderer>().sprite = blockColorToSprite[instance.GetComponent<BaseBlock>().blockColor];
 
             }
-            folderForPiece.transform.position = positionToDisplayBlocks[i]; 
+            folderForPiece.transform.position = positionToDisplayBlocks[i];
             folderForPiece.transform.localScale = new Vector3(0.3f, 0.3f, 1f); 
+        }
+    }
+
+    public void ChangePhase(Phase newPhase) {
+        phaseScenes[phase].SetActive(false);
+        phaseScenes[newPhase].SetActive(true);
+
+        phase = newPhase;
+    }
+
+    public void UI_StartShop() {
+        ChangePhase(Phase.Shop);
+    }
+
+    public void UI_StartBattle() {
+        ChangePhase(Phase.Battle);
+        // delete all non-grid blocks.
+
+
+        // 
+        PieceFolder[] pieceFolders = FindObjectsOfType<PieceFolder>();
+        foreach (PieceFolder pieceFolder in pieceFolders) {
+            if (pieceFolder.isInsideGrid) {
+                foreach (Transform child in pieceFolder.transform) {
+                    child.GetComponent<BaseBlock>().isSelectable = true;
+                }
+            } else {
+                Destroy(pieceFolder);
+            }
+        }
+    }
+
+    public void UI_UndoButton() {
+        if (actionList.Count > 0) {
+            actionList.RemoveAt(actionList.Count - 1);
+        }
+    }
+
+    public void UI_Attack() {
+        if (actionList.Count > 0) {
+            // attack here.
         }
     }
 }

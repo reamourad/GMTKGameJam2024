@@ -8,6 +8,7 @@ public class DragManager : MonoBehaviour
 {
     [SerializeField] private Camera referenceCamera;
     [SerializeField] private EventSystem eventSystem;
+    [SerializeField] private GameManager gameManager;
     public Transform dragBlock = null;
     bool isMouseDown = false;
     private Vector2 pickupLocation = Vector2.zero;
@@ -39,7 +40,6 @@ public class DragManager : MonoBehaviour
 
         // pickBlock(Input.mousePosition);
 
-
         switch (dragMode) {
             case DragMode.Click:
                 if (dragBlock != null) {
@@ -64,30 +64,34 @@ public class DragManager : MonoBehaviour
         Vector2 mousePosition = m_Event.mousePosition;
         mousePosition.y = referenceCamera.pixelHeight - mousePosition.y;
 
-        if (m_Event.button == 0){
+        if (gameManager.phase == GameManager.Phase.Shop) {
+            if (m_Event.button == 0){
 
-            switch (m_Event.type) {
-                case EventType.MouseDown:
-                    dragMode = DragMode.Click;
-                    isMouseDown = true;
-                    break;
-                case EventType.MouseUp:
-                    isMouseDown = false;
-                    if (dragBlock != null) {
-                        dropBlock(mousePosition);
-                    } else if (dragMode == DragMode.Click) {
-                        pickBlock(mousePosition);
-                    }
-                    break;
-                case EventType.MouseDrag:
-                    dragMode = DragMode.Drag;
-                    if (dragBlock == null) {
-                        pickBlock(mousePosition);
-                    }
-                    break;
-                default:
-                    break;
+                switch (m_Event.type) {
+                    case EventType.MouseDown:
+                        dragMode = DragMode.Click;
+                        isMouseDown = true;
+                        break;
+                    case EventType.MouseUp:
+                        isMouseDown = false;
+                        if (dragBlock != null) {
+                            dropBlock(mousePosition);
+                        } else if (dragMode == DragMode.Click) {
+                            pickBlock(mousePosition);
+                        }
+                        break;
+                    case EventType.MouseDrag:
+                        dragMode = DragMode.Drag;
+                        if (dragBlock == null) {
+                            pickBlock(mousePosition);
+                        }
+                        break;
+                    default:
+                        break;
+                }
             }
+        } else {
+            dropBlock(Input.mousePosition);
         }
     }
 
