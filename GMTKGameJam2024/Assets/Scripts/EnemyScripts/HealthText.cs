@@ -5,9 +5,13 @@ using UnityEngine.UI;
 
 public class HealthText : MonoBehaviour
 {
-    public Text healthText; // Reference to the Text component
+    [SerializeField] public TMPro.TMP_Text healthText; // Reference to the Text component
 
     // Initialize the health bar with maximum health
+
+    void Start() {
+    }
+
     public void SetMaxHealth(int maxHealth)
     {
         if (healthText != null)
