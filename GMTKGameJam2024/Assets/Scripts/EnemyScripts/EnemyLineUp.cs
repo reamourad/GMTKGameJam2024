@@ -13,10 +13,12 @@ public class EnemyLineUp : MonoBehaviour
     void Start()
     {   
         //For testing purposes
-        Debug.Log("EnemyLineUp.cs: Line up called");
+        Debug.Log("EnemyLineUp: Line up created");
         this.CreateLineUp();
-        Debug.Log("EnemyLineUp.cs: Attack called");
+        Debug.Log("EnemyLineUp: Attack called");
         this.BeginAttack();
+        Debug.Log("EnemyLineUp: apply damage called");
+        this.ApplyDamageToAll(100);
     }
 
     // Update is called once per frame
@@ -65,5 +67,12 @@ public class EnemyLineUp : MonoBehaviour
             enemyLineUp[i].Attack();
         }
         Debug.Log("EnemyLineUp.cs: Attack completed");
+    }
+
+    public void ApplyDamageToAll(int damage) {
+        // Apply damage to each enemy in the lineup
+        for (int i = 0; i < numberOfEnemies; i++) {
+            enemyLineUp[i].TakeDamage(damage);
+        }
     }
 }

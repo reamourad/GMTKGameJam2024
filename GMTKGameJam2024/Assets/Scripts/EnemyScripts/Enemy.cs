@@ -10,8 +10,8 @@ public class Enemy : MonoBehaviour
 
     // Start is called before the first frame update
     void Start()
-    {
-        
+    {   
+
     }
 
     // Update is called once per frame
@@ -24,6 +24,8 @@ public class Enemy : MonoBehaviour
     public virtual void Attack()
     {
         Debug.Log("Enemy attacks with " + attack + " power.");
+        Debug.Log("Enemy.cs: TakeDamage called");
+        TakeDamage(100);
     }
 
     public void ChooseBlock() {
@@ -43,7 +45,7 @@ public class Enemy : MonoBehaviour
     // Method for dying
     protected void Die()
     {
-        Debug.Log("Enemy dies.");
+        Debug.Log("Enemy.cs: Enemy dies.");
         // Add death behavior here
         Destroy(gameObject);
     }
