@@ -27,7 +27,7 @@ public class EnemyLineUp : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Return))
         {
             Debug.Log("EnemyLineUp: Enter key pressed, applying damage to all enemies.");
-            ApplyDamageToAll(4);
+            ApplyDamageToAll(40);
         }
 
     }

@@ -5,17 +5,11 @@ using UnityEngine.UI;
 
 public class HealthBar : MonoBehaviour
 {
-    private Slider healthSlider;
+    [SerializeField] private Slider healthSlider;
 
     // Start is called before the first frame update
     void Start()
     {
-        // Find the Slider component on this GameObject
-        healthSlider = GetComponent<Slider>();
-        if (healthSlider == null)
-        {
-            Debug.LogError("HealthBar.cs: Slider component not found on HealthBar.");
-        }
     }
 
     // Initialize the health bar with maximum health
