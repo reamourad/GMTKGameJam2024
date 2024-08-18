@@ -1817,57 +1817,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1532703923}
   m_CullTransparentMesh: 1
---- !u!1 &1568831573
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1568831575}
-  - component: {fileID: 1568831574}
-  m_Layer: 0
-  m_Name: DragManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1568831574
+--- !u!114 &1568831574 stripped
 MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 7827526022871887857, guid: 2b352f4c1adae4b0b93a87e0b7b97ddf, type: 3}
+  m_PrefabInstance: {fileID: 3547953030089653254}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1568831573}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0094d3f59669a489283b20c392d94209, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  referenceCamera: {fileID: 1100146651}
-  eventSystem: {fileID: 2111604572}
-  gameManager: {fileID: 909481318}
-  dragBlock: {fileID: 0}
-  blockMouseOffset: {x: 0, y: 0}
-  tetrisGridDisplay: {fileID: 946559244}
-  tetrisGridDisplayLocked: 0
---- !u!4 &1568831575
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1568831573}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1627809128
 GameObject:
   m_ObjectHideFlags: 0
@@ -2082,7 +2042,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -100
   m_TargetDisplay: 0
 --- !u!224 &1705947219
 RectTransform:
@@ -2442,6 +2402,79 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 177d11fc7101e0346895afe89001abbc, type: 3}
+--- !u!1001 &3547953030089653254
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 3161626200102355956, guid: 2b352f4c1adae4b0b93a87e0b7b97ddf, type: 3}
+      propertyPath: m_Name
+      value: DragManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 7827526022871887857, guid: 2b352f4c1adae4b0b93a87e0b7b97ddf, type: 3}
+      propertyPath: eventSystem
+      value: 
+      objectReference: {fileID: 2111604572}
+    - target: {fileID: 7827526022871887857, guid: 2b352f4c1adae4b0b93a87e0b7b97ddf, type: 3}
+      propertyPath: gameManager
+      value: 
+      objectReference: {fileID: 909481318}
+    - target: {fileID: 7827526022871887857, guid: 2b352f4c1adae4b0b93a87e0b7b97ddf, type: 3}
+      propertyPath: referenceCamera
+      value: 
+      objectReference: {fileID: 1100146651}
+    - target: {fileID: 7827526022871887857, guid: 2b352f4c1adae4b0b93a87e0b7b97ddf, type: 3}
+      propertyPath: tetrisGridDisplay
+      value: 
+      objectReference: {fileID: 946559244}
+    - target: {fileID: 9089281915642166768, guid: 2b352f4c1adae4b0b93a87e0b7b97ddf, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9089281915642166768, guid: 2b352f4c1adae4b0b93a87e0b7b97ddf, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9089281915642166768, guid: 2b352f4c1adae4b0b93a87e0b7b97ddf, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9089281915642166768, guid: 2b352f4c1adae4b0b93a87e0b7b97ddf, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9089281915642166768, guid: 2b352f4c1adae4b0b93a87e0b7b97ddf, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9089281915642166768, guid: 2b352f4c1adae4b0b93a87e0b7b97ddf, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9089281915642166768, guid: 2b352f4c1adae4b0b93a87e0b7b97ddf, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9089281915642166768, guid: 2b352f4c1adae4b0b93a87e0b7b97ddf, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9089281915642166768, guid: 2b352f4c1adae4b0b93a87e0b7b97ddf, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9089281915642166768, guid: 2b352f4c1adae4b0b93a87e0b7b97ddf, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 2b352f4c1adae4b0b93a87e0b7b97ddf, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -2451,6 +2484,6 @@ SceneRoots:
   - {fileID: 2111604573}
   - {fileID: 984072477}
   - {fileID: 1705947219}
-  - {fileID: 1568831575}
+  - {fileID: 3547953030089653254}
   - {fileID: 2100441585}
   - {fileID: 974910185}

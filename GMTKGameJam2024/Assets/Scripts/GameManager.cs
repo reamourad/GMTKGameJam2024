@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine; 
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -105,6 +106,23 @@ public class GameManager : MonoBehaviour
         {
             Debug.Log("space key was pressed");
             currentTierLevel += 1; 
+        }
+
+        switch (phase) {
+            case Phase.Battle:
+                Button undo = phaseScenes[Phase.Battle].transform.Find("Undo").GetComponent<Button>() as Button;
+                Button attack = phaseScenes[Phase.Battle].transform.Find("Attack").GetComponent<Button>() as Button;
+                
+                if (actionList.Count > 0) {
+                    undo.interactable = true;
+                    attack.interactable = true;
+                } else {
+                    undo.interactable = false;
+                    attack.interactable = false;
+                }
+                break;
+            default:
+                break;
         }
     }
 

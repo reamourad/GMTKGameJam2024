@@ -10,6 +10,7 @@ public class DragManager : MonoBehaviour
     [SerializeField] private EventSystem eventSystem;
     [SerializeField] private GameManager gameManager;
     public Transform dragBlock = null;
+    public bool dragBlockPreviouslyLocked = false;
     bool isMouseDown = false;
     private Vector2 pickupLocation = Vector2.zero;
 
@@ -108,10 +109,11 @@ public class DragManager : MonoBehaviour
             if (parent.name.StartsWith("Piece")) {
                 blockMouseOffset = (Vector2) (parent.position - referenceCamera.ScreenToWorldPoint(mousePos));
                 pickupLocation = parent.position;
-                Debug.Log("pickup location"+pickupLocation.ToString());
                 dragBlock = parent;
+                dragBlockPreviouslyLocked = false;
                 if (tetrisGridDisplayLocked) {
                     tetrisGridDisplay.tetrisGrid.RemoveFromGrid(dragBlock);
+                    dragBlockPreviouslyLocked = true;
                 }
             }
         }
@@ -120,19 +122,27 @@ public class DragManager : MonoBehaviour
     private void dropBlock(Vector2 mousePos) {
         if (dragBlock != null) {
             if (tetrisGridDisplayLocked) {
-                Vector2Int cellPos = Vector2Int.RoundToInt((referenceCamera.ScreenToWorldPoint(mousePos) - tetrisGridDisplay.transform.position) / tetrisGridDisplay.cellSize);
+                Vector2Int cellPos = Vector2Int.RoundToInt((referenceCamera.ScreenToWorldPoint(mousePos + blockMouseOffset) - tetrisGridDisplay.transform.position) / tetrisGridDisplay.cellSize);
                 if (tetrisGridDisplay.tetrisGrid.CanAddToGrid(cellPos, dragBlock)) {
+                    Debug.Log("lock");
+                    tetrisGridDisplay.tetrisGrid.AddToGrid(cellPos, dragBlock);
+                    dragBlock.gameObject.GetComponent<PieceFolder>().isInsideGrid = true;
+                    dragBlock = null;
+                } else if (dragBlockPreviouslyLocked) {
+                    Debug.Log("reset to previous lock");
+                    dragBlock.position = (Vector2) pickupLocation;
+                    cellPos = Vector2Int.RoundToInt((dragBlock.position - tetrisGridDisplay.transform.position) / tetrisGridDisplay.cellSize);
                     tetrisGridDisplay.tetrisGrid.AddToGrid(cellPos, dragBlock);
                     dragBlock.gameObject.GetComponent<PieceFolder>().isInsideGrid = true;
                     dragBlock = null;
                 } else {
-                    Debug.Log("placed down at pickup location"+ pickupLocation.ToString());
+                    Debug.Log("reset to previous");
                     dragBlock.position = (Vector2) pickupLocation;
                     dragBlock = null;
                 }
             } else {
                 //check if it is bought 
-                if(dragBlock.gameObject.GetComponent<PieceFolder>().isBought == false)
+                if (dragBlock.gameObject.GetComponent<PieceFolder>().isBought == false)
                 {
                     dragBlock.position = (Vector2)pickupLocation;
                 }
