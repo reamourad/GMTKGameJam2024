@@ -114,7 +114,8 @@ public class GameManager : MonoBehaviour
         phaseScenes[phase].SetActive(true);
 
         instance = this;
-        setMoneyTo(currentMoney); 
+        setMoneyTo(currentMoney);
+        setAttackScore(0); 
         allBlocksList.Add(tier1Blocks);
         allBlocksList.Add(tier2Blocks);
 
@@ -252,7 +253,6 @@ public class GameManager : MonoBehaviour
         if (actionList.Count > 0) {
             actionList.Last().transform.GetChild(0).GetComponent<BaseBlock>().Deactivate();
             actionList.Last().setIsPieceSelected(false);
-            Debug.Log("called"); 
         }
     }
 
