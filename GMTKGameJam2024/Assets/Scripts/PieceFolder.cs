@@ -2,6 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum TypeOfBlock
+{
+    None, 
+    OnAttack
+}
 public class PieceFolder : MonoBehaviour
 {
     public bool isBought = false;
@@ -10,6 +15,8 @@ public class PieceFolder : MonoBehaviour
 
     public int initialPowerLevel = 0; 
     public int currentPowerLevel = 0;
+
+    public TypeOfBlock blockType;
 
     public void setIsPieceSelected(bool newIsSelected)
     {
@@ -22,7 +29,8 @@ public class PieceFolder : MonoBehaviour
             {
                 baseBlock.setIsGlowing(true);
             }
-           
+            transform.GetChild(0).GetComponent<BaseBlock>().Activate();
+
         }
         else
         {
