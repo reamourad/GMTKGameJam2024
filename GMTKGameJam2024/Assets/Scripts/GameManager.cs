@@ -106,7 +106,7 @@ public class GameManager : MonoBehaviour
 
             }
             folderForPiece.transform.position = positionToDisplayBlocks[i]; 
-            folderForPiece.transform.localScale = new Vector3(0.5f, 0.5f, 1f); 
+            folderForPiece.transform.localScale = new Vector3(0.3f, 0.3f, 1f); 
         }
     }
 }

@@ -61,7 +61,6 @@ public class TetrisGrid : MonoBehaviour
         // assume the block is in the grid.
         // it silently fails otherwise.
         // memory inefficent but logically efficient.
-        Debug.Log(string.Join(" ", gridBlocks));
         var keys = new List<Vector2Int>(gridBlocks.Keys);
         foreach (Vector2Int key in keys) {
             if (gridBlocks[key] == block) {

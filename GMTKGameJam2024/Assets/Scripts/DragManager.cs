@@ -99,11 +99,12 @@ public class DragManager : MonoBehaviour
             Transform parent = raycastResult.gameObject.GetComponentInParent<Transform>().parent;
             if (parent.name.StartsWith("Piece")) {
                 blockMouseOffset = (Vector2) (parent.position - referenceCamera.ScreenToWorldPoint(mousePos));
+                pickupLocation = parent.position;
+                Debug.Log("pickup location"+pickupLocation.ToString());
                 dragBlock = parent;
                 if (tetrisGridDisplayLocked) {
                     tetrisGridDisplay.tetrisGrid.RemoveFromGrid(dragBlock);
                 }
-                pickupLocation = dragBlock.transform.position;
             }
         }
     }
@@ -116,7 +117,8 @@ public class DragManager : MonoBehaviour
                     tetrisGridDisplay.tetrisGrid.AddToGrid(cellPos, dragBlock);
                     dragBlock = null;
                 } else {
-                    dragBlock.position = (Vector2) referenceCamera.ScreenToWorldPoint(pickupLocation);
+                    Debug.Log("placed down at pickup location"+ pickupLocation.ToString());
+                    dragBlock.position = (Vector2) pickupLocation;
                     dragBlock = null;
                 }
             } else {
