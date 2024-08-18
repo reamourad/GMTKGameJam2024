@@ -37,10 +37,6 @@ public class DragManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // Vector2 mousePosition = referenceCamera.ScreenToWorldPoint(Input.mousePosition);
-
-        // pickBlock(Input.mousePosition);
-
         switch (dragMode) {
             case DragMode.Click:
                 if (dragBlock != null) {
@@ -106,7 +102,7 @@ public class DragManager : MonoBehaviour
         foreach (RaycastResult raycastResult in raycastResults) {
             // TODO: check if broken.
             Transform parent = raycastResult.gameObject.GetComponentInParent<Transform>().parent;
-            if (parent.GetComponent<PieceFolder>() != null) {
+            if (parent != null && parent.GetComponent<PieceFolder>() != null) {
                 blockMouseOffset = (Vector2) (parent.position - referenceCamera.ScreenToWorldPoint(mousePos));
                 pickupLocation = parent.position;
                 dragBlock = parent;
@@ -124,19 +120,16 @@ public class DragManager : MonoBehaviour
             if (tetrisGridDisplayLocked) {
                 Vector2Int cellPos = Vector2Int.RoundToInt((referenceCamera.ScreenToWorldPoint(mousePos + blockMouseOffset) - tetrisGridDisplay.transform.position) / tetrisGridDisplay.cellSize);
                 if (tetrisGridDisplay.tetrisGrid.CanAddToGrid(cellPos, dragBlock)) {
-                    Debug.Log("lock");
                     tetrisGridDisplay.tetrisGrid.AddToGrid(cellPos, dragBlock);
                     dragBlock.gameObject.GetComponent<PieceFolder>().isInsideGrid = true;
                     dragBlock = null;
                 } else if (dragBlockPreviouslyLocked) {
-                    Debug.Log("reset to previous lock");
                     dragBlock.position = (Vector2) pickupLocation;
                     cellPos = Vector2Int.RoundToInt((dragBlock.position - tetrisGridDisplay.transform.position) / tetrisGridDisplay.cellSize);
                     tetrisGridDisplay.tetrisGrid.AddToGrid(cellPos, dragBlock);
                     dragBlock.gameObject.GetComponent<PieceFolder>().isInsideGrid = true;
                     dragBlock = null;
                 } else {
-                    Debug.Log("reset to previous");
                     dragBlock.position = (Vector2) pickupLocation;
                     dragBlock = null;
                 }

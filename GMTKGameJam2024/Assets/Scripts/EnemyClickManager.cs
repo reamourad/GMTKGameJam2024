@@ -34,7 +34,7 @@ public class EnemyClickManager : MonoBehaviour
         Vector2 mousePosition = m_Event.mousePosition;
         mousePosition.y = referenceCamera.pixelHeight - mousePosition.y;
         if (gameManager.phase == GameManager.Phase.Battle) {
-            if (m_Event.button == 0) {
+            if (m_Event.button == 0 && m_Event.type == EventType.MouseUp) {
                 List<RaycastResult> raycastResults = new List<RaycastResult>();
                 PointerEventData pointerEventData  = new PointerEventData(EventSystem.current);
                 pointerEventData.position = mousePosition;
