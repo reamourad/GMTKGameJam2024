@@ -97,5 +97,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89a6dced834477f45b87f1a52dbba72f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attack: 0
   health: 0
+  tetrisGrid: {fileID: 3458992783110730198, guid: 319e44bd4c6d04e89be3933a5a348e9b, type: 3}

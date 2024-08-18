@@ -16,9 +16,4 @@ public class BaseEnemy : Enemy
     {
         
     }
-
-    public override void Attack() {
-        //TODO: Uses a randomly chosen block  in the inventory and deletes it
-        Debug.Log("BaseEnemy.cs: Me attack hehe");
-    }
 }
