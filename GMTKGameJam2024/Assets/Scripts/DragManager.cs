@@ -104,9 +104,9 @@ public class DragManager : MonoBehaviour
         pointerEventData.position = mousePos;
         eventSystem.RaycastAll(pointerEventData, raycastResults);
         foreach (RaycastResult raycastResult in raycastResults) {
-            // TODO: update checking style. tags maybe? right now it's based on name...?
+            // TODO: check if broken.
             Transform parent = raycastResult.gameObject.GetComponentInParent<Transform>().parent;
-            if (parent.name.StartsWith("Piece")) {
+            if (parent.GetComponent<PieceFolder>() != null) {
                 blockMouseOffset = (Vector2) (parent.position - referenceCamera.ScreenToWorldPoint(mousePos));
                 pickupLocation = parent.position;
                 dragBlock = parent;
