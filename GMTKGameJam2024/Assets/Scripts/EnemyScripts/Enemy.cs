@@ -1,18 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Enemy : MonoBehaviour
 {
     // Variables
     public int health;
     public int maxHealth;
-    private HealthBar healthBar;
+    [SerializeField] private Text healthText; // Reference to the UI Text for health display
     [SerializeField] private TetrisGrid tetrisGrid;  // Reference to TetrisGrid
 
     // Start is called before the first frame update
     void Start()
-    {   
+    {
         // Ensure TetrisGrid reference is set
         if (tetrisGrid == null)
         {
@@ -23,7 +24,8 @@ public class Enemy : MonoBehaviour
             }
         }
 
-        InitializeHealthBar();     
+        // Initialize health  
+        healthText.text = health.ToString();   
     }
 
     // Update is called once per frame
@@ -31,22 +33,6 @@ public class Enemy : MonoBehaviour
     {
         
     }
-
-    //Initializing the health bar
-    public void InitializeHealthBar()
-    {
-        healthBar = GetComponentInChildren<HealthBar>();
-        if (healthBar != null)
-        {
-            healthBar.SetMaxHealth(maxHealth);
-            healthBar.SetHealth(health);
-        }
-        else
-        {
-            Debug.LogError("Enemy.cs: HealthBar component not found on child objects.");
-        }
-    }
-
 
     public virtual void Attack()
     {
@@ -73,7 +59,6 @@ public class Enemy : MonoBehaviour
     private Vector2Int GetRandomGridPosition()
     {
         // Generate a random position within the grid size
-        Debug.Log(tetrisGrid.size.x + ", " + tetrisGrid.size.y); //Erm...FIX FIX FIX FIX
         int x = Random.Range(0, tetrisGrid.size.x);
         int y = Random.Range(0, tetrisGrid.size.y);
         return new Vector2Int(x, y);
@@ -82,18 +67,12 @@ public class Enemy : MonoBehaviour
     // Method for taking damage
     public virtual void TakeDamage(int damage)
     {
-        // Print health before taking damage
-        Debug.Log($"Enemy.cs: Health before damage: {health}");
-
         health -= damage;
 
-        // Print health after taking damage
-        Debug.Log($"Enemy.cs: Health after damage: {health}");
-
-        // Update the health bar
-        if (healthBar != null)
+        // Update the health text
+        if (healthText != null)
         {
-            healthBar.SetHealth(health);
+            healthText.text = health.ToString();
         }
 
         if (health <= 0)

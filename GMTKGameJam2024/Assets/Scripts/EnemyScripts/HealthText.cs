@@ -5,29 +5,23 @@ using UnityEngine.UI;
 
 public class HealthBar : MonoBehaviour
 {
-    [SerializeField] private Slider healthSlider;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-    }
+    public Text healthText; // Reference to the Text component
 
     // Initialize the health bar with maximum health
     public void SetMaxHealth(int maxHealth)
     {
-        if (healthSlider != null)
+        if (healthText != null)
         {
-            healthSlider.maxValue = maxHealth;
-            healthSlider.value = maxHealth;
+            healthText.text = maxHealth.ToString(); // Set the max health initially
         }
     }
 
     // Update the health bar value
     public void SetHealth(int health)
     {
-        if (healthSlider != null)
+        if (healthText != null)
         {
-            healthSlider.value = health;
+            healthText.text = health.ToString(); // Update the health value
         }
     }
 }
