@@ -26,6 +26,7 @@ public class Enemy : MonoBehaviour
 
         // Initialize health and healthTextComponent
         healthTextComponent = GetComponentInChildren<HealthText>();
+        Debug.Log("test");
         if (healthTextComponent != null)
         {
             healthTextComponent.SetMaxHealth(maxHealth);
