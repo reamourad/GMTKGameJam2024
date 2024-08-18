@@ -5,14 +5,18 @@ using UnityEngine;
 public class EnemyLineUp : MonoBehaviour
 {   
     //Variables
-    public BaseEnemy[] enemyLineUp;
+    public Enemy[] enemyLineUp;
     public GameObject enemyPrefab;
+    public int numberOfEnemies = 3;
 
     // Start is called before the first frame update
     void Start()
-    {
+    {   
+        //For testing purposes
         Debug.Log("Line up called");
-        CreateLineUp(); //For testing purposes
+        this.CreateLineUp();
+        Debug.Log("Attack called");
+        this.BeginAttack();
     }
 
     // Update is called once per frame
@@ -21,44 +25,44 @@ public class EnemyLineUp : MonoBehaviour
         
     }
 
-    public void CreateLineUp()
-{
-    int numberOfEnemies = 3;
-    enemyLineUp = new BaseEnemy[numberOfEnemies];
+    public void CreateLineUp(){
+        enemyLineUp = new Enemy[numberOfEnemies];
 
-    Debug.Log("Creating enemy lineup...");
+        Debug.Log("Creating enemy lineup...");
 
-    for (int i = 0; i < numberOfEnemies; i++)
-    {
-        // SPAWNING IN RANDOM AREAS NEAR ORIGIN TO TEST
-        Vector2 randomPosition = new Vector2(
-            Random.Range(1f, 4f), 
-            Random.Range(-4f, 4f)  
-        );
+        for (int i = 0; i < numberOfEnemies; i++)
+        {
+            // SPAWNING IN RANDOM AREAS NEAR ORIGIN TO TEST
+            Vector2 randomPosition = new Vector2(
+                Random.Range(1f, 4f), 
+                Random.Range(-4f, 4f)  
+            );
 
-        // Instantiate the enemy at the random position
-        GameObject enemyObject = Instantiate(enemyPrefab, randomPosition, Quaternion.identity);
+            // Instantiate the enemy at the random position
+            GameObject enemyObject = Instantiate(enemyPrefab, randomPosition, Quaternion.identity);
 
-        Debug.Log("Enemy " + i + " instantiated at position: " + randomPosition);
+            Debug.Log("Enemy " + i + " instantiated at position: " + randomPosition);
 
-        // Get the BaseEnemy component from the instantiated object
-        BaseEnemy enemy = enemyObject.GetComponent<BaseEnemy>();
+            // Get the Enemy component from the instantiated object
+            Enemy enemy = enemyObject.GetComponent<Enemy>();
 
-        // Assign the enemy to the array
-        enemyLineUp[i] = enemy;
+            // Assign the enemy to the array and the stats n stuff
+            enemyLineUp[i] = enemy;
+            enemy.attack = Random.Range(10, 20); // Example values
+            enemy.health = Random.Range(50, 100); // Example values
 
-        // Optionally, set attack and health stats
-        enemy.attack = Random.Range(10, 20); // Example values
-        enemy.health = Random.Range(50, 100); // Example values
+            Debug.Log("Enemy " + i + " - Attack: " + enemy.attack + ", Health: " + enemy.health);
+        }
 
-        Debug.Log("Enemy " + i + " - Attack: " + enemy.attack + ", Health: " + enemy.health);
-    }
-
-    Debug.Log("Enemy lineup creation complete. Total enemies: " + enemyLineUp.Length);
+        Debug.Log("Enemy lineup creation complete. Total enemies: " + enemyLineUp.Length);
 }
 
 
     public void BeginAttack() {
         //TODO: Iterate through enemy array and have each enemy attack 
+        for (int i = 0; i < numberOfEnemies; i++) {
+            Debug.Log(enemyLineUp[i].attack + ", " + enemyLineUp[i].health);
+        }
+        Debug.Log("Attack completed");
     }
 }
