@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,9 +28,14 @@ public class GameManager : MonoBehaviour
 
     public int currentMoney = 10;
     [SerializeField] TMP_Text moneyDisplay;
-    [SerializeField] TMP_Text descriptionDisplay; 
+    [SerializeField] TMP_Text descriptionDisplay;
+
+    public int currentAttackScore = 0; 
+    [SerializeField] TMP_Text attackScoreDisplay; 
      
     public int damage = -1;
+
+    public List<PieceFolder> pieceCurrentlyInGrid = new List<PieceFolder>();
 
     public enum Phase {
         Menu,
@@ -61,6 +67,18 @@ public class GameManager : MonoBehaviour
     public void setDescriptionDisplay(int powerLevel, string description)
     {
         descriptionDisplay.text = "Power Level: " + powerLevel + "\nDescription: " + description; 
+    }
+
+    public void setAttackScore(int attackScore)
+    {
+        currentAttackScore = attackScore;
+        attackScoreDisplay.text = currentAttackScore.ToString();
+    }
+
+    public void changeAttackScoreBy(int delta)
+    {
+        currentAttackScore += delta;
+        attackScoreDisplay.text = currentAttackScore.ToString();
     }
 
     public void clearDescriptionDisplay()
@@ -167,7 +185,7 @@ public class GameManager : MonoBehaviour
                 tempBlockList.AddRange(allBlocksList[j]);
             }
             //get a random block
-            BaseBlock randomBlock = tempBlockList[Random.Range(0, tempBlockList.Count)];
+            BaseBlock randomBlock = tempBlockList[UnityEngine.Random.Range(0, tempBlockList.Count)];
 
             //check the lenght of offsets = number of blocks to draw 
             for (int z = 0; z < randomBlock.offsetList.Count; z++)
@@ -178,13 +196,14 @@ public class GameManager : MonoBehaviour
                                        Quaternion.identity
                                      );  
                 instance.transform.SetParent(folderForPiece.transform, false);
-                instance.GetComponent<BaseBlock>().background.GetComponent<SpriteRenderer>().sprite = blockColorToSprite[instance.GetComponent<BaseBlock>().blockColor];
+                instance.GetComponent<BaseBlock>().GetComponent<SpriteRenderer>().sprite = blockColorToSprite[instance.GetComponent<BaseBlock>().blockColor];
 
             }
             folderForPiece.transform.position = positionToDisplayBlocks[i];
             folderForPiece.transform.localScale = new Vector3(0.3f, 0.3f, 1f);
-            folderForPiece.GetComponent<PieceFolder>().initialPowerLevel = folderForPiece.transform.childCount ^ 2;
-            folderForPiece.GetComponent<PieceFolder>().currentPowerLevel = folderForPiece.transform.childCount ^ 2;
+            folderForPiece.GetComponent<PieceFolder>().blockType = randomBlock.typeOfBlock; 
+            folderForPiece.GetComponent<PieceFolder>().initialPowerLevel = folderForPiece.transform.childCount * folderForPiece.transform.childCount;
+            folderForPiece.GetComponent<PieceFolder>().currentPowerLevel = folderForPiece.GetComponent<PieceFolder>().initialPowerLevel;
         }
     }
 
@@ -209,6 +228,10 @@ public class GameManager : MonoBehaviour
             {
                 Destroy(block);
                 currentRollout.RemoveAt(i);
+            }
+            else if (block.GetComponent<PieceFolder>().isInsideGrid)
+            {
+                pieceCurrentlyInGrid.Add(block.GetComponent<PieceFolder>()); 
             }
         }
 
@@ -236,15 +259,37 @@ public class GameManager : MonoBehaviour
     public void UI_Attack() {
         //TODO: CHECK IF ENEMY IS TARGETED
         if (actionList.Count > 0) {
-            // attack here.
-            for (int i = actionList.Count - 1; i >= 0; i--)
-            {
-                PieceFolder pieceFolder = actionList[i];
-                pieceFolder.transform.GetChild(0).GetComponent<BaseBlock>().Activate();
-                pieceFolder.gameObject.SetActive(false);
-                actionList.RemoveAt(i);
-            }
-
+            StartCoroutine(HandleAttackSequence());
         }
     }
+
+    private IEnumerator HandleAttackSequence() 
+    {
+        foreach(PieceFolder pieceFolder in pieceCurrentlyInGrid)
+        {
+            if (pieceFolder.blockType == TypeOfBlock.OnAttack) 
+            {
+                for (int i = 0; i < 4; ++i)
+                {
+                   BaseBlock[] childrens = pieceFolder.GetComponentsInChildren<BaseBlock>();
+                   foreach(BaseBlock children in childrens)
+                   {
+                        children.setIsGlowing(!children.isGlowing); 
+                        
+                   }
+                    yield return new WaitForSeconds(0.2f);
+                }
+                yield return StartCoroutine(pieceFolder.transform.GetChild(0).GetComponent<BaseBlock>().OnAttack());
+            } 
+        }
+        // attack here.
+        for (int i = actionList.Count - 1; i >= 0; i--)
+        {
+            PieceFolder pieceFolder = actionList[i];
+            pieceFolder.gameObject.SetActive(false);
+            actionList.RemoveAt(i); 
+        }
+        yield return null;
+    }
+
 }

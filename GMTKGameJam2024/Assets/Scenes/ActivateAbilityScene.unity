@@ -2615,6 +2615,14 @@ PrefabInstance:
       propertyPath: descriptionDisplay
       value: 
       objectReference: {fileID: 2007164806}
+    - target: {fileID: 5846257673399975580, guid: 177d11fc7101e0346895afe89001abbc, type: 3}
+      propertyPath: tier1Blocks.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5846257673399975580, guid: 177d11fc7101e0346895afe89001abbc, type: 3}
+      propertyPath: tier1Blocks.Array.data[0]
+      value: 
+      objectReference: {fileID: -4401724298114247026, guid: c844da71bbcd9384093ad0651aa7d72c, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

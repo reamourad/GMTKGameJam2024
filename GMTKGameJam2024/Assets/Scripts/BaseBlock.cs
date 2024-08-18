@@ -15,11 +15,12 @@ public abstract class BaseBlock : MonoBehaviour
     public List<Vector2Int> offsetList = new List<Vector2Int>();
     public string description = "This block is not special";
     public BlockColor blockColor;
-    private bool isGlowing = false;
+    public bool isGlowing = false;
     private bool isHoverable = true;
     public bool isSelectable = false;
     public bool isBought = false; 
     private Renderer currentRenderer;
+    public TypeOfBlock typeOfBlock; 
     [SerializeField] public GameObject background;
 
     // assigned on Start()
@@ -114,10 +115,14 @@ public abstract class BaseBlock : MonoBehaviour
         }
     }
 
-    public void OnMouseDown()
+    public virtual IEnumerator OnAttack() { yield return null; } 
+    virtual public void Activate()
     {
-        
+        GameManager.Instance.changeAttackScoreBy(GetComponentInParent<PieceFolder>().currentPowerLevel); 
     }
-    public abstract void Activate();  
-    public abstract void Deactivate(); 
+    virtual public void Deactivate()
+    {
+        GameManager.Instance.changeAttackScoreBy(-GetComponentInParent<PieceFolder>().currentPowerLevel);
+
+    }
 }
