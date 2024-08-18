@@ -13,9 +13,9 @@ public class EnemyLineUp : MonoBehaviour
     void Start()
     {   
         //For testing purposes
-        Debug.Log("Line up called");
+        Debug.Log("EnemyLineUp.cs: Line up called");
         this.CreateLineUp();
-        Debug.Log("Attack called");
+        Debug.Log("EnemyLineUp.cs: Attack called");
         this.BeginAttack();
     }
 
@@ -28,7 +28,7 @@ public class EnemyLineUp : MonoBehaviour
     public void CreateLineUp(){
         enemyLineUp = new Enemy[numberOfEnemies];
 
-        Debug.Log("Creating enemy lineup...");
+        Debug.Log("EnemyLineUp.cs: Creating enemy lineup...");
 
         for (int i = 0; i < numberOfEnemies; i++)
         {
@@ -41,7 +41,7 @@ public class EnemyLineUp : MonoBehaviour
             // Instantiate the enemy at the random position
             GameObject enemyObject = Instantiate(enemyPrefab, randomPosition, Quaternion.identity);
 
-            Debug.Log("Enemy " + i + " instantiated at position: " + randomPosition);
+            //Debug.Log("Enemy " + i + " instantiated at position: " + randomPosition);
 
             // Get the Enemy component from the instantiated object
             Enemy enemy = enemyObject.GetComponent<Enemy>();
@@ -51,18 +51,19 @@ public class EnemyLineUp : MonoBehaviour
             enemy.attack = Random.Range(10, 20); // Example values
             enemy.health = Random.Range(50, 100); // Example values
 
-            Debug.Log("Enemy " + i + " - Attack: " + enemy.attack + ", Health: " + enemy.health);
+            //Debug.Log("Enemy " + i + " - Attack: " + enemy.attack + ", Health: " + enemy.health);
         }
 
-        Debug.Log("Enemy lineup creation complete. Total enemies: " + enemyLineUp.Length);
+        Debug.Log("EnemyLineUp.cs: Enemy lineup creation complete. Total enemies: " + enemyLineUp.Length);
 }
 
 
     public void BeginAttack() {
         //TODO: Iterate through enemy array and have each enemy attack 
         for (int i = 0; i < numberOfEnemies; i++) {
-            Debug.Log(enemyLineUp[i].attack + ", " + enemyLineUp[i].health);
+            //Debug.Log(enemyLineUp[i].attack + ", " + enemyLineUp[i].health);
+            enemyLineUp[i].Attack();
         }
-        Debug.Log("Attack completed");
+        Debug.Log("EnemyLineUp.cs: Attack completed");
     }
 }
