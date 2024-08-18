@@ -188,7 +188,16 @@ public class GameManager : MonoBehaviour
     public void UI_StartBattle() {
         ChangePhase(Phase.Battle);
         // delete all non-grid blocks.
-
+        // Delete previously instantiated blocks
+        for (int i = currentRollout.Count - 1; i >= 0; i--)
+        {
+            GameObject block = currentRollout[i];
+            if (block != null && !block.GetComponent<PieceFolder>().isInsideGrid)
+            {
+                Destroy(block);
+                currentRollout.RemoveAt(i);
+            }
+        }
 
         // 
         PieceFolder[] pieceFolders = FindObjectsOfType<PieceFolder>();
