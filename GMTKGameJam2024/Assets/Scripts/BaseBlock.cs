@@ -19,6 +19,7 @@ public abstract class BaseBlock : MonoBehaviour
     private bool isHoverable = true;
     private bool isSelectable = false;
     private bool isSelected = false;
+    public bool isBought = false; 
     private Renderer currentRenderer;
     [SerializeField] public GameObject background;
 
@@ -85,26 +86,8 @@ public abstract class BaseBlock : MonoBehaviour
             {
                 baseBlock.setIsGlowing(true);
             }
-            Debug.Log("mouse over");
         }
-    }
-
-    public void OnMouseExit()
-    {
-        if (isHoverable && !isSelected)
-        {
-            var children = transform.parent.gameObject.GetComponentsInChildren<BaseBlock>();
-            foreach (BaseBlock baseBlock in children)
-            {
-                baseBlock.setIsGlowing(false);
-            }
-            Debug.Log("mouse exit");
-        }
-    }
-
-    public void OnMouseDown()
-    {
-        if (isSelectable)
+        if (isSelectable && Input.GetMouseButtonDown(0))
         {
             if (isSelected)
             {
@@ -124,9 +107,30 @@ public abstract class BaseBlock : MonoBehaviour
                     baseBlock.setIsSelected(true);
                 }
             }
-           
-            Debug.Log("mouse down");
         }
+
+        if (Input.GetMouseButtonDown(1) && !GetComponentInParent<PieceFolder>().isInsideGrid)
+        {
+            Debug.Log("Rotate");
+            transform.parent.Rotate(0, 0, 90); 
+        }
+    }
+
+    public void OnMouseExit()
+    {
+        if (isHoverable && !isSelected)
+        {
+            var children = transform.parent.gameObject.GetComponentsInChildren<BaseBlock>();
+            foreach (BaseBlock baseBlock in children)
+            {
+                baseBlock.setIsGlowing(false);
+            }
+        }
+    }
+
+    public void OnMouseDown()
+    {
+        
     }
     public abstract void Activate(); 
 }

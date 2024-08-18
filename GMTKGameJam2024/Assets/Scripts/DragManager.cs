@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -63,27 +64,30 @@ public class DragManager : MonoBehaviour
         Vector2 mousePosition = m_Event.mousePosition;
         mousePosition.y = referenceCamera.pixelHeight - mousePosition.y;
 
-        switch (m_Event.type) {
-            case EventType.MouseDown:
-                dragMode = DragMode.Click;
-                isMouseDown = true;
-                break;
-            case EventType.MouseUp:
-                isMouseDown = false;
-                if (dragBlock != null) {
-                    dropBlock(mousePosition);
-                } else if (dragMode == DragMode.Click) {
-                    pickBlock(mousePosition);
-                }
-                break;
-            case EventType.MouseDrag:
-                dragMode = DragMode.Drag;
-                if (dragBlock == null) {
-                    pickBlock(mousePosition);
-                }
-                break;
-            default:
-                break;
+        if (m_Event.button == 0){
+
+            switch (m_Event.type) {
+                case EventType.MouseDown:
+                    dragMode = DragMode.Click;
+                    isMouseDown = true;
+                    break;
+                case EventType.MouseUp:
+                    isMouseDown = false;
+                    if (dragBlock != null) {
+                        dropBlock(mousePosition);
+                    } else if (dragMode == DragMode.Click) {
+                        pickBlock(mousePosition);
+                    }
+                    break;
+                case EventType.MouseDrag:
+                    dragMode = DragMode.Drag;
+                    if (dragBlock == null) {
+                        pickBlock(mousePosition);
+                    }
+                    break;
+                default:
+                    break;
+            }
         }
     }
 
@@ -115,6 +119,7 @@ public class DragManager : MonoBehaviour
                 Vector2Int cellPos = Vector2Int.RoundToInt((referenceCamera.ScreenToWorldPoint(mousePos) - tetrisGridDisplay.transform.position) / tetrisGridDisplay.cellSize);
                 if (tetrisGridDisplay.tetrisGrid.CanAddToGrid(cellPos, dragBlock)) {
                     tetrisGridDisplay.tetrisGrid.AddToGrid(cellPos, dragBlock);
+                    dragBlock.gameObject.GetComponent<PieceFolder>().isInsideGrid = true;
                     dragBlock = null;
                 } else {
                     Debug.Log("placed down at pickup location"+ pickupLocation.ToString());
@@ -122,6 +127,15 @@ public class DragManager : MonoBehaviour
                     dragBlock = null;
                 }
             } else {
+                //check if it is bought 
+                if(dragBlock.gameObject.GetComponent<PieceFolder>().isBought == false)
+                {
+                    dragBlock.position = (Vector2)pickupLocation;
+                }
+                else
+                {
+                    dragBlock.gameObject.GetComponent<PieceFolder>().isInsideGrid = false; 
+                }
                 // TODO: functionality when a block is dropped outside of the grid.
                 // may need to revamp the entire lock to grid system lol this system isn't scalable at all
                 dragBlock = null;

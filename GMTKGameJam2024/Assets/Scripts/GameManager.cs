@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine; 
 
 public class GameManager : MonoBehaviour
@@ -14,7 +15,7 @@ public class GameManager : MonoBehaviour
     public int currentTierLevel = 1;
     public List<Vector2> positionToDisplayBlocks = new List<Vector2>();
 
-    private List<GameObject> currentRollout = new List<GameObject>();
+    public List<GameObject> currentRollout = new List<GameObject>();
 
     //dictionnary used to translate the block color to its related color 
     public Dictionary<BlockColor, Color> blockColorToColor = new Dictionary<BlockColor, Color>();
@@ -22,6 +23,8 @@ public class GameManager : MonoBehaviour
 
     public List<Sprite> blockSpriteList = new List<Sprite>();
 
+    public int currentMoney = 10;
+    [SerializeField] TMP_Text moneyDisplay; 
      
 
 
@@ -37,9 +40,24 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void changeMoneyBy(int money)
+    {
+        //update the UI 
+        currentMoney += money;
+        moneyDisplay.text = currentMoney.ToString();
+        
+    }
+
+    public void setMoneyTo(int money)
+    {
+        currentMoney = money;
+        moneyDisplay.text = currentMoney.ToString();
+    }
+
     private void Awake()
     {
         instance = this;
+        setMoneyTo(currentMoney); 
         allBlocksList.Add(tier1Blocks);
         allBlocksList.Add(tier2Blocks);
 
@@ -67,19 +85,21 @@ public class GameManager : MonoBehaviour
     public void Roll()
     {
         // Delete previously instantiated blocks
-        foreach (GameObject block in currentRollout)
+        for (int i = currentRollout.Count - 1; i >= 0; i--)
         {
-            if(block != null)
+            GameObject block = currentRollout[i];
+            if (block != null && !block.GetComponent<PieceFolder>().isInsideGrid)
             {
                 Destroy(block);
+                currentRollout.RemoveAt(i);
             }
         }
-        currentRollout.Clear();
 
         //I want to display three random block based on the current tier 
         for (int i = 0; i < 3; i++)
         {
             GameObject folderForPiece = new GameObject();
+            folderForPiece.AddComponent<PieceFolder>();
             folderForPiece.name = "Piece" + i.ToString();
             currentRollout.Add(folderForPiece.gameObject);
 

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
+using UnityEngine.WSA;
 
 public class TetrisGrid : MonoBehaviour
 {
@@ -33,6 +34,17 @@ public class TetrisGrid : MonoBehaviour
             if (gridBlocks.ContainsKey(globalPosition)) {
                 return false;
             }
+            if (block.GetComponentInParent<PieceFolder>().isBought == false)
+            {
+                if (BuyPiece(block.GetComponentInParent<PieceFolder>()))
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
         }
         return true;
     }
@@ -40,7 +52,7 @@ public class TetrisGrid : MonoBehaviour
     public bool CanAddToGrid(Vector2Int position, Transform dragBlock) {
         // AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
         if (dragBlock.childCount > 0) {
-            return CanAddToGrid(position, dragBlock.GetChild(0).GetComponent<BaseBlock>() as BaseBlock);
+           return CanAddToGrid(position, dragBlock.GetChild(0).GetComponent<BaseBlock>() as BaseBlock);
         }
         return false;
     }
@@ -53,6 +65,8 @@ public class TetrisGrid : MonoBehaviour
     }
     public void AddToGrid(Vector2Int position, Transform dragBlock) {
         if (dragBlock.childCount > 0) {
+            PieceFolder folder = dragBlock.gameObject.GetComponent<PieceFolder>();
+            
             AddToGrid(position, dragBlock.GetChild(0).GetComponent<BaseBlock>() as BaseBlock);
         }
     }
@@ -74,6 +88,17 @@ public class TetrisGrid : MonoBehaviour
         }
     }
 
+    public bool BuyPiece(PieceFolder pieceFolder)
+    {
+        if(GameManager.Instance.currentMoney >= 3)
+        {
+            pieceFolder.isBought = true;
+            GameManager.Instance.changeMoneyBy( - 3);
+            return true;
+        }
+        return false;
+        
+    }
     public BaseBlock GetBlockAtPosition(Vector2Int position) {
         if (gridBlocks.ContainsKey(position)) {
             return gridBlocks[position];
