@@ -149,7 +149,12 @@ public class Enemy : MonoBehaviour
     protected void Die()
     {
         Debug.Log("Enemy.cs: Enemy dies.");
-        // Add death behavior here
+        // Increment the death count in the GameManager
+        if (gameManager != null)
+        {
+            Debug.Log("Incrementing death count");
+            gameManager.IncrementDeathCount();
+        }
         Destroy(gameObject);
     }
 }

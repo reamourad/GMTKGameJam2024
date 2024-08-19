@@ -6,6 +6,7 @@ public class EnemyLineUp : MonoBehaviour
 {
     // Variables
     public Enemy[] enemyLineUp;
+    public int deathCount;
 
     //PREFABS FOR ENEMIES
     public GameObject slimeEnemyPrefab;
@@ -24,6 +25,7 @@ public class EnemyLineUp : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        deathCount = 0;
         spawnPositions = new Vector2[] // INITIALIZE POSSIBLE SPAWN LOCATIONS
         {
             new Vector2(3.5f, 3f),  
