@@ -10,10 +10,27 @@ public class EnemyLineUp : MonoBehaviour
     public int numberOfEnemies = 3;
     public float attackDelay = 1f; // Time in seconds between each attack
     public float moveDuration = 1f; // Time it takes for the enemy to move into position
+    public Vector2[] spawnPositions; // Array of possible spawn positions
 
     // Start is called before the first frame update
     void Start()
     {
+        spawnPositions = new Vector2[] // INITIALIZE POSSIBLE SPAWN LOCATIONS
+        {
+            new Vector2(3.5f, 3f),  
+            new Vector2(3.5f, 0f),  
+            new Vector2(3.5f, -3f),
+            new Vector2(4.5f, 2f),  
+            new Vector2(4.5f, -1f),  
+            new Vector2(5.5f, 3f),  
+            new Vector2(5.5f, 0f),  
+            new Vector2(5.5f, -3f),
+            new Vector2(6.5f, 2.5f),
+            new Vector2(6.5f, -2f),
+            new Vector2(7.5f, 2f),
+            new Vector2(7.5f, -1f)
+        };
+        
         this.CreateLineUp(numberOfEnemies);
     }
 
@@ -27,7 +44,9 @@ public class EnemyLineUp : MonoBehaviour
         }
     }
 
-    // SPAWNING ENEMIES
+
+    // SPAWNING LOGIC
+
 
     public void CreateLineUp(int numberOfEnemies)
     {
@@ -35,13 +54,16 @@ public class EnemyLineUp : MonoBehaviour
 
         Debug.Log("EnemyLineUp.cs: Creating enemy lineup...");
 
+        // Shuffle the spawn positions to randomize the order
+        ShuffleArray(spawnPositions);
+
         for (int i = 0; i < numberOfEnemies; i++)
         {
             // Off-screen starting position to the right
-            Vector2 offScreenPosition = new Vector2(10f, Random.Range(-4f, 4f));
+            Vector2 offScreenPosition = new Vector2(10f, spawnPositions[i].y);
 
-            // Target position in the scene
-            Vector2 targetPosition = new Vector2(Random.Range(2.6f, 3.5f), offScreenPosition.y);
+            // Target position in the scene from shuffled array
+            Vector2 targetPosition = spawnPositions[i];
 
             // Instantiate the enemy at the off-screen position
             GameObject enemyObject = Instantiate(enemyPrefab, offScreenPosition, Quaternion.identity);
@@ -77,7 +99,20 @@ public class EnemyLineUp : MonoBehaviour
         enemyObject.transform.position = targetPosition; // Ensure final position is set
     }
 
+    private void ShuffleArray(Vector2[] array)
+    {
+        for (int i = array.Length - 1; i > 0; i--)
+        {
+            int j = Random.Range(0, i + 1);
+            Vector2 temp = array[i];
+            array[i] = array[j];
+            array[j] = temp;
+        }
+    }
+
+
     // ATTACK LOGIC
+
 
     private void StartAttackSequence()
     {
