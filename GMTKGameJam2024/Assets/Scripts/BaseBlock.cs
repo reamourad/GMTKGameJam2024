@@ -116,13 +116,17 @@ public abstract class BaseBlock : MonoBehaviour
     }
 
     public virtual IEnumerator OnAttack() { yield return null; } 
+    public virtual IEnumerator OnDestroyed() { yield return null; } 
     virtual public void Activate()
     {
         GameManager.Instance.changeAttackScoreBy(GetComponentInParent<PieceFolder>().currentPowerLevel); 
     }
+
     virtual public void Deactivate()
     {
         GameManager.Instance.changeAttackScoreBy(-GetComponentInParent<PieceFolder>().currentPowerLevel);
 
     }
+
+
 }

@@ -5,7 +5,8 @@ using UnityEngine;
 public enum TypeOfBlock
 {
     None, 
-    OnAttack
+    OnAttack, 
+    OnDestroyed
 }
 public class PieceFolder : MonoBehaviour
 {
