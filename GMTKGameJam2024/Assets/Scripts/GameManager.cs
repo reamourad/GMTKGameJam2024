@@ -332,4 +332,22 @@ public class GameManager : MonoBehaviour
         yield return null;
     }
 
+    //AN ADDED THIS
+    public void IncrementDeathCount() {
+        enemyLineUp.deathCount++;
+        Debug.Log("GameManager: Death count increased to " + enemyLineUp.deathCount);
+
+        if (enemyLineUp.deathCount >= enemyLineUp.numberOfEnemies)
+        {
+            Debug.Log("GameManager: All enemies defeated. Triggering phase change.");
+            
+            // Activate all pieces currently in the grid
+            ChangePhase(Phase.Shop);
+            foreach (PieceFolder pieceFolder in pieceCurrentlyInGrid)
+            {
+                pieceFolder.gameObject.SetActive(true);
+            }
+        }
+    }
+
 }
