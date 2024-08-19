@@ -38,6 +38,7 @@ public class GameManager : MonoBehaviour
     public int damage = -1;
 
     public List<PieceFolder> pieceCurrentlyInGrid = new List<PieceFolder>();
+    private bool isAttacking = false;
 
     public enum Phase {
         Menu,
@@ -153,7 +154,7 @@ public class GameManager : MonoBehaviour
                 Button undo = phaseScenes[Phase.Battle].transform.Find("Undo").GetComponent<Button>() as Button;
                 Button attack = phaseScenes[Phase.Battle].transform.Find("Attack").GetComponent<Button>() as Button;
                 
-                if (actionList.Count > 0) {
+                if (actionList.Count > 0 && !isAttacking) {
                     undo.interactable = true;
                     if (enemyClickManager.selectedEnemy != null) {
                         attack.interactable = true;
@@ -282,6 +283,7 @@ public class GameManager : MonoBehaviour
 
     private IEnumerator HandleAttackSequence() 
     {
+        isAttacking = true;
         foreach(PieceFolder pieceFolder in pieceCurrentlyInGrid)
         {
             if (pieceFolder.blockType == TypeOfBlock.OnAttack) 
@@ -329,6 +331,7 @@ public class GameManager : MonoBehaviour
 
         enemyLineUp.StartAttackSequence();
 
+        isAttacking = false;
         yield return null;
     }
 
