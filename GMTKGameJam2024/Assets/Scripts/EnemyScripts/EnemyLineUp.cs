@@ -41,7 +41,7 @@ public class EnemyLineUp : MonoBehaviour
             Vector2 offScreenPosition = new Vector2(10f, Random.Range(-4f, 4f));
 
             // Target position in the scene
-            Vector2 targetPosition = new Vector2(Random.Range(2.6f, 4f), offScreenPosition.y);
+            Vector2 targetPosition = new Vector2(Random.Range(2.6f, 3.5f), offScreenPosition.y);
 
             // Instantiate the enemy at the off-screen position
             GameObject enemyObject = Instantiate(enemyPrefab, offScreenPosition, Quaternion.identity);
