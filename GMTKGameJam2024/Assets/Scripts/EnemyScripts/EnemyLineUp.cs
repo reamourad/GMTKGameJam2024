@@ -6,11 +6,19 @@ public class EnemyLineUp : MonoBehaviour
 {
     // Variables
     public Enemy[] enemyLineUp;
-    public GameObject enemyPrefab;
+
+    //PREFABS FOR ENEMIES
+    public GameObject slimeEnemyPrefab;
+    public GameObject wolfEnemyPrefab;
+
+
+
     public int numberOfEnemies = 3;
     public float attackDelay = 1f; // Time in seconds between each attack
     public float moveDuration = 1f; // Time it takes for the enemy to move into position
     public Vector2[] spawnPositions; // Array of possible spawn positions
+
+    public GameObject[] enemyPrefabs;
 
     // Start is called before the first frame update
     void Start()
@@ -29,6 +37,12 @@ public class EnemyLineUp : MonoBehaviour
             new Vector2(6.5f, -2f),
             new Vector2(7.5f, 2f),
             new Vector2(7.5f, -1f)
+        };
+
+        enemyPrefabs = new GameObject[]
+        {
+            slimeEnemyPrefab,
+            wolfEnemyPrefab
         };
     }
 
@@ -63,8 +77,8 @@ public class EnemyLineUp : MonoBehaviour
             // Target position in the scene from shuffled array
             Vector2 targetPosition = spawnPositions[i];
 
-            // Instantiate the enemy at the off-screen position
-            GameObject enemyObject = Instantiate(enemyPrefab, offScreenPosition, Quaternion.identity);
+            // Choose and instantiate the enemy at the off-screen position
+            GameObject enemyObject = Instantiate(enemyPrefabs[Random.Range(0, enemyPrefabs.Length)], offScreenPosition, Quaternion.identity);
 
             // Get the Enemy component from the instantiated object
             Enemy enemy = enemyObject.GetComponent<Enemy>();

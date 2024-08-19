@@ -45,7 +45,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyLineUp: []
-  enemyPrefab: {fileID: 7420245061084819426, guid: dfc655b965b2b334d80cd077c153de46, type: 3}
+  slimeEnemyPrefab: {fileID: 7420245061084819426, guid: 1a2821f5398abb84780cf00b15a55ffd, type: 3}
+  wolfEnemyPrefab: {fileID: 7420245061084819426, guid: f6fd36d86779a3f46b7244800798a3ce, type: 3}
   numberOfEnemies: 3
   attackDelay: 1
   moveDuration: 1
