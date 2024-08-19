@@ -47,7 +47,9 @@ MonoBehaviour:
   enemyLineUp: []
   slimeEnemyPrefab: {fileID: 7420245061084819426, guid: 1a2821f5398abb84780cf00b15a55ffd, type: 3}
   wolfEnemyPrefab: {fileID: 7420245061084819426, guid: f6fd36d86779a3f46b7244800798a3ce, type: 3}
+  mageEnemyPrefab: {fileID: 7691063655281554202, guid: 1591e270c24489747b1de00a307957be, type: 3}
   numberOfEnemies: 3
   attackDelay: 1
   moveDuration: 1
   spawnPositions: []
+  enemyPrefabs: []

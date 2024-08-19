@@ -10,6 +10,7 @@ public class EnemyLineUp : MonoBehaviour
     //PREFABS FOR ENEMIES
     public GameObject slimeEnemyPrefab;
     public GameObject wolfEnemyPrefab;
+    public GameObject mageEnemyPrefab;
 
 
 
@@ -42,7 +43,8 @@ public class EnemyLineUp : MonoBehaviour
         enemyPrefabs = new GameObject[]
         {
             slimeEnemyPrefab,
-            wolfEnemyPrefab
+            wolfEnemyPrefab,
+            mageEnemyPrefab
         };
     }
 
