@@ -2826,6 +2826,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1924949797}
     - target: {fileID: 5846257673399975580, guid: 177d11fc7101e0346895afe89001abbc, type: 3}
+      propertyPath: currentMoney
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 5846257673399975580, guid: 177d11fc7101e0346895afe89001abbc, type: 3}
       propertyPath: moneyDisplay
       value: 
       objectReference: {fileID: 1482059231}

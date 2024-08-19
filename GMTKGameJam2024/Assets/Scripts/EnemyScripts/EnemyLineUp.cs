@@ -137,14 +137,21 @@ public class EnemyLineUp : MonoBehaviour
     {
         for (int i = 0; i < numberOfEnemies; i++)
         {
-            enemyLineUp[i].Attack();
-            Debug.Log($"EnemyLineUp.cs: Enemy {i} attacked.");
-
-            yield return new WaitForSeconds(attackDelay);
+            if (enemyLineUp[i] != null)
+            {
+                enemyLineUp[i].Attack();
+                Debug.Log($"EnemyLineUp.cs: Enemy {i} attacked.");
+                yield return new WaitForSeconds(attackDelay);
+            }
+            else
+            {
+                Debug.LogWarning($"EnemyLineUp.cs: Enemy at index {i} is null and will be skipped.");
+            }
         }
 
         Debug.Log("EnemyLineUp.cs: All attacks completed.");
     }
+
 
     public void ApplyDamageToAll(int damage)
     {
