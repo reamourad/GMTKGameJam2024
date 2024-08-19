@@ -108,10 +108,34 @@ public class Enemy : MonoBehaviour
             healthTextComponent.SetHealth(health);
         }
 
+        // Shake the enemy when taking damage
+        StartCoroutine(ShakeEnemy(0.1f, 0.1f));
+
         if (health <= 0)
         {
             Die();
         }
+    }
+
+    // Coroutine to shake the enemy
+    private IEnumerator ShakeEnemy(float duration, float magnitude)
+    {
+        // Get the current position as the target position for shaking
+        Vector2 originalPosition = transform.position;
+
+        float elapsedTime = 0f;
+
+        while (elapsedTime < duration)
+        {
+            Vector2 randomOffset = Random.insideUnitCircle * magnitude;
+            transform.position = originalPosition + randomOffset;
+            elapsedTime += Time.deltaTime;
+
+            yield return null;
+        }
+
+        // Reset position after shaking
+        transform.position = originalPosition;
     }
 
     // Method for dying
