@@ -13,6 +13,7 @@ public class TetrisGrid : MonoBehaviour
     // the dictionary should not contain the key for a block if the position is empty.
     public Dictionary<Vector2Int, BaseBlock> gridBlocks = new Dictionary<Vector2Int, BaseBlock>();
 
+
     // Start is called before the first frame update
     void Start()
     {
@@ -90,10 +91,11 @@ public class TetrisGrid : MonoBehaviour
 
     public bool BuyPiece(PieceFolder pieceFolder)
     {
-        if(GameManager.Instance.currentMoney >= 3)
+        if(GameManager.Instance.currentMoney >= GameManager.Instance.currentPrice)
         {
             pieceFolder.isBought = true;
-            GameManager.Instance.changeMoneyBy( - 3);
+            GameManager.Instance.changeMoneyBy(-GameManager.Instance.currentPrice);
+            StartCoroutine(pieceFolder.transform.GetChild(0).GetComponent<BaseBlock>().OnBuy());
             return true;
         }
         return false;

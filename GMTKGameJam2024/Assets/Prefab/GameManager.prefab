@@ -44,17 +44,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1ea959d55fc1394ca17f1d75cfe47b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tier1Blocks:
-  - {fileID: 3450485876080542382, guid: 02916d9fd801ec24f8b76a9caa7bd42c, type: 3}
-  - {fileID: 2125034794464622809, guid: c415496068ff5f842bb1f844f304434d, type: 3}
-  - {fileID: 1773086666778549780, guid: 1247142ef944b0448934f5f13b8900db, type: 3}
+  tier1Blocks: []
   tier2Blocks: []
   currentTierLevel: 1
   positionToDisplayBlocks:
   - {x: -7, y: 0}
   - {x: -2, y: 0}
   - {x: 3, y: 0}
+  currentRollout: []
   blockSpriteList:
   - {fileID: 21300000, guid: f643ff3bd4f394847b65ad5beafd3e66, type: 3}
   - {fileID: 21300000, guid: f3596061013691f47ba2d06037e29c54, type: 3}
   - {fileID: 21300000, guid: 1db829ef2bbbea1448e474305e08d644, type: 3}
+  currentMoney: 10
+  moneyDisplay: {fileID: 0}
+  descriptionDisplay: {fileID: 0}
+  currentAttackScore: 0
+  attackScoreDisplay: {fileID: 0}
+  initialPrice: 3
+  currentPrice: 0
+  damage: -1
+  pieceCurrentlyInGrid: []
+  phase: 0
+  tetrisGridDisplay: {fileID: 0}
+  actionList: []
+  enemyClickManager: {fileID: 0}
+  enemyLineUp: {fileID: 0}

@@ -32,6 +32,8 @@ public class GameManager : MonoBehaviour
 
     public int currentAttackScore = 0; 
     [SerializeField] TMP_Text attackScoreDisplay; 
+    public int initialPrice = 3;
+    public int currentPrice;
      
     public int damage = -1;
 
@@ -95,7 +97,10 @@ public class GameManager : MonoBehaviour
         //update the UI 
         currentMoney += money;
         moneyDisplay.text = currentMoney.ToString();
-        
+
+        foreach (PieceFolder pieceFolder in pieceCurrentlyInGrid) {
+            StartCoroutine(pieceFolder.transform.GetChild(0).gameObject.GetComponent<BaseBlock>().OnGainGold());
+        }
     }
 
     public void setMoneyTo(int money)
@@ -225,6 +230,7 @@ public class GameManager : MonoBehaviour
 
     public void UI_StartShop() {
         ChangePhase(Phase.Shop);
+        currentPrice = initialPrice;
     }
 
     public void UI_StartBattle() {

@@ -4,15 +4,12 @@ using UnityEngine;
 
 public class TUnitRed : BaseBlock
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+    public override IEnumerator OnAttack() { 
+        foreach (PieceFolder pieceFolder in GameManager.Instance.pieceCurrentlyInGrid) {
+            if (pieceFolder.gameObject.activeSelf && pieceFolder.transform.GetChild(0).GetComponent<BaseBlock>().blockColor == BlockColor.Red) {
+                GameManager.Instance.enemyLineUp.ApplyDamageToAll(3);
+            }
+        }
+        yield return null;
     }
 }
