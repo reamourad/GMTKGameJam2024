@@ -293,7 +293,6 @@ public class GameManager : MonoBehaviour
                    foreach(BaseBlock children in childrens)
                    {
                         children.setIsGlowing(!children.isGlowing); 
-                        
                    }
                     yield return new WaitForSeconds(0.2f);
                 }

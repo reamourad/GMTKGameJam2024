@@ -117,6 +117,7 @@ public abstract class BaseBlock : MonoBehaviour
     public virtual IEnumerator OnKill() { yield return null;}
     public virtual IEnumerator OnGainGold() { yield return null;}
     public virtual IEnumerator OnDeath() { yield return null;}
+    public virtual IEnumerator OnAttacked(Enemy enemy) { yield return null;}
     virtual public void Activate()
     {
         GameManager.Instance.changeAttackScoreBy(GetComponentInParent<PieceFolder>().currentPowerLevel); 

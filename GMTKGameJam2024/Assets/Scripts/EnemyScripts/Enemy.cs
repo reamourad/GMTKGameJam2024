@@ -66,9 +66,17 @@ public class Enemy : MonoBehaviour
             // disable block
 
             pieceSelectable[randnum].SetActive(false);
+            pieceSelectable.RemoveAt(randnum);
         } else {
             Debug.Log("Enemy.cs: no pieces to attack.");
         }
+
+        // this has to happen afterwards due to situations where the enemy dies from the OnAttacked() damage.
+        foreach (GameObject piece in pieceSelectable) {
+            StartCoroutine(piece.transform.GetChild(0).GetComponent<BaseBlock>().OnAttacked(this));
+        }
+
+        
 
         // // Get a random position on the grid
         // Vector2Int randomPosition = GetRandomGridPosition();
