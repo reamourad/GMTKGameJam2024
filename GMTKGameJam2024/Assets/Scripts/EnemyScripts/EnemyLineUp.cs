@@ -91,6 +91,7 @@ public class EnemyLineUp : MonoBehaviour
             enemy.health = health;
             enemy.maxHealth = health;
 
+            Debug.Log($"EnemyLineUp.cs: Enemy {i} created with stats - Type: {enemyObject.name}, Health: {enemy.health}, Max Health: {enemy.maxHealth}");
             // Start moving the enemy into position
             StartCoroutine(MoveEnemyToPosition(enemyObject, targetPosition, moveDuration));
         }

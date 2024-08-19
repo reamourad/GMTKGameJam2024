@@ -317,8 +317,13 @@ public class GameManager : MonoBehaviour
             pieceFolder.gameObject.SetActive(false);
             actionList.RemoveAt(i);
         }
+        if (enemyClickManager.selectedEnemy != null) 
+        {
         enemyClickManager.selectedEnemy.GetComponent<Enemy>().TakeDamage(currentAttackScore);
+        }
+
         enemyLineUp.StartAttackSequence();
+
         yield return null;
     }
 
