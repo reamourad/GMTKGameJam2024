@@ -82,10 +82,10 @@ MonoBehaviour:
   - {x: 1, y: 0}
   - {x: 2, y: 0}
   - {x: 3, y: 0}
-  description: when destroyed deal mass damage equal to its power
+  description: 'On destroyed, do damage equal to its power to every enemy  '
   blockColor: 0
   isGlowing: 0
   isSelectable: 0
   isBought: 0
-  typeOfBlock: 0
+  typeOfBlock: 2
   background: {fileID: 0}

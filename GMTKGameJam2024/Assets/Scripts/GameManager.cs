@@ -53,6 +53,8 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] public EnemyClickManager enemyClickManager;
 
+    [SerializeField] public EnemyLineUp enemyLineUp;
+
 
     public static GameManager Instance
     {
@@ -275,6 +277,7 @@ public class GameManager : MonoBehaviour
         {
             if (pieceFolder.blockType == TypeOfBlock.OnAttack) 
             {
+                //make the on attack piece glow
                 for (int i = 0; i < 4; ++i)
                 {
                    BaseBlock[] childrens = pieceFolder.GetComponentsInChildren<BaseBlock>();
@@ -292,6 +295,22 @@ public class GameManager : MonoBehaviour
         for (int i = actionList.Count - 1; i >= 0; i--)
         {
             PieceFolder pieceFolder = actionList[i];
+            if(pieceFolder.blockType == TypeOfBlock.OnDestroyed)
+            {
+                //make the on destroyed piece glow
+                for (int j = 0; j < 4; ++j)
+                {
+                    BaseBlock[] childrens = pieceFolder.GetComponentsInChildren<BaseBlock>();
+                    foreach (BaseBlock children in childrens)
+                    {
+                        children.setIsGlowing(!children.isGlowing);
+
+                    }
+                    yield return new WaitForSeconds(0.2f);
+                }
+                yield return StartCoroutine(pieceFolder.transform.GetChild(0).gameObject.GetComponent<BaseBlock>().OnDestroyed());
+
+            }
             pieceFolder.gameObject.SetActive(false);
             actionList.RemoveAt(i);
         }
