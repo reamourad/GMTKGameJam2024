@@ -30,18 +30,16 @@ public class EnemyLineUp : MonoBehaviour
             new Vector2(7.5f, 2f),
             new Vector2(7.5f, -1f)
         };
-        
-        this.CreateLineUp(numberOfEnemies);
     }
 
     void Update()
     {
         // Test: Apply damage to all enemies when Enter is pressed
-        if (Input.GetKeyDown(KeyCode.Return))
-        {
-            Debug.Log("EnemyLineUp: Enter key pressed, applying damage to all enemies.");
-            ApplyDamageToAll(40);
-        }
+        // if (Input.GetKeyDown(KeyCode.Return))
+        // {
+        //     Debug.Log("EnemyLineUp: Enter key pressed, applying damage to all enemies.");
+        //     ApplyDamageToAll(40);
+        // }
     }
 
 
@@ -114,7 +112,7 @@ public class EnemyLineUp : MonoBehaviour
     // ATTACK LOGIC
 
 
-    private void StartAttackSequence()
+    public void StartAttackSequence()
     {
         StartCoroutine(AttackSequenceCoroutine());
     }

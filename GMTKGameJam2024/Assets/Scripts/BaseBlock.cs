@@ -62,10 +62,6 @@ public abstract class BaseBlock : MonoBehaviour
 
     public void Update()
     {
-        if (Input.GetKeyDown(KeyCode.V))
-        {
-            setIsGlowing(!isGlowing); 
-        }
     }
 
     public void OnMouseOver()

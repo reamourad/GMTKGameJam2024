@@ -255,6 +255,9 @@ public class GameManager : MonoBehaviour
                 Destroy(pieceFolder);
             }
         }
+        
+        // TODO: number of enemies?
+        enemyLineUp.CreateLineUp(enemyLineUp.numberOfEnemies);
     }
 
     public void UI_UndoButton() {
@@ -315,6 +318,7 @@ public class GameManager : MonoBehaviour
             actionList.RemoveAt(i);
         }
         enemyClickManager.selectedEnemy.GetComponent<Enemy>().TakeDamage(currentAttackScore);
+        enemyLineUp.StartAttackSequence();
         yield return null;
     }
 

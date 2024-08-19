@@ -125,4 +125,9 @@ MonoBehaviour:
   isSelectable: 0
   isBought: 0
   typeOfBlock: 1
-  background: {fileID: 0}
+  background: {fileID: 4123307022963047096}
+--- !u!1 &4123307022963047096 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7894481252088301330, guid: bdd66013bb724e9429fbb39187da2517, type: 3}
+  m_PrefabInstance: {fileID: 6104129271035444650}
+  m_PrefabAsset: {fileID: 0}

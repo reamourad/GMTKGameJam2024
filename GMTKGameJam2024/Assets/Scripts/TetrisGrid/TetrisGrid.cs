@@ -11,7 +11,7 @@ public class TetrisGrid : MonoBehaviour
     
     // a dictionary of positions which contain the blocks in those positions.
     // the dictionary should not contain the key for a block if the position is empty.
-    Dictionary<Vector2Int, BaseBlock> gridBlocks = new Dictionary<Vector2Int, BaseBlock>();
+    public Dictionary<Vector2Int, BaseBlock> gridBlocks = new Dictionary<Vector2Int, BaseBlock>();
 
     // Start is called before the first frame update
     void Start()

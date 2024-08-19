@@ -9,20 +9,23 @@ public class Enemy : MonoBehaviour
     public int health;
     public int maxHealth;
     private HealthText healthTextComponent; // Reference to the HealthText component
-    [SerializeField] private TetrisGrid tetrisGrid;  // Reference to TetrisGrid
+    // TODO: if you ever come back to this, figure out why this reference doesn't seem to work (tetrisGrid.gridBlocks.Count always returns 0)
+    // [SerializeField] public TetrisGrid tetrisGrid;  // Reference to TetrisGrid
+    private GameManager gameManager = null;
 
     // Start is called before the first frame update
     void Start()
     {
         // Ensure TetrisGrid reference is set
-        if (tetrisGrid == null)
-        {
-            tetrisGrid = FindObjectOfType<TetrisGrid>();
-            if (tetrisGrid == null)
-            {
-                Debug.LogError("TetrisGrid not found in the scene.");
-            }
-        }
+        // if (tetrisGrid == null)
+        // {
+            // tetrisGrid = FindObjectOfType<TetrisGrid>();
+            // if (tetrisGrid == null)
+            // {
+            //     Debug.LogError("TetrisGrid not found in the scene.");
+            // }
+        // }
+        gameManager = FindObjectOfType<GameManager>() as GameManager;
 
         // Initialize health and healthTextComponent
         healthTextComponent = GetComponentInChildren<HealthText>();
@@ -41,38 +44,58 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        // Debug.Log(FindObjectOfType<TetrisGrid>().gridBlocks.Count);
+        // Debug.Log(gameManager.tetrisGrid.gridBlocks.Count);
     }
 
-    public virtual void Attack()
-    {
-        Debug.Log("Enemy.cs: Attack started.");
-
-        // Get a random position on the grid
-        Vector2Int randomPosition = GetRandomGridPosition();
-
-        // Check if there is a block at the random position
-        BaseBlock block = tetrisGrid.GetBlockAtPosition(randomPosition);
-        if (block != null)
-        {
-            // Remove the block from the grid
-            tetrisGrid.RemoveFromGrid(block);
-            Debug.Log($"Enemy.cs: Block at position {randomPosition} was removed.");
+    public virtual void Attack() {
+        List<GameObject> pieceSelectable = new List<GameObject>();
+        // foreach ((Vector2Int pos, BaseBlock piece) in tetrisGrid.gridBlocks) {
+        //     Debug.Log(piece.transform.parent.gameObject.activeSelf.ToString() + " " + (!pieceSelectable.Contains(piece.transform.parent.gameObject)).ToString() );
+        //     if (piece.transform.parent.gameObject.activeSelf && !pieceSelectable.Contains(piece.transform.parent.gameObject)) {
+        //         pieceSelectable.Add(piece.transform.parent.gameObject);
+        //     }
+        // }
+        foreach (PieceFolder pieceFolder in gameManager.pieceCurrentlyInGrid) {
+            if (pieceFolder.gameObject.activeSelf) {
+                pieceSelectable.Add(pieceFolder.gameObject);
+            }
         }
-        else
-        {
-            // No block found at the position
-            Debug.Log($"Enemy.cs: Missed attack at position {randomPosition}.");
+        if (pieceSelectable.Count > 0) {
+            int randnum = Random.Range(0,pieceSelectable.Count);
+
+            // disable block
+
+            pieceSelectable[randnum].SetActive(false);
+        } else {
+            Debug.Log("Enemy.cs: no pieces to attack.");
         }
+
+        // // Get a random position on the grid
+        // Vector2Int randomPosition = GetRandomGridPosition();
+
+        // // Check if there is a block at the random position
+        // BaseBlock block = tetrisGrid.GetBlockAtPosition(randomPosition);
+        // if (block != null)
+        // {
+        //     // Remove the block from the grid
+        //     tetrisGrid.RemoveFromGrid(block);
+        //     Debug.Log($"Enemy.cs: Block at position {randomPosition} was removed.");
+        // }
+        // else
+        // {
+        //     // No block found at the position
+        //     Debug.Log($"Enemy.cs: Missed attack at position {randomPosition}.");
+        // }
     }
 
-    private Vector2Int GetRandomGridPosition()
-    {
-        // Generate a random position within the grid size
-        int x = Random.Range(0, tetrisGrid.size.x);
-        int y = Random.Range(0, tetrisGrid.size.y);
-        return new Vector2Int(x, y);
-    }
+    // private Vector2Int GetRandomGridPosition()
+    // {
+    //     // Generate a random position within the grid size
+    //     int x = Random.Range(0, tetrisGrid.size.x);
+    //     int y = Random.Range(0, tetrisGrid.size.y);
+    //     return new Vector2Int(x, y);
+    // }
 
     // Method for taking damage
     public virtual void TakeDamage(int damage)
