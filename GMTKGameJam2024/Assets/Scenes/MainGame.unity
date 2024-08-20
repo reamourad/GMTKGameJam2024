@@ -1339,6 +1339,11 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4294967295
   m_MaxRayIntersections: 0
+--- !u!1 &1121146247 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 374300777548044993, guid: 51c58298bd4868747ae76f662d698c18, type: 3}
+  m_PrefabInstance: {fileID: 963351146}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1132484197
 GameObject:
   m_ObjectHideFlags: 0
@@ -3018,6 +3023,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameManager
       objectReference: {fileID: 0}
+    - target: {fileID: 5846257673399975580, guid: 177d11fc7101e0346895afe89001abbc, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 1121146247}
     - target: {fileID: 5846257673399975580, guid: 177d11fc7101e0346895afe89001abbc, type: 3}
       propertyPath: enemyLineUp
       value: 
