@@ -7,12 +7,12 @@ using static UnityEngine.GraphicsBuffer;
 public class TrailRenderer : MonoBehaviour
 {
     [SerializeField] private int speed;
-    private GameObject selectedEnemy;
+    public GameObject selectedEnemy;
     public PieceFolder currentPieceFolder; 
 
     private void Start()
     {
-        selectedEnemy = GameManager.Instance.enemyClickManager.selectedEnemy;
+        
     }
 
     // Update is called once per frame
@@ -29,8 +29,6 @@ public class TrailRenderer : MonoBehaviour
             if (checkDistance < 1f)
             {
                 selectedEnemy.GetComponent<Enemy>().TakeDamage(currentPieceFolder.currentPowerLevel);
-                GameManager.Instance.changeAttackScoreBy(-currentPieceFolder.currentPowerLevel);
-
                 // Swap the position of the cylinder.
                 Destroy(this);
             }
