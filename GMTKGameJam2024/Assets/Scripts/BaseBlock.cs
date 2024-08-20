@@ -86,11 +86,11 @@ public abstract class BaseBlock : MonoBehaviour
             pieceFolder.setIsPieceSelected(true); 
         }
 
-        if (Input.GetMouseButtonDown(1) && !pieceFolder.isInsideGrid)
+/*        if (Input.GetMouseButtonDown(1) && !pieceFolder.isInsideGrid)
         {
             Debug.Log("Rotate");
             transform.parent.Rotate(0, 0, 90); 
-        }
+        }*/
     }
 
     public void OnMouseExit()

@@ -26,10 +26,11 @@ public class TrailRenderer : MonoBehaviour
 
             // Check if the position of the cube and sphere are approximately equal.
             float checkDistance = Vector3.Distance(transform.position, selectedEnemy.transform.position);
-            Debug.Log(checkDistance);
             if (checkDistance < 1f)
             {
                 selectedEnemy.GetComponent<Enemy>().TakeDamage(currentPieceFolder.currentPowerLevel);
+                GameManager.Instance.changeAttackScoreBy(-currentPieceFolder.currentPowerLevel);
+
                 // Swap the position of the cylinder.
                 Destroy(this);
             }

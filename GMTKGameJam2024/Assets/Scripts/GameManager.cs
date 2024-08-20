@@ -321,6 +321,13 @@ public class GameManager : MonoBehaviour
                     yield return new WaitForSeconds(0.2f);
                 }
                 yield return StartCoroutine(pieceFolder.transform.GetChild(0).GetComponent<BaseBlock>().OnAttack());
+                //the best hack hehehehehehhe
+                foreach(PieceFolder child in actionList)
+                {
+                    setAttackScore(0);
+                    changeAttackScoreBy(child.currentPowerLevel); 
+
+                }
             } 
         }
         // attack here.
@@ -357,7 +364,6 @@ public class GameManager : MonoBehaviour
             yield return StartCoroutine(pieceFolder.transform.GetChild(0).gameObject.GetComponent<BaseBlock>().OnDestroyed());
 
             }
-            pieceFolder.transform.GetChild(0).GetComponent<BaseBlock>().Deactivate();
             pieceFolder.gameObject.SetActive(false);
             actionList.RemoveAt(i);
             bool isLosing = true; 
@@ -381,7 +387,17 @@ public class GameManager : MonoBehaviour
         }*/
 
         //enemyLineUp.StartAttackSequence();
+        if (enemyLineUp.deathCount >= enemyLineUp.numberOfEnemies)
+        {
+            Debug.Log("GameManager: All enemies defeated. Triggering phase change.");
 
+            // Activate all pieces currently in the grid
+            UI_StartShop();
+            foreach (PieceFolder pieceFolder in pieceCurrentlyInGrid)
+            {
+                pieceFolder.gameObject.SetActive(true);
+            }
+        }
         isAttacking = false;
         yield return null;
     }
@@ -391,17 +407,7 @@ public class GameManager : MonoBehaviour
         enemyLineUp.deathCount++;
         Debug.Log("GameManager: Death count increased to " + enemyLineUp.deathCount);
 
-        if (enemyLineUp.deathCount >= enemyLineUp.numberOfEnemies)
-        {
-            Debug.Log("GameManager: All enemies defeated. Triggering phase change.");
-
-            // Activate all pieces currently in the grid
-            UI_StartShop(); 
-            foreach (PieceFolder pieceFolder in pieceCurrentlyInGrid)
-            {
-                pieceFolder.gameObject.SetActive(true);
-            }
-        }
+        
     }
 
 }
