@@ -106,7 +106,7 @@ public class GameManager : MonoBehaviour
     {
         //update the UI 
         currentMoney += money;
-        moneyDisplay.text = currentMoney.ToString();
+        moneyDisplay.text = "Money: " + currentMoney.ToString();
 
         foreach (PieceFolder pieceFolder in pieceCurrentlyInGrid) {
             StartCoroutine(pieceFolder.transform.GetChild(0).gameObject.GetComponent<BaseBlock>().OnGainGold());
@@ -201,8 +201,8 @@ public class GameManager : MonoBehaviour
             if (block != null && !block.GetComponent<PieceFolder>().isInsideGrid)
             {
                 Destroy(block);
-                currentRollout.RemoveAt(i);
             }
+            currentRollout.RemoveAt(i);
         }
 
         //I want to display three random block based on the current tier 
@@ -272,13 +272,14 @@ public class GameManager : MonoBehaviour
             GameObject block = currentRollout[i];
             if (block != null && !block.GetComponent<PieceFolder>().isInsideGrid)
             {
+                if (pieceCurrentlyInGrid.Contains(block.GetComponent<PieceFolder>())) { Debug.Log("contains destroyed piecefolder 1");}
                 Destroy(block);
-                currentRollout.RemoveAt(i);
             }
             else if (block.GetComponent<PieceFolder>().isInsideGrid)
             {
                 pieceCurrentlyInGrid.Add(block.GetComponent<PieceFolder>()); 
             }
+            currentRollout.RemoveAt(i);
         }
 
         // 
@@ -289,6 +290,7 @@ public class GameManager : MonoBehaviour
                     child.GetComponent<BaseBlock>().isSelectable = true;
                 }
             } else {
+                if (pieceCurrentlyInGrid.Contains(pieceFolder)) { Debug.Log("contains destroyed piecefolder 2");}
                 Destroy(pieceFolder);
             }
         }
@@ -426,6 +428,11 @@ public class GameManager : MonoBehaviour
     public void IncrementDeathCount() {
         enemyLineUp.deathCount++;
         Debug.Log("GameManager: Death count increased to " + enemyLineUp.deathCount);
+        foreach (PieceFolder pieceFolder in pieceCurrentlyInGrid) {
+            if (pieceFolder.gameObject.activeSelf) {
+                StartCoroutine(pieceFolder.transform.GetChild(0).GetComponent<BaseBlock>().OnKill());
+            }
+        }
     }
 
 }

@@ -22,7 +22,7 @@ public class TetrisGrid : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(gridBlocks.Count);
+        // Debug.Log(gridBlocks.Count);
     }
     public bool CanAddToGrid(Vector2Int position, BaseBlock block) {
         foreach (Vector2Int blockOffset in block.offsetList) {
