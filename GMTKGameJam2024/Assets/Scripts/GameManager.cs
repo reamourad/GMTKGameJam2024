@@ -264,7 +264,7 @@ public class GameManager : MonoBehaviour
         }
         
         // TODO: number of enemies?
-        enemyLineUp.CreateLineUp(enemyLineUp.numberOfEnemies);
+        enemyLineUp.CreateLineUp();
     }
 
     public void UI_UndoButton() {
