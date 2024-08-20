@@ -47,11 +47,6 @@ public class Enemy : MonoBehaviour
     {
         // Debug.Log(FindObjectOfType<TetrisGrid>().gridBlocks.Count);
         // Debug.Log(gameManager.tetrisGrid.gridBlocks.Count);
-
-        if (Input.GetKeyDown("space"))
-        {
-            animator.Play("Hurt");
-        }
     }
 
     public virtual void Attack() {

@@ -35,17 +35,10 @@ public class TetrisGrid : MonoBehaviour
             if (gridBlocks.ContainsKey(globalPosition)) {
                 return false;
             }
-            if (block.GetComponentInParent<PieceFolder>().isBought == false)
-            {
-                if (BuyPiece(block.GetComponentInParent<PieceFolder>()))
-                {
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
-            }
+        }
+        if (block.GetComponentInParent<PieceFolder>().isBought == false)
+        {
+            return BuyPiece(block.GetComponentInParent<PieceFolder>());
         }
         return true;
     }
