@@ -332,7 +332,7 @@ public class GameManager : MonoBehaviour
                 //make the on attack piece glow
                 for (int i = 0; i < 4; ++i)
                 {
-                    player.GetComponent<Animator>().play("Player_attack");
+                    player.GetComponent<Animator>().Play("Player_attack");
                     BaseBlock[] childrens = pieceFolder.GetComponentsInChildren<BaseBlock>();
                     foreach (BaseBlock children in childrens)
                     {
@@ -359,7 +359,7 @@ public class GameManager : MonoBehaviour
         {
             PieceFolder pieceFolder = actionList[i];
             //do the attack piece animation 
-            player.GetComponent<Animator>().play("Player_attack");
+            player.GetComponent<Animator>().Play("Player_attack");
             GameObject trailRendererInstance = Instantiate(
                                trailRenderer,
                                pieceFolder.gameObject.transform.position,
@@ -383,7 +383,7 @@ public class GameManager : MonoBehaviour
             {
                 setDescriptionDisplay(pieceFolder.transform.GetChild(0).GetComponent<BaseBlock>().description);
                 //make the on destroyed piece glow
-                player.GetComponent<Animator>().play("Player_attack");
+                player.GetComponent<Animator>().Play("Player_attack");
                 for (int j = 0; j < 4; ++j)
                 {
                     BaseBlock[] childrens = pieceFolder.GetComponentsInChildren<BaseBlock>();
