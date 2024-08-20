@@ -51,7 +51,6 @@ public class EnemyLineUp : MonoBehaviour
             mageEnemyPrefab
         };
         Debug.Log("Turn Number: " + turnNumber);
-        CreateLineUp();
     }
 
     void Update()
