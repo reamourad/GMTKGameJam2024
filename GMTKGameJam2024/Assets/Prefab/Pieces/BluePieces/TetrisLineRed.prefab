@@ -48,10 +48,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3043393178765759354, guid: bdd66013bb724e9429fbb39187da2517, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: f3596061013691f47ba2d06037e29c54, type: 3}
     - target: {fileID: 4958074049130618074, guid: bdd66013bb724e9429fbb39187da2517, type: 3}
       propertyPath: m_Name
       value: TetrisLineRed
       objectReference: {fileID: 0}
+    - target: {fileID: 7038440171669779206, guid: bdd66013bb724e9429fbb39187da2517, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: f3596061013691f47ba2d06037e29c54, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -88,7 +96,7 @@ MonoBehaviour:
   - {x: 2, y: 0}
   - {x: 3, y: 0}
   description: 'On destroyed, do damage equal to its power to every enemy  '
-  blockColor: 0
+  blockColor: 1
   isGlowing: 0
   isSelectable: 0
   isBought: 0

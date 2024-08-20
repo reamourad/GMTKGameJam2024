@@ -3103,7 +3103,7 @@ PrefabInstance:
       objectReference: {fileID: 1910568185}
     - target: {fileID: 5846257673399975580, guid: 177d11fc7101e0346895afe89001abbc, type: 3}
       propertyPath: tier1Blocks.Array.size
-      value: 15
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 5846257673399975580, guid: 177d11fc7101e0346895afe89001abbc, type: 3}
       propertyPath: tier1Blocks.Array.data[0]
@@ -3148,19 +3148,19 @@ PrefabInstance:
     - target: {fileID: 5846257673399975580, guid: 177d11fc7101e0346895afe89001abbc, type: 3}
       propertyPath: tier1Blocks.Array.data[10]
       value: 
-      objectReference: {fileID: 4412080472312976967, guid: aaff21d875b6e4227a3786a048290aef, type: 3}
+      objectReference: {fileID: 1592810036065512133, guid: bef169d1245424015a3be23e4ad655cd, type: 3}
     - target: {fileID: 5846257673399975580, guid: 177d11fc7101e0346895afe89001abbc, type: 3}
       propertyPath: tier1Blocks.Array.data[11]
       value: 
-      objectReference: {fileID: 4495632949580676874, guid: 8d32a5e11659649738f94f62b0a58b2c, type: 3}
+      objectReference: {fileID: 1592810036065512133, guid: bef169d1245424015a3be23e4ad655cd, type: 3}
     - target: {fileID: 5846257673399975580, guid: 177d11fc7101e0346895afe89001abbc, type: 3}
       propertyPath: tier1Blocks.Array.data[12]
       value: 
-      objectReference: {fileID: 4154492062797495106, guid: 58156e99a62b94a9db939bda0bbc6c54, type: 3}
+      objectReference: {fileID: 6323421548655066003, guid: 34f1201ddddf3465295b8c16c688a765, type: 3}
     - target: {fileID: 5846257673399975580, guid: 177d11fc7101e0346895afe89001abbc, type: 3}
       propertyPath: tier1Blocks.Array.data[13]
       value: 
-      objectReference: {fileID: 1592810036065512133, guid: bef169d1245424015a3be23e4ad655cd, type: 3}
+      objectReference: {fileID: 6323421548655066003, guid: 34f1201ddddf3465295b8c16c688a765, type: 3}
     - target: {fileID: 5846257673399975580, guid: 177d11fc7101e0346895afe89001abbc, type: 3}
       propertyPath: tier1Blocks.Array.data[14]
       value: 
