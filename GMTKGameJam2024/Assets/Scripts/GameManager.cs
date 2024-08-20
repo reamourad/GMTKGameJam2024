@@ -274,6 +274,7 @@ public class GameManager : MonoBehaviour
             }
         setMoneyTo(initialMoney); 
         ChangePhase(Phase.Battle);
+        setAttackScore(0); 
         // Delete previously instantiated blocks
         for (int i = currentRollout.Count - 1; i >= 0; i--)
         {
