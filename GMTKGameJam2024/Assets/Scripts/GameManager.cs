@@ -363,26 +363,14 @@ public class GameManager : MonoBehaviour
             yield return new WaitForSeconds(1.5f);
             changeAttackScoreBy(-pieceFolder.currentPowerLevel);
 
-            if (enemyLineUp.deathCount >= enemyLineUp.numberOfEnemies)
-            {
-                Debug.Log("GameManager: All enemies defeated. Triggering phase change.");
-
-                // Activate all pieces currently in the grid
-                UI_StartShop();
-
-                foreach (PieceFolder piece in pieceCurrentlyInGrid)
-                {
-                    piece.gameObject.SetActive(true);
-                }
-            }
 
             isAttacking = false;
 
-            foreach (PieceFolder piece in pieceCurrentlyInGrid)
+            /*foreach (PieceFolder piece in pieceCurrentlyInGrid)
             {
                 piece.setIsPieceSelected(false);
             }
-
+*/
             if (pieceFolder.blockType == TypeOfBlock.OnDestroyed)
             {
                 setDescriptionDisplay(pieceFolder.transform.GetChild(0).GetComponent<BaseBlock>().description);
@@ -401,8 +389,8 @@ public class GameManager : MonoBehaviour
                 yield return StartCoroutine(pieceFolder.transform.GetChild(0).gameObject.GetComponent<BaseBlock>().OnDestroyed());
             }
             pieceFolder.gameObject.SetActive(false);
-            actionList.RemoveAt(i);
         }
+        actionList.Clear(); 
         /*if (enemyClickManager.selectedEnemy != null) 
         {
             enemyClickManager.selectedEnemy.GetComponent<Enemy>().TakeDamage(currentAttackScore);
@@ -410,6 +398,20 @@ public class GameManager : MonoBehaviour
 
         //enemyLineUp.StartAttackSequence();
         bool isLosing = true;
+
+
+        if (enemyLineUp.deathCount >= enemyLineUp.numberOfEnemies)
+        {
+            Debug.Log("GameManager: All enemies defeated. Triggering phase change.");
+
+            // Activate all pieces currently in the grid
+            UI_StartShop();
+
+            foreach (PieceFolder piece in pieceCurrentlyInGrid)
+            {
+                piece.gameObject.SetActive(true);
+            }
+        }
 
         foreach (PieceFolder piece in pieceCurrentlyInGrid)
         {
