@@ -9,6 +9,9 @@ public class DragManager : MonoBehaviour
     [SerializeField] private Camera referenceCamera;
     [SerializeField] private EventSystem eventSystem;
     [SerializeField] private GameManager gameManager;
+
+    [SerializeField] private AudioManager audioManager;
+
     public Transform dragBlock = null;
     public bool dragBlockPreviouslyLocked = false;
     bool isMouseDown = false;
@@ -111,6 +114,11 @@ public class DragManager : MonoBehaviour
                     tetrisGridDisplay.tetrisGrid.RemoveFromGrid(dragBlock);
                     dragBlockPreviouslyLocked = true;
                 }
+
+                //AUDIO
+                Debug.Log("SFX called");
+                audioManager.PlaySFX(audioManager.blockPlaced);
+                break;
             }
         }
     }
@@ -122,11 +130,19 @@ public class DragManager : MonoBehaviour
                 if (tetrisGridDisplay.tetrisGrid.CanAddToGrid(cellPos, dragBlock)) {
                     tetrisGridDisplay.tetrisGrid.AddToGrid(cellPos, dragBlock);
                     dragBlock.gameObject.GetComponent<PieceFolder>().isInsideGrid = true;
+
+                    //AUDIO
+                    Debug.Log("SFX called");
+                    audioManager.PlaySFX(audioManager.blockPlaced);
                 } else if (dragBlockPreviouslyLocked) {
                     dragBlock.position = (Vector2) pickupLocation;
                     cellPos = Vector2Int.RoundToInt((dragBlock.position - tetrisGridDisplay.transform.position) / tetrisGridDisplay.cellSize);
                     tetrisGridDisplay.tetrisGrid.AddToGrid(cellPos, dragBlock);
                     dragBlock.gameObject.GetComponent<PieceFolder>().isInsideGrid = true;
+
+                    //AUDIO
+                    Debug.Log("SFX called");
+                    audioManager.PlaySFX(audioManager.blockPlaced);
                 } else {
                     dragBlock.position = (Vector2) pickupLocation;
                 }
