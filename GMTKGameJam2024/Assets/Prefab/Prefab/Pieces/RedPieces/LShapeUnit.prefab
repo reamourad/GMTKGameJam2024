@@ -1,0 +1,133 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &6104129271035444650
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 640514367620440401, guid: bdd66013bb724e9429fbb39187da2517, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -2.651278
+      objectReference: {fileID: 0}
+    - target: {fileID: 640514367620440401, guid: bdd66013bb724e9429fbb39187da2517, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -1.1503327
+      objectReference: {fileID: 0}
+    - target: {fileID: 640514367620440401, guid: bdd66013bb724e9429fbb39187da2517, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 640514367620440401, guid: bdd66013bb724e9429fbb39187da2517, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 640514367620440401, guid: bdd66013bb724e9429fbb39187da2517, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 640514367620440401, guid: bdd66013bb724e9429fbb39187da2517, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 640514367620440401, guid: bdd66013bb724e9429fbb39187da2517, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 640514367620440401, guid: bdd66013bb724e9429fbb39187da2517, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 640514367620440401, guid: bdd66013bb724e9429fbb39187da2517, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 640514367620440401, guid: bdd66013bb724e9429fbb39187da2517, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4958074049130618074, guid: bdd66013bb724e9429fbb39187da2517, type: 3}
+      propertyPath: m_Name
+      value: LShapeUnit
+      objectReference: {fileID: 0}
+    - target: {fileID: 5441173028511223340, guid: bdd66013bb724e9429fbb39187da2517, type: 3}
+      propertyPath: typeOfBlock
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5441173028511223340, guid: bdd66013bb724e9429fbb39187da2517, type: 3}
+      propertyPath: offsetList.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 5441173028511223340, guid: bdd66013bb724e9429fbb39187da2517, type: 3}
+      propertyPath: offsetList.Array.data[0].x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5441173028511223340, guid: bdd66013bb724e9429fbb39187da2517, type: 3}
+      propertyPath: offsetList.Array.data[1].x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5441173028511223340, guid: bdd66013bb724e9429fbb39187da2517, type: 3}
+      propertyPath: offsetList.Array.data[1].y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5441173028511223340, guid: bdd66013bb724e9429fbb39187da2517, type: 3}
+      propertyPath: offsetList.Array.data[2].x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5441173028511223340, guid: bdd66013bb724e9429fbb39187da2517, type: 3}
+      propertyPath: offsetList.Array.data[2].y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5441173028511223340, guid: bdd66013bb724e9429fbb39187da2517, type: 3}
+      propertyPath: offsetList.Array.data[3].x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5441173028511223340, guid: bdd66013bb724e9429fbb39187da2517, type: 3}
+      propertyPath: offsetList.Array.data[3].y
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 5441173028511223340, guid: bdd66013bb724e9429fbb39187da2517, type: 3}
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4958074049130618074, guid: bdd66013bb724e9429fbb39187da2517, type: 3}
+      insertIndex: 1
+      addedObject: {fileID: -6465675089407028751}
+  m_SourcePrefab: {fileID: 100100000, guid: bdd66013bb724e9429fbb39187da2517, type: 3}
+--- !u!1 &1186882323117957488 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4958074049130618074, guid: bdd66013bb724e9429fbb39187da2517, type: 3}
+  m_PrefabInstance: {fileID: 6104129271035444650}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &-6465675089407028751
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1186882323117957488}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c2c200969045c84398b835e3551e276, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  offsetList:
+  - {x: 0, y: 0}
+  - {x: 0, y: 1}
+  - {x: 0, y: 2}
+  - {x: 1, y: 0}
+  description: On attack, all other of your pieces power receives x2
+  blockColor: 0
+  isGlowing: 0
+  isSelectable: 0
+  isBought: 0
+  typeOfBlock: 1
+  background: {fileID: 4123307022963047096}
+--- !u!1 &4123307022963047096 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7894481252088301330, guid: bdd66013bb724e9429fbb39187da2517, type: 3}
+  m_PrefabInstance: {fileID: 6104129271035444650}
+  m_PrefabAsset: {fileID: 0}
