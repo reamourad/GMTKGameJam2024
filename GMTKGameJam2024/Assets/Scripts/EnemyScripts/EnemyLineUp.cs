@@ -50,6 +50,7 @@ public class EnemyLineUp : MonoBehaviour
             wolfEnemyPrefab,
             mageEnemyPrefab
         };
+        GameManager.Instance.waveDisplayScore.text = "Wave: " + turnNumber; 
         Debug.Log("Turn Number: " + turnNumber);
     }
 
@@ -70,6 +71,7 @@ public class EnemyLineUp : MonoBehaviour
     public void CreateLineUp()
     {
         turnNumber++;
+        GameManager.Instance.waveDisplayScore.text = "Wave: " + turnNumber;
         numberOfEnemies = Random.Range(1, 5);
         enemyLineUp = new Enemy[numberOfEnemies];
 

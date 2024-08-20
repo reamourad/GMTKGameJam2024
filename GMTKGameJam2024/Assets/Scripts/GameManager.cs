@@ -34,6 +34,7 @@ public class GameManager : MonoBehaviour
     public int initialMoney = 100;
     [SerializeField] TMP_Text moneyDisplay;
     [SerializeField] TMP_Text descriptionDisplay;
+    public TMP_Text waveDisplayScore;
 
     public int currentAttackScore = 0; 
     [SerializeField] TMP_Text attackScoreDisplay; 
@@ -98,6 +99,7 @@ public class GameManager : MonoBehaviour
         currentAttackScore += delta;
         attackScoreDisplay.text = currentAttackScore.ToString();
     }
+
 
     public void clearDescriptionDisplay()
     {
