@@ -20,6 +20,10 @@ public class ButtonClick : MonoBehaviour
 
     public void Start()
     {
-        waveDisplay.text = "Wave: " + turnNumber; 
+        if(waveDisplay != null)
+        {
+            waveDisplay.text = "Wave: " + turnNumber;
+
+        }
     }
 }
