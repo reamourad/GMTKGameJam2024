@@ -22,12 +22,13 @@ public class TetrisGrid : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Debug.Log(gridBlocks.Count);
     }
     public bool CanAddToGrid(Vector2Int position, BaseBlock block) {
         foreach (Vector2Int blockOffset in block.offsetList) {
             Vector2Int globalPosition = blockOffset + position;
             // check if outside of grid
-            if (globalPosition.x < 0 || globalPosition.y < 0 || globalPosition.x >= size.x || globalPosition.y > size.y) {
+            if (globalPosition.x < 0 || globalPosition.y < 0 || globalPosition.x >= size.x || globalPosition.y >= size.y) {
                 return false;
             }
             
