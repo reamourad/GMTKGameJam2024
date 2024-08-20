@@ -14,4 +14,9 @@ public class ButtonClick : MonoBehaviour
     {
         SceneManager.LoadScene("MainMenu");
     }
+
+    public void onTutorialClick()
+    {
+        SceneManager.LoadScene("Tutorial");
+    }
 }
