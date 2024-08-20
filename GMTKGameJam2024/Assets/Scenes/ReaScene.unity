@@ -3140,6 +3140,14 @@ PrefabInstance:
       value: EnemyClickManager
       objectReference: {fileID: 0}
     - target: {fileID: 1191276777450441486, guid: 70c6a6b0188234cd19dbfd90d1cc934d, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1191276777450441486, guid: 70c6a6b0188234cd19dbfd90d1cc934d, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1191276777450441486, guid: 70c6a6b0188234cd19dbfd90d1cc934d, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
@@ -3151,6 +3159,10 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2461625338495191522, guid: 70c6a6b0188234cd19dbfd90d1cc934d, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 06efcd619e9b84d3f9d0aee99838b5df, type: 3}
     - target: {fileID: 2461625338495191522, guid: 70c6a6b0188234cd19dbfd90d1cc934d, type: 3}
       propertyPath: m_SortingOrder
       value: 1
