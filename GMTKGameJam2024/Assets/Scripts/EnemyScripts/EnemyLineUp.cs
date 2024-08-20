@@ -70,10 +70,12 @@ public class EnemyLineUp : MonoBehaviour
 
     public void CreateLineUp()
     {
+        deathCount = 0;
         turnNumber++;
         GameManager.Instance.waveDisplayScore.text = "Wave: " + turnNumber;
         numberOfEnemies = Random.Range(1, 5);
         enemyLineUp = new Enemy[numberOfEnemies];
+        
 
         Debug.Log("EnemyLineUp.cs: Creating enemy lineup...");
 
