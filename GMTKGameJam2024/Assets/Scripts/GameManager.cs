@@ -330,22 +330,14 @@ public class GameManager : MonoBehaviour
                    {
                         children.setIsGlowing(!children.isGlowing); 
                    }
-                    yield return new WaitForSeconds(0.2f);
+                   yield return new WaitForSeconds(0.2f);
                 }
                 yield return StartCoroutine(pieceFolder.transform.GetChild(0).GetComponent<BaseBlock>().OnAttack());
-                //the best hack hehehehehehhe
-                foreach(PieceFolder child in actionList)
-                {
-                    setAttackScore(0);
-                    changeAttackScoreBy(child.currentPowerLevel); 
-
-                }
             } 
         }
         // attack here.
         for (int i = actionList.Count - 1; i >= 0; i--)
         {
-
             PieceFolder pieceFolder = actionList[i];
             //do the attack piece animation 
             GameObject trailRendererInstance = Instantiate(
@@ -371,15 +363,10 @@ public class GameManager : MonoBehaviour
 
                 yield return new WaitForSeconds(0.2f);
                 }
-            
-            
                 yield return StartCoroutine(pieceFolder.transform.GetChild(0).gameObject.GetComponent<BaseBlock>().OnDestroyed());
-                yield return new WaitForSeconds(1.5f); 
             }
             pieceFolder.gameObject.SetActive(false);
             actionList.RemoveAt(i);
-
-
         }
         /*if (enemyClickManager.selectedEnemy != null) 
         {
