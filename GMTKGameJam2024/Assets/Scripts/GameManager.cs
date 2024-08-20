@@ -357,6 +357,7 @@ public class GameManager : MonoBehaviour
             yield return StartCoroutine(pieceFolder.transform.GetChild(0).gameObject.GetComponent<BaseBlock>().OnDestroyed());
 
             }
+            pieceFolder.transform.GetChild(0).GetComponent<BaseBlock>().Deactivate();
             pieceFolder.gameObject.SetActive(false);
             actionList.RemoveAt(i);
             bool isLosing = true; 

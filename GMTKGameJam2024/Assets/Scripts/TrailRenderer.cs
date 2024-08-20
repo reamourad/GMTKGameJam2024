@@ -18,21 +18,26 @@ public class TrailRenderer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // Move our position a step closer to the target.
-        var step = speed * Time.deltaTime; // calculate distance to move
-        transform.position = Vector3.MoveTowards(transform.position, selectedEnemy.transform.position, step);
-
-        // Check if the position of the cube and sphere are approximately equal.
-        float checkDistance = Vector3.Distance(transform.position, selectedEnemy.transform.position);
-        Debug.Log(checkDistance); 
-        if ( checkDistance < 1f)
+        if(selectedEnemy != null)
         {
-            if (selectedEnemy != null)
+            // Move our position a step closer to the target.
+            var step = speed * Time.deltaTime; // calculate distance to move
+            transform.position = Vector3.MoveTowards(transform.position, selectedEnemy.transform.position, step);
+
+            // Check if the position of the cube and sphere are approximately equal.
+            float checkDistance = Vector3.Distance(transform.position, selectedEnemy.transform.position);
+            Debug.Log(checkDistance);
+            if (checkDistance < 1f)
             {
                 selectedEnemy.GetComponent<Enemy>().TakeDamage(currentPieceFolder.currentPowerLevel);
+                // Swap the position of the cylinder.
+                Destroy(this);
             }
-            // Swap the position of the cylinder.
-            Destroy(this); 
         }
+        else
+        {
+            Destroy(this);
+        }
+        
     }
 }
