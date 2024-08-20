@@ -315,27 +315,38 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private IEnumerator HandleAttackSequence() 
+    private IEnumerator checkIfIsOnAttack()
     {
         isAttacking = true;
-        foreach(PieceFolder pieceFolder in pieceCurrentlyInGrid)
+        foreach (PieceFolder pieceFolder in pieceCurrentlyInGrid)
         {
-            if (pieceFolder.blockType == TypeOfBlock.OnAttack) 
+            if (pieceFolder.blockType == TypeOfBlock.OnAttack)
             {
-                setDescriptionDisplay(pieceFolder.transform.GetChild(0).GetComponent<BaseBlock>().description); 
+                setDescriptionDisplay(pieceFolder.transform.GetChild(0).GetComponent<BaseBlock>().description);
                 //make the on attack piece glow
                 for (int i = 0; i < 4; ++i)
                 {
-                   BaseBlock[] childrens = pieceFolder.GetComponentsInChildren<BaseBlock>();
-                   foreach(BaseBlock children in childrens)
-                   {
-                        children.setIsGlowing(!children.isGlowing); 
-                   }
-                   yield return new WaitForSeconds(0.2f);
+                    BaseBlock[] childrens = pieceFolder.GetComponentsInChildren<BaseBlock>();
+                    foreach (BaseBlock children in childrens)
+                    {
+                        children.setIsGlowing(!children.isGlowing);
+                    }
+                    yield return new WaitForSeconds(0.2f);
                 }
                 yield return StartCoroutine(pieceFolder.transform.GetChild(0).GetComponent<BaseBlock>().OnAttack());
-            } 
+                //checks again the power of stuff 
+                setAttackScore(0);
+                foreach (PieceFolder piece in actionList)
+                {
+                    changeAttackScoreBy(piece.currentPowerLevel);
+                }
+            }
         }
+    }
+
+    private IEnumerator HandleAttackSequence() 
+    {
+        yield return checkIfIsOnAttack();
         // attack here.
         for (int i = actionList.Count - 1; i >= 0; i--)
         {
@@ -347,11 +358,34 @@ public class GameManager : MonoBehaviour
                                Quaternion.identity
                              );
             trailRendererInstance.GetComponent<TrailRenderer>().currentPieceFolder = pieceFolder;
+            trailRendererInstance.GetComponent<TrailRenderer>().selectedEnemy = enemyClickManager.selectedEnemy;
 
             yield return new WaitForSeconds(1.5f);
-           
+            changeAttackScoreBy(-pieceFolder.currentPowerLevel);
+
+            if (enemyLineUp.deathCount >= enemyLineUp.numberOfEnemies)
+            {
+                Debug.Log("GameManager: All enemies defeated. Triggering phase change.");
+
+                // Activate all pieces currently in the grid
+                UI_StartShop();
+
+                foreach (PieceFolder piece in pieceCurrentlyInGrid)
+                {
+                    piece.gameObject.SetActive(true);
+                }
+            }
+
+            isAttacking = false;
+
+            foreach (PieceFolder piece in pieceCurrentlyInGrid)
+            {
+                piece.setIsPieceSelected(false);
+            }
+
             if (pieceFolder.blockType == TypeOfBlock.OnDestroyed)
             {
+                setDescriptionDisplay(pieceFolder.transform.GetChild(0).GetComponent<BaseBlock>().description);
                 //make the on destroyed piece glow
                 for (int j = 0; j < 4; ++j)
                 {
@@ -375,25 +409,6 @@ public class GameManager : MonoBehaviour
         }*/
 
         //enemyLineUp.StartAttackSequence();
-
-        if (enemyLineUp.deathCount >= enemyLineUp.numberOfEnemies)
-        {
-            Debug.Log("GameManager: All enemies defeated. Triggering phase change.");
-
-            // Activate all pieces currently in the grid
-            UI_StartShop();
-            foreach (PieceFolder pieceFolder in pieceCurrentlyInGrid)
-            {
-                pieceFolder.gameObject.SetActive(true);
-            }
-        }
-            isAttacking = false;
-
-            foreach (PieceFolder piece in pieceCurrentlyInGrid)
-            {
-                piece.setIsPieceSelected(false);
-            }
-
         bool isLosing = true;
 
         foreach (PieceFolder piece in pieceCurrentlyInGrid)
