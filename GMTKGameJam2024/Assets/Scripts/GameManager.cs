@@ -58,6 +58,8 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] public EnemyLineUp enemyLineUp;
 
+    [SerializeField] public GameObject trailRenderer; 
+
 
     public static GameManager Instance
     {
@@ -74,6 +76,11 @@ public class GameManager : MonoBehaviour
     public void setDescriptionDisplay(int powerLevel, string description)
     {
         descriptionDisplay.text = "Power Level: " + powerLevel + "\nDescription: " + description; 
+    }
+
+    public void setDescriptionDisplay(string description)
+    {
+        descriptionDisplay.text = description;
     }
 
     public void setAttackScore(int attackScore)
@@ -288,6 +295,7 @@ public class GameManager : MonoBehaviour
         {
             if (pieceFolder.blockType == TypeOfBlock.OnAttack) 
             {
+                setDescriptionDisplay(pieceFolder.transform.GetChild(0).GetComponent<BaseBlock>().description); 
                 //make the on attack piece glow
                 for (int i = 0; i < 4; ++i)
                 {
@@ -304,8 +312,19 @@ public class GameManager : MonoBehaviour
         // attack here.
         for (int i = actionList.Count - 1; i >= 0; i--)
         {
+
             PieceFolder pieceFolder = actionList[i];
-            if(pieceFolder.blockType == TypeOfBlock.OnDestroyed)
+            //do the attack piece animation 
+            GameObject trailRendererInstance = Instantiate(
+                               trailRenderer,
+                               pieceFolder.gameObject.transform.position,
+                               Quaternion.identity
+                             );
+            trailRendererInstance.GetComponent<TrailRenderer>().currentPieceFolder = pieceFolder;
+
+            yield return new WaitForSeconds(1.5f);
+           
+            if (pieceFolder.blockType == TypeOfBlock.OnDestroyed)
             {
                 //make the on destroyed piece glow
                 for (int j = 0; j < 4; ++j)
@@ -314,22 +333,25 @@ public class GameManager : MonoBehaviour
                     foreach (BaseBlock children in childrens)
                     {
                         children.setIsGlowing(!children.isGlowing);
-
                     }
-                    yield return new WaitForSeconds(0.2f);
+                
+
+                yield return new WaitForSeconds(0.2f);
                 }
-                yield return StartCoroutine(pieceFolder.transform.GetChild(0).gameObject.GetComponent<BaseBlock>().OnDestroyed());
+            
+            
+            yield return StartCoroutine(pieceFolder.transform.GetChild(0).gameObject.GetComponent<BaseBlock>().OnDestroyed());
 
             }
             pieceFolder.gameObject.SetActive(false);
             actionList.RemoveAt(i);
         }
-        if (enemyClickManager.selectedEnemy != null) 
+        /*if (enemyClickManager.selectedEnemy != null) 
         {
-        enemyClickManager.selectedEnemy.GetComponent<Enemy>().TakeDamage(currentAttackScore);
-        }
+            enemyClickManager.selectedEnemy.GetComponent<Enemy>().TakeDamage(currentAttackScore);
+        }*/
 
-        enemyLineUp.StartAttackSequence();
+        //enemyLineUp.StartAttackSequence();
 
         isAttacking = false;
         yield return null;
