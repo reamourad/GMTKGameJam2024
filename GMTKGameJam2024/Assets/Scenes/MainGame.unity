@@ -2174,7 +2174,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.08
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -3033,7 +3033,7 @@ PrefabInstance:
       objectReference: {fileID: 1924949797}
     - target: {fileID: 5846257673399975580, guid: 177d11fc7101e0346895afe89001abbc, type: 3}
       propertyPath: currentMoney
-      value: 20
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 5846257673399975580, guid: 177d11fc7101e0346895afe89001abbc, type: 3}
       propertyPath: currentPrice
@@ -3041,7 +3041,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5846257673399975580, guid: 177d11fc7101e0346895afe89001abbc, type: 3}
       propertyPath: initialMoney
-      value: 20
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 5846257673399975580, guid: 177d11fc7101e0346895afe89001abbc, type: 3}
       propertyPath: moneyDisplay
@@ -3073,7 +3073,7 @@ PrefabInstance:
       objectReference: {fileID: 1910568185}
     - target: {fileID: 5846257673399975580, guid: 177d11fc7101e0346895afe89001abbc, type: 3}
       propertyPath: tier1Blocks.Array.size
-      value: 11
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 5846257673399975580, guid: 177d11fc7101e0346895afe89001abbc, type: 3}
       propertyPath: tier1Blocks.Array.data[0]
@@ -3102,19 +3102,19 @@ PrefabInstance:
     - target: {fileID: 5846257673399975580, guid: 177d11fc7101e0346895afe89001abbc, type: 3}
       propertyPath: tier1Blocks.Array.data[6]
       value: 
-      objectReference: {fileID: 168486891842114831, guid: 61c2952a0f89a4bb894f6e02f88dfff1, type: 3}
+      objectReference: {fileID: 2189081015390217881, guid: f4880f6e73ddc4422975e907ec1d6293, type: 3}
     - target: {fileID: 5846257673399975580, guid: 177d11fc7101e0346895afe89001abbc, type: 3}
       propertyPath: tier1Blocks.Array.data[7]
       value: 
-      objectReference: {fileID: 2189081015390217881, guid: f4880f6e73ddc4422975e907ec1d6293, type: 3}
+      objectReference: {fileID: -8432262674251493700, guid: dd18558d5003342e2b6dcd53dcb2afca, type: 3}
     - target: {fileID: 5846257673399975580, guid: 177d11fc7101e0346895afe89001abbc, type: 3}
       propertyPath: tier1Blocks.Array.data[8]
       value: 
-      objectReference: {fileID: -8432262674251493700, guid: dd18558d5003342e2b6dcd53dcb2afca, type: 3}
+      objectReference: {fileID: 3362573546508562321, guid: 71f21badcb38946fea6ae9b31cc48c95, type: 3}
     - target: {fileID: 5846257673399975580, guid: 177d11fc7101e0346895afe89001abbc, type: 3}
       propertyPath: tier1Blocks.Array.data[9]
       value: 
-      objectReference: {fileID: 3362573546508562321, guid: 71f21badcb38946fea6ae9b31cc48c95, type: 3}
+      objectReference: {fileID: 1592810036065512133, guid: bef169d1245424015a3be23e4ad655cd, type: 3}
     - target: {fileID: 5846257673399975580, guid: 177d11fc7101e0346895afe89001abbc, type: 3}
       propertyPath: tier1Blocks.Array.data[10]
       value: 
@@ -3288,6 +3288,10 @@ PrefabInstance:
     - target: {fileID: 7742294418274171634, guid: ff99b3a1d5fca2048a9363d48090b203, type: 3}
       propertyPath: Loop
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7742294418274171634, guid: ff99b3a1d5fca2048a9363d48090b203, type: 3}
+      propertyPath: m_Volume
+      value: 0.08
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 2553215321155417408, guid: ff99b3a1d5fca2048a9363d48090b203, type: 3}
