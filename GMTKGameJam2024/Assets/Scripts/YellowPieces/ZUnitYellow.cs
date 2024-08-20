@@ -5,7 +5,7 @@ using UnityEngine;
 public class ZUnitYellow : BaseBlock
 {
     public override IEnumerator OnDestroyed() { 
-        GameManager.Instance.currentMoney *= 2;
+        GameManager.Instance.setMoneyTo(GameManager.Instance.currentMoney * 2);
         yield return null;
     }
 }
