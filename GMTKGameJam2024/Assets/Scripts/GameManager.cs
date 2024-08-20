@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -250,11 +251,19 @@ public class GameManager : MonoBehaviour
     }
 
     public void UI_StartShop() {
+        foreach (PieceFolder piece in pieceCurrentlyInGrid)
+        {
+            piece.setIsPieceSelected(false);
+        }
         ChangePhase(Phase.Shop);
         currentPrice = initialPrice;
     }
 
     public void UI_StartBattle() {
+        foreach (PieceFolder piece in pieceCurrentlyInGrid)
+            {
+                piece.setIsPieceSelected(false);
+            }
         setMoneyTo(initialMoney); 
         ChangePhase(Phase.Battle);
         // Delete previously instantiated blocks
@@ -298,6 +307,7 @@ public class GameManager : MonoBehaviour
     public void UI_Attack() {
         //TODO: CHECK IF ENEMY IS TARGETED
         if (actionList.Count > 0) {
+
             StartCoroutine(HandleAttackSequence());
         }
     }
@@ -361,24 +371,12 @@ public class GameManager : MonoBehaviour
                 }
             
             
-            yield return StartCoroutine(pieceFolder.transform.GetChild(0).gameObject.GetComponent<BaseBlock>().OnDestroyed());
-
+                yield return StartCoroutine(pieceFolder.transform.GetChild(0).gameObject.GetComponent<BaseBlock>().OnDestroyed());
+                yield return new WaitForSeconds(1.5f); 
             }
             pieceFolder.gameObject.SetActive(false);
             actionList.RemoveAt(i);
-            bool isLosing = true; 
-            foreach(PieceFolder piece in pieceCurrentlyInGrid)
-            {
-                if (piece.gameObject.activeSelf)
-                {
-                    isLosing = false; 
-                }
-            }
-            if (isLosing)
-            {
-                SceneManager.LoadScene("Died");
 
-            }
 
         }
         /*if (enemyClickManager.selectedEnemy != null) 
@@ -387,6 +385,7 @@ public class GameManager : MonoBehaviour
         }*/
 
         //enemyLineUp.StartAttackSequence();
+
         if (enemyLineUp.deathCount >= enemyLineUp.numberOfEnemies)
         {
             Debug.Log("GameManager: All enemies defeated. Triggering phase change.");
@@ -398,16 +397,35 @@ public class GameManager : MonoBehaviour
                 pieceFolder.gameObject.SetActive(true);
             }
         }
-        isAttacking = false;
+            isAttacking = false;
+
+            foreach (PieceFolder piece in pieceCurrentlyInGrid)
+            {
+                piece.setIsPieceSelected(false);
+            }
+
+        bool isLosing = true;
+
+        foreach (PieceFolder piece in pieceCurrentlyInGrid)
+        {
+            if (piece.gameObject.activeSelf)
+            {
+                isLosing = false;
+            }
+        }
+        if (isLosing)
+        {
+            SceneManager.LoadScene("Died");
+
+        }
         yield return null;
+
     }
 
     //AN ADDED THIS
     public void IncrementDeathCount() {
         enemyLineUp.deathCount++;
         Debug.Log("GameManager: Death count increased to " + enemyLineUp.deathCount);
-
-        
     }
 
 }
