@@ -109,7 +109,7 @@ MonoBehaviour:
   isGlowing: 0
   isSelectable: 0
   isBought: 0
-  typeOfBlock: 0
+  typeOfBlock: 1
   background: {fileID: 7894481252088301330}
 --- !u!65 &6505687750606408419
 BoxCollider:

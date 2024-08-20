@@ -104,11 +104,6 @@ public abstract class BaseBlock : MonoBehaviour
                 baseBlock.setIsGlowing(false);
             }
         }
-
-        if (isHoverable)
-        {
-            GameManager.Instance.clearDescriptionDisplay();
-        }
     }
 
     public virtual IEnumerator OnAttack() { yield return null; } 
