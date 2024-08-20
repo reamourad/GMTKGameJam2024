@@ -27,13 +27,14 @@ public class GameManager : MonoBehaviour
     public List<Sprite> blockSpriteList = new List<Sprite>();
 
     public int currentMoney = 10;
+    public int initialMoney = 100;
     [SerializeField] TMP_Text moneyDisplay;
     [SerializeField] TMP_Text descriptionDisplay;
 
     public int currentAttackScore = 0; 
     [SerializeField] TMP_Text attackScoreDisplay; 
     public int initialPrice = 3;
-    public int currentPrice;
+    public int currentPrice = 3;
      
     public int damage = -1;
 
@@ -41,14 +42,13 @@ public class GameManager : MonoBehaviour
     private bool isAttacking = false;
 
     public enum Phase {
-        Menu,
         Shop,
         Battle,
     }
 
     [SerializeField] Dictionary<Phase, GameObject> phaseScenes;
 
-    [SerializeField] public Phase phase = Phase.Menu;
+    [SerializeField] public Phase phase = Phase.Shop;
 
     [SerializeField] private TetrisGridDisplay tetrisGridDisplay;
 
@@ -120,7 +120,6 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         phaseScenes = new Dictionary<Phase, GameObject>() {
-        {Phase.Menu, GameObject.Find("/Canvas/UIMenuPhase")},
         {Phase.Shop, GameObject.Find("/Canvas/UIShopPhase")},
         {Phase.Battle, GameObject.Find("/Canvas/UIBattlePhase")},
         };
@@ -173,6 +172,18 @@ public class GameManager : MonoBehaviour
                     attack.interactable = false;
                 }
                 break;
+            case Phase.Shop:
+                Button roll = phaseScenes[Phase.Shop].transform.Find("Roll").GetComponent<Button>() as Button;
+                if(currentMoney <= 0)
+                {
+                    roll.interactable = false;
+                }
+                else
+                {
+                    roll.interactable = true;
+                }
+                break;
+
             default:
                 break;
         }
@@ -180,6 +191,7 @@ public class GameManager : MonoBehaviour
 
     public void Roll()
     {
+        changeMoneyBy(-1); 
         // Delete previously instantiated blocks
         for (int i = currentRollout.Count - 1; i >= 0; i--)
         {
@@ -242,6 +254,7 @@ public class GameManager : MonoBehaviour
     }
 
     public void UI_StartBattle() {
+        setMoneyTo(initialMoney); 
         ChangePhase(Phase.Battle);
         // Delete previously instantiated blocks
         for (int i = currentRollout.Count - 1; i >= 0; i--)
@@ -365,9 +378,9 @@ public class GameManager : MonoBehaviour
         if (enemyLineUp.deathCount >= enemyLineUp.numberOfEnemies)
         {
             Debug.Log("GameManager: All enemies defeated. Triggering phase change.");
-            
+
             // Activate all pieces currently in the grid
-            ChangePhase(Phase.Shop);
+            UI_StartShop(); 
             foreach (PieceFolder pieceFolder in pieceCurrentlyInGrid)
             {
                 pieceFolder.gameObject.SetActive(true);
