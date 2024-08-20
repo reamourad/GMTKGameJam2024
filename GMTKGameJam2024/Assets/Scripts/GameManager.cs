@@ -3,7 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using TMPro;
-using UnityEngine; 
+using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
@@ -358,6 +359,20 @@ public class GameManager : MonoBehaviour
             }
             pieceFolder.gameObject.SetActive(false);
             actionList.RemoveAt(i);
+            bool isLosing = true; 
+            foreach(PieceFolder piece in pieceCurrentlyInGrid)
+            {
+                if (piece.gameObject.activeSelf)
+                {
+                    isLosing = false; 
+                }
+            }
+            if (isLosing)
+            {
+                SceneManager.LoadScene("Died");
+
+            }
+
         }
         /*if (enemyClickManager.selectedEnemy != null) 
         {

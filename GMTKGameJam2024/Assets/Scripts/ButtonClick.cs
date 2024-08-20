@@ -9,4 +9,9 @@ public class ButtonClick : MonoBehaviour
     {
         SceneManager.LoadScene("MainGame");
     }
+
+    public void onMainMenuClick()
+    {
+        SceneManager.LoadScene("MainMenu");
+    }
 }
