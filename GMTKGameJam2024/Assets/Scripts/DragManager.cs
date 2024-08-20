@@ -122,16 +122,13 @@ public class DragManager : MonoBehaviour
                 if (tetrisGridDisplay.tetrisGrid.CanAddToGrid(cellPos, dragBlock)) {
                     tetrisGridDisplay.tetrisGrid.AddToGrid(cellPos, dragBlock);
                     dragBlock.gameObject.GetComponent<PieceFolder>().isInsideGrid = true;
-                    dragBlock = null;
                 } else if (dragBlockPreviouslyLocked) {
                     dragBlock.position = (Vector2) pickupLocation;
                     cellPos = Vector2Int.RoundToInt((dragBlock.position - tetrisGridDisplay.transform.position) / tetrisGridDisplay.cellSize);
                     tetrisGridDisplay.tetrisGrid.AddToGrid(cellPos, dragBlock);
                     dragBlock.gameObject.GetComponent<PieceFolder>().isInsideGrid = true;
-                    dragBlock = null;
                 } else {
                     dragBlock.position = (Vector2) pickupLocation;
-                    dragBlock = null;
                 }
             } else {
                 //check if it is bought 
@@ -145,8 +142,9 @@ public class DragManager : MonoBehaviour
                 }
                 // TODO: functionality when a block is dropped outside of the grid.
                 // may need to revamp the entire lock to grid system lol this system isn't scalable at all
-                dragBlock = null;
             }
+            if (dragBlock != null) {Debug.Log("isInsideGrid: "+dragBlock.gameObject.GetComponent<PieceFolder>().isInsideGrid.ToString());}
+            dragBlock = null;
         }
     }
 

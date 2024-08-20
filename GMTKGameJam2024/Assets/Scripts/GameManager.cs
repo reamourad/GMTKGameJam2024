@@ -116,7 +116,7 @@ public class GameManager : MonoBehaviour
     public void setMoneyTo(int money)
     {
         currentMoney = money;
-        moneyDisplay.text = currentMoney.ToString();
+        moneyDisplay.text = "Money: " + currentMoney.ToString();
     }
 
     private void Awake()
@@ -156,6 +156,7 @@ public class GameManager : MonoBehaviour
         //     Debug.Log("space key was pressed");
         //     currentTierLevel += 1; 
         // }
+
 
         switch (phase) {
             case Phase.Battle:
@@ -198,11 +199,11 @@ public class GameManager : MonoBehaviour
         for (int i = currentRollout.Count - 1; i >= 0; i--)
         {
             GameObject block = currentRollout[i];
-            if (block != null && !block.GetComponent<PieceFolder>().isInsideGrid)
+            if (block != null && !block.GetComponent<PieceFolder>().isBought)
             {
+                currentRollout.RemoveAt(i);
                 Destroy(block);
             }
-            currentRollout.RemoveAt(i);
         }
 
         //I want to display three random block based on the current tier 
@@ -253,6 +254,7 @@ public class GameManager : MonoBehaviour
     public void UI_StartShop() {
         foreach (PieceFolder piece in pieceCurrentlyInGrid)
         {
+            piece.gameObject.SetActive(true);
             piece.setIsPieceSelected(false);
         }
         ChangePhase(Phase.Shop);
@@ -270,14 +272,14 @@ public class GameManager : MonoBehaviour
         for (int i = currentRollout.Count - 1; i >= 0; i--)
         {
             GameObject block = currentRollout[i];
-            if (block != null && !block.GetComponent<PieceFolder>().isInsideGrid)
-            {
-                if (pieceCurrentlyInGrid.Contains(block.GetComponent<PieceFolder>())) { Debug.Log("contains destroyed piecefolder 1");}
-                Destroy(block);
-            }
-            else if (block.GetComponent<PieceFolder>().isInsideGrid)
-            {
-                pieceCurrentlyInGrid.Add(block.GetComponent<PieceFolder>()); 
+            if (block != null) {
+                if (!block.GetComponent<PieceFolder>().isInsideGrid)
+                {
+                    Destroy(block);
+                }
+                else {
+                    pieceCurrentlyInGrid.Add(block.GetComponent<PieceFolder>()); 
+                }
             }
             currentRollout.RemoveAt(i);
         }
@@ -290,8 +292,7 @@ public class GameManager : MonoBehaviour
                     child.GetComponent<BaseBlock>().isSelectable = true;
                 }
             } else {
-                if (pieceCurrentlyInGrid.Contains(pieceFolder)) { Debug.Log("contains destroyed piecefolder 2");}
-                Destroy(pieceFolder);
+                Destroy(pieceFolder.gameObject);
             }
         }
         
