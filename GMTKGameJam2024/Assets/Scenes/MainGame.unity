@@ -2106,7 +2106,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -400, y: 254.99997}
+  m_AnchoredPosition: {x: -399.99997, y: 254.99997}
   m_SizeDelta: {x: -800, y: -510}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1482059231
@@ -2131,8 +2131,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Money
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: acb517728170342a6ac9aee89160509c, type: 2}
-  m_sharedMaterial: {fileID: 1399580088761209191, guid: acb517728170342a6ac9aee89160509c, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: d3b96438427bf4d999b96eb9ba411c00, type: 2}
+  m_sharedMaterial: {fileID: -1829119128374322532, guid: d3b96438427bf4d999b96eb9ba411c00, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
