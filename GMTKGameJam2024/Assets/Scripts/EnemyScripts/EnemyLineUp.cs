@@ -7,6 +7,7 @@ public class EnemyLineUp : MonoBehaviour
     // Variables
     public Enemy[] enemyLineUp;
     public int deathCount;
+    public int turnNumber;
 
     //PREFABS FOR ENEMIES
     public GameObject slimeEnemyPrefab;
@@ -15,7 +16,7 @@ public class EnemyLineUp : MonoBehaviour
 
 
 
-    public int numberOfEnemies = 3;
+    public int numberOfEnemies;
     public float attackDelay = 1f; // Time in seconds between each attack
     public float moveDuration = 1f; // Time it takes for the enemy to move into position
     public Vector2[] spawnPositions; // Array of possible spawn positions
@@ -26,6 +27,7 @@ public class EnemyLineUp : MonoBehaviour
     void Start()
     {
         deathCount = 0;
+        turnNumber = 0;
         spawnPositions = new Vector2[] // INITIALIZE POSSIBLE SPAWN LOCATIONS
         {
             new Vector2(3.5f, 3f),  
@@ -48,6 +50,7 @@ public class EnemyLineUp : MonoBehaviour
             wolfEnemyPrefab,
             mageEnemyPrefab
         };
+        Debug.Log("Turn Number: " + turnNumber);
     }
 
     void Update()
@@ -64,8 +67,10 @@ public class EnemyLineUp : MonoBehaviour
     // SPAWNING LOGIC
 
 
-    public void CreateLineUp(int numberOfEnemies)
+    public void CreateLineUp()
     {
+        turnNumber++;
+        numberOfEnemies = Random.Range(1, 5);
         enemyLineUp = new Enemy[numberOfEnemies];
 
         Debug.Log("EnemyLineUp.cs: Creating enemy lineup...");
@@ -87,8 +92,8 @@ public class EnemyLineUp : MonoBehaviour
             // Get the Enemy component from the instantiated object
             Enemy enemy = enemyObject.GetComponent<Enemy>();
 
-            // Assign the enemy to the array and set stats
-            int health = Random.Range(50, 100);
+            // Assign the enemy to the array and set stats with multiplier according to turn number
+            int health = Random.Range(10, 20) * (turnNumber / Random.Range(1, 2)) / numberOfEnemies;
             enemyLineUp[i] = enemy;
             enemy.health = health;
             enemy.maxHealth = health;
