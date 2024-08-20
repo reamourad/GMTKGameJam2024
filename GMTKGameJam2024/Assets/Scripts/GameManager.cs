@@ -109,7 +109,9 @@ public class GameManager : MonoBehaviour
         moneyDisplay.text = "Money: " + currentMoney.ToString();
 
         foreach (PieceFolder pieceFolder in pieceCurrentlyInGrid) {
-            StartCoroutine(pieceFolder.transform.GetChild(0).gameObject.GetComponent<BaseBlock>().OnGainGold());
+            if (pieceFolder != null && pieceFolder.gameObject.activeSelf) {
+                StartCoroutine(pieceFolder.transform.GetChild(0).gameObject.GetComponent<BaseBlock>().OnGainGold());
+            }
         }
     }
 
@@ -320,7 +322,7 @@ public class GameManager : MonoBehaviour
         isAttacking = true;
         foreach (PieceFolder pieceFolder in pieceCurrentlyInGrid)
         {
-            if (pieceFolder.blockType == TypeOfBlock.OnAttack)
+            if (pieceFolder.blockType == TypeOfBlock.OnAttack && pieceFolder.gameObject.activeSelf)
             {
                 setDescriptionDisplay(pieceFolder.transform.GetChild(0).GetComponent<BaseBlock>().description);
                 //make the on attack piece glow
