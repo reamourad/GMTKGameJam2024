@@ -13,6 +13,8 @@ public class Enemy : MonoBehaviour
     // [SerializeField] public TetrisGrid tetrisGrid;  // Reference to TetrisGrid
     private GameManager gameManager = null;
 
+    [SerializeField] private Animator animator;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -45,6 +47,11 @@ public class Enemy : MonoBehaviour
     {
         // Debug.Log(FindObjectOfType<TetrisGrid>().gridBlocks.Count);
         // Debug.Log(gameManager.tetrisGrid.gridBlocks.Count);
+
+        if (Input.GetKeyDown("space"))
+        {
+            animator.Play("Hurt");
+        }
     }
 
     public virtual void Attack() {
@@ -55,6 +62,7 @@ public class Enemy : MonoBehaviour
         //         pieceSelectable.Add(piece.transform.parent.gameObject);
         //     }
         // }
+        animator.Play("Attack");
         foreach (PieceFolder pieceFolder in gameManager.pieceCurrentlyInGrid) {
             if (pieceFolder.gameObject.activeSelf) {
                 pieceSelectable.Add(pieceFolder.gameObject);
@@ -107,6 +115,7 @@ public class Enemy : MonoBehaviour
     // Method for taking damage
     public virtual void TakeDamage(int damage)
     {
+        animator.Play("Hurt");
         health -= damage;
 
         // Update the health text

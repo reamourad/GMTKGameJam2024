@@ -262,6 +262,7 @@ GameObject:
   - component: {fileID: 4867822797229747495}
   - component: {fileID: 2856294772054875762}
   - component: {fileID: 8372480733419805855}
+  - component: {fileID: 787514297214980159}
   m_Layer: 0
   m_Name: WolfEnemy
   m_TagString: Untagged
@@ -351,6 +352,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 0
   maxHealth: 100
+  animator: {fileID: 787514297214980159}
 --- !u!65 &8372480733419805855
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -372,3 +374,24 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 39.01, y: 60.114735, z: 0.2}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!95 &787514297214980159
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7420245061084819426}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 6a1e66bd466e848b7801f62427a3d343, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
