@@ -2174,7 +2174,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.08
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -3288,6 +3288,10 @@ PrefabInstance:
     - target: {fileID: 7742294418274171634, guid: ff99b3a1d5fca2048a9363d48090b203, type: 3}
       propertyPath: Loop
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7742294418274171634, guid: ff99b3a1d5fca2048a9363d48090b203, type: 3}
+      propertyPath: m_Volume
+      value: 0.08
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 2553215321155417408, guid: ff99b3a1d5fca2048a9363d48090b203, type: 3}

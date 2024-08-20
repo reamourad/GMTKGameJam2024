@@ -431,6 +431,7 @@ public class GameManager : MonoBehaviour
         }
         if (isLosing)
         {
+            ButtonClick.turnNumber = enemyLineUp.turnNumber; 
             SceneManager.LoadScene("Died");
 
         }

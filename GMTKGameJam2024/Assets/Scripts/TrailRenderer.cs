@@ -8,7 +8,8 @@ public class TrailRenderer : MonoBehaviour
 {
     [SerializeField] private int speed;
     public GameObject selectedEnemy;
-    public PieceFolder currentPieceFolder; 
+    public PieceFolder currentPieceFolder;
+    public int damage = 0; 
 
     private void Start()
     {
@@ -28,7 +29,16 @@ public class TrailRenderer : MonoBehaviour
             float checkDistance = Vector3.Distance(transform.position, selectedEnemy.transform.position);
             if (checkDistance < 1f)
             {
-                selectedEnemy.GetComponent<Enemy>().TakeDamage(currentPieceFolder.currentPowerLevel);
+                if(damage == 0)
+                {
+                    selectedEnemy.GetComponent<Enemy>().TakeDamage(currentPieceFolder.currentPowerLevel);
+
+                }
+                else
+                {
+                    selectedEnemy.GetComponent<Enemy>().TakeDamage(damage);
+
+                }
                 // Swap the position of the cylinder.
                 Destroy(this);
             }
@@ -37,6 +47,5 @@ public class TrailRenderer : MonoBehaviour
         {
             Destroy(this);
         }
-        
     }
 }
